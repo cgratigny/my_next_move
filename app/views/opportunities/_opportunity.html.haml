@@ -1,0 +1,4 @@
+%div{:id => "#{dom_id opportunity}"}
+  = link_to_if opportunity.uri.present?, opportunity.name, opportunity.uri, target: :_blank
+  = opportunity.state.text
+  = link_to_if opportunity.company.uri.present?, opportunity.company.name, opportunity.company.uri, target: :_blank

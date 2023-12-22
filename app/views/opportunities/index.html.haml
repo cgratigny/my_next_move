@@ -1,0 +1,11 @@
+%p{:style => "color: green"}= notice
+%h1.text-xl.strong.mb-2 Opportunities
+#opportunities
+  - @opportunities.each do |opportunity|
+    .card.m-1
+      = render opportunity
+    %p
+      
+      = render Common::ButtonComponent.new(label: "Show this opportunity", path: opportunity)
+= link_to "New opportunity", new_opportunity_path
+ 

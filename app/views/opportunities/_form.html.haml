@@ -1,0 +1,19 @@
+= simple_form_for(@opportunity) do |form|
+  - if opportunity.errors.any?
+    %div{:style => "color: red"}
+      %h2
+        = pluralize(opportunity.errors.count, "error")
+        prohibited this job from being saved:
+      %ul
+        - opportunity.errors.each do |error|
+          %li= error.full_message
+  = form.input :name
+  = form.input :uri, label: "Opporunity Website"
+  = form.input :state, collection: OpportunityState.select_options
+  = form.input :applied_at
+  = form.simple_fields_for :company do |company_form|
+    = company_form.input :name, label: "Company Name"
+    = company_form.input :uri, label: "Company Website"
+
+  %div
+    = form.submit
