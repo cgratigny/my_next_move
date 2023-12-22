@@ -3,7 +3,7 @@ class OpportunitiesController < ApplicationController
 
   # GET /Opportunitys or /Opportunitys.json
   def index
-    @opportunities = Opportunity.all
+    @opportunities = Opportunity.all.order(created_at: :desc)
   end
 
   # GET /Opportunitys/1 or /Opportunitys/1.json
@@ -65,7 +65,7 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params[:opportunity].present? ? params.require(:opportunity).permit(:name, :uri, :state, :applied_at, company_attributes: [:id, :name, :uri]) : {}
+      params[:opportunity].present? ? params.require(:opportunity).permit(:name, :uri, :state, :applied_on, company_attributes: [:id, :name, :uri]) : {}
     end
 
 end

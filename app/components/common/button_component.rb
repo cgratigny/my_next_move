@@ -14,7 +14,9 @@ class Common::ButtonComponent < ApplicationComponent
 
   def default_args
     { class: "text-slate-100 bg-cyan-900 p-2 rounded" }
-    "p-1"
-    "p-5"
+  end
+  
+  def submit_button_args
+    default_args
   end
 end

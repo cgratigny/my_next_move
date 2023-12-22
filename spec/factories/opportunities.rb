@@ -2,16 +2,20 @@
 #
 # Table name: opportunities
 #
-#  id         :bigint           not null, primary key
-#  applied_at :datetime
-#  data       :jsonb
-#  name       :string
-#  rating     :string
-#  state      :string
-#  uri        :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  company_id :bigint
+#  id          :bigint           not null, primary key
+#  applied_on  :date
+#  data        :jsonb
+#  description :text
+#  name        :string
+#  pay_maximum :integer
+#  pay_minimum :integer
+#  pay_period  :string
+#  rating      :string
+#  state       :string
+#  uri         :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  company_id  :bigint
 #
 # Indexes
 #

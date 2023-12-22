@@ -1,7 +1,7 @@
 %h1 Editing opportunity
-= render "form", opportunity: @opportunity
+.w-96.m-auto= render "form", opportunity: @opportunity
 %br/
-%div
+%div.text-xs
   = link_to "Show this opportunity", @opportunity
   |
   = link_to "Back to opportunitiess", [:opportunities]

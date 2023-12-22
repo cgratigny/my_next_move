@@ -6,9 +6,13 @@ class CreateOpportunities < ActiveRecord::Migration[7.1]
       t.jsonb :data, default: {}
       t.string :state
       t.string :rating
+      t.integer :pay_minimum
+      t.integer :pay_maximum
+      t.string :pay_period
+      t.text :description
       t.references :company
     
-      t.timestamp :applied_at
+      t.date :applied_on
     
       t.timestamps
     end

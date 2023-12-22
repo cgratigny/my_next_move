@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_22_043410) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_22_075544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,14 +22,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_043410) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string "notable_type"
+    t.bigint "notable_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
+  end
+
   create_table "opportunities", force: :cascade do |t|
     t.string "name"
     t.string "uri"
     t.jsonb "data", default: {}
     t.string "state"
     t.string "rating"
+    t.integer "pay_minimum"
+    t.integer "pay_maximum"
+    t.string "pay_period"
+    t.text "description"
     t.bigint "company_id"
-    t.datetime "applied_at", precision: nil
+    t.date "applied_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_opportunities_on_company_id"

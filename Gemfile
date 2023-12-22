@@ -34,6 +34,7 @@ gem 'forgery', require: false
 
 # Use for forms
 gem "simple_form"
+gem 'simple_form-tailwind'
 
 # validate urls
 gem "validate_url"
@@ -114,3 +115,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.1"
+
+gem "mechanize", "~> 2.9"

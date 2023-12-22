@@ -10,10 +10,10 @@
   = form.input :name
   = form.input :uri, label: "Opporunity Website"
   = form.input :state, collection: OpportunityState.select_options
-  = form.input :applied_at
+  = form.input :applied_on
   = form.simple_fields_for :company do |company_form|
     = company_form.input :name, label: "Company Name"
     = company_form.input :uri, label: "Company Website"
 
   %div
-    = form.submit
+    = form.submit "Save", Common::ButtonComponent.new.submit_button_args
