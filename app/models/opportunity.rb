@@ -4,9 +4,11 @@
 #
 #  id          :bigint           not null, primary key
 #  applied_on  :date
+#  body        :text
 #  data        :jsonb
 #  description :text
 #  name        :string
+#  notes_count :integer
 #  pay_maximum :integer
 #  pay_minimum :integer
 #  pay_period  :string
@@ -22,6 +24,8 @@
 #  index_opportunities_on_company_id  (company_id)
 #
 class Opportunity < ApplicationRecord
+  has_paper_trail
+
   belongs_to :company
   has_many :notes, as: :notable
 
@@ -32,7 +36,13 @@ class Opportunity < ApplicationRecord
   
   validates :uri, url: { allow_nil: true, allow_blank: true }
 
-  before_save :set_name_from_uri_title
+  scope :company_alphabetical, -> { joins(:company).merge(Company.all.alphabetical) }
+
+  has_rich_text :body
+
+  validates :name, presence: true
+
+  before_validation :set_name_from_uri_title
 
   def set_name_from_uri_title
     return if self.name.present?
@@ -40,6 +50,8 @@ class Opportunity < ApplicationRecord
     agent = Mechanize.new
     page = agent.get(self.uri)
     self.name = page.title
+  rescue
+    # this means we weren't able to get the name, not a big deal
   end
   
   

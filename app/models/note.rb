@@ -14,5 +14,7 @@
 #  index_notes_on_notable  (notable_type,notable_id)
 #
 class Note < ApplicationRecord
-  belongs_to :notable, polymorphic: true
+  belongs_to :notable, polymorphic: true, counter_cache: true
+
+  has_rich_text :body
 end

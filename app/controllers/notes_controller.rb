@@ -5,7 +5,7 @@ class NotesController < ApplicationController
 
   # GET /notes or /notes.json
   def index
-    @notes = Note.all
+    @notes = @notable.notes
   end
 
   # GET /notes/1 or /notes/1.json

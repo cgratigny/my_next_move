@@ -1,6 +1,7 @@
 %p{:style => "color: green"}= notice
-%h1.text-4xl.font-bold.mb-4 Opportunities
-= render Common::ButtonComponent.new(label: "New Opportunity", path: [:new, :opportunity])
+.float-right
+  = render Common::ButtonComponent.new(label: "New", path: [:new, :opportunity])
+%h1.text-2xl.font-bold.mb-4 Opportunities (#{@opportunities.count})
 .mb-4
 #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
   - @opportunities.each do |opportunity|

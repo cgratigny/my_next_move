@@ -4,9 +4,11 @@
 #
 #  id          :bigint           not null, primary key
 #  applied_on  :date
+#  body        :text
 #  data        :jsonb
 #  description :text
 #  name        :string
+#  notes_count :integer
 #  pay_maximum :integer
 #  pay_minimum :integer
 #  pay_period  :string
