@@ -42,7 +42,7 @@ gem "validate_url"
 # Postgres database gem
 gem "pg"
 
-gem 'acts-as-taggable-on', '~> 9.0'
+gem 'acts-as-taggable-on'
 
 # Track database changes
 gem 'paper_trail'
