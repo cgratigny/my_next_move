@@ -53,6 +53,10 @@ class Opportunity < ApplicationRecord
   rescue
     # this means we weren't able to get the name, not a big deal
   end
+
+  def short_name
+    self.name.truncate(20)
+  end
   
   
 end

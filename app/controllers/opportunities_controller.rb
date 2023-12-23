@@ -8,15 +8,19 @@ class OpportunitiesController < ApplicationController
 
   # GET /Opportunitys/1 or /Opportunitys/1.json
   def show
+    breadcrumb @opportunity.short_name, @opportunity
   end
 
   # GET /Opportunitys/new
   def new
+    breadcrumb "New", [:new, :opportunity]
     @opportunity = Opportunity.new(company: Company.new)
   end
 
   # GET /Opportunitys/1/edit
   def edit
+    breadcrumb @opportunity.short_name, @opportunity, match: {order: :desc}
+    breadcrumb "Edit", [:edit, @opportunity]
   end
 
   # POST /Opportunitys or /Opportunitys.json

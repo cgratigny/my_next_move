@@ -4,19 +4,31 @@
   .title.mb-2
     %div.font-semibold
       = link_to_if opportunity.company.uri.present?, opportunity.company.name, opportunity.company.uri, target: :_blank
-    %div.text-s.text-slate-700.text-xs
+    %div.text-s.text-slate-700.text-xs.dark:text-slate-200
       = link_to_if opportunity.uri.present?, opportunity.name, opportunity.uri, target: :_blank
 
   %br
   .text-xs
     Added
     = opportunity.created_at.to_fs
-    -# .font-semibold
-    -#   Job Details:
-    -# .text-xs.p-2.pb-4
-    -#   = display_content(opportunity.body)
+    - if action_name == "show"
+      .font-semibold
+        Job Details:
+      .text-xs.p-2.pb-4
+        = display_content(opportunity.body)
+    - else
+      .text-xs.mt-1
+        = link_to "Edit", [:edit, opportunity], class: "inline-flex items-center text-slate-500 hover:underline"
+        = " | "
+        = link_to "Show", opportunity, class: "inline-flex items-center text-slate-500 hover:underline"
+ 
 
     %hr.m-2
-    = link_to [opportunity, :notes] do
-      #{opportunity.notes_count} Notes | 
-    = link_to "+", [:new, opportunity, :note], class: "font-semibold"
+    - if action_name == "show"
+      %h3.text-lg.font-semi-bold Notes
+      = render "notes/list", notes: opportunity.notes
+    - else
+      = link_to [opportunity, :notes] do
+        #{opportunity.notes_count} Notes | 
+    
+    = link_to "Add Note", [:new, opportunity, :note], class: "font-semibold"

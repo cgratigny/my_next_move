@@ -3,6 +3,8 @@ class NotesController < ApplicationController
   before_action :build_note, only: %i[ new create ]
   before_action :set_note, only: %i[ show edit update destroy ]
 
+  before_action :set_notable_breadcrumb
+
   # GET /notes or /notes.json
   def index
     @notes = @notable.notes
@@ -14,7 +16,7 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
-    
+    breadcrumb "New Note", [:new, @notable, :note]
   end
 
   # GET /notes/1/edit
@@ -55,6 +57,10 @@ class NotesController < ApplicationController
       format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def set_notable_breadcrumb
+    breadcrumb @notable.short_name, @notable, match: :exact
   end
 
   private

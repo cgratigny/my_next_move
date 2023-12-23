@@ -10,6 +10,13 @@
     = stylesheet_link_tag "application", data: { turbo_track: :reload }
     = stylesheet_link_tag "https://unpkg.com/stimulus-datepicker@1.0.5/css/datepicker.css", data: { turbo_track: :reload }
     = javascript_importmap_tags
-  %body
+  %body.dark:bg-gray-900.dark:text-gray-100
     .container.mx-6.mt-6
+      .breadcrumb.text-xs.mb-2.border-b.border-slate-500.pb-1
+        - breadcrumb_trail.with_index do |crumb, index|
+          %span.breadcrumb-item{class: crumb.current? ? "active" : "" }
+            - if index > 0
+              = " | "
+            = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {"aria-current" => "page"} : {})
+        
       = yield

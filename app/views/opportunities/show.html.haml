@@ -1,8 +1,2 @@
 %p{:style => "color: green"}= notice
 = render @opportunity
-%div.text-xs
-  = link_to "Edit this opportunity", edit_opportunity_path(@opportunity)
-  |
-  = link_to "Back to opportunities", opportunities_path
-  
-  = button_to "Destroy this opportunity", @opportunity, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }
