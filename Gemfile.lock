@@ -218,6 +218,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
+    paper_trail (15.1.0)
+      activerecord (>= 6.1)
+      request_store (~> 1.4)
     pg (1.5.4)
     psych (5.1.2)
       stringio
@@ -290,6 +293,8 @@ GEM
     regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     require_all (3.0.0)
     rexml (3.2.6)
     rouge (4.2.0)
@@ -417,6 +422,7 @@ DEPENDENCIES
   jbuilder
   listen
   mechanize (~> 2.9)
+  paper_trail
   pg
   puma (>= 5.0)
   rack-mini-profiler
