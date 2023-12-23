@@ -50,6 +50,9 @@ gem 'paper_trail'
 # annotate the model files
 gem 'annotate'
 
+# for breadcrumbs
+gem 'loaf'
+
 # Provides hamlit generators for Rails. It also enables hamlit as the templating engine and "hamlit:erb2haml" rake task that converts erb files to haml.
 gem 'hamlit-rails'
 
