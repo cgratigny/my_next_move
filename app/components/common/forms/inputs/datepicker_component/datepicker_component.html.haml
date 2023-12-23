@@ -1,0 +1,3 @@
+%div{ data: { controller: :datepicker, "datepicker-format-value": Date::DATE_FORMATS[:default] } }
+  %span{ data: { "datepicker-target": :toggle }}
+    = builder.send(:text_field, attribute_name, merged_input_options)

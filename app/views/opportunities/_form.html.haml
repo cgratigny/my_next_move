@@ -16,14 +16,12 @@
     %h4.font-bold.text-m.mb-2 Opportunity Info
     = form.input :name
     = form.input :uri, label: "Opportunity Website"
-    = form.input :posted_on
+    = form.input :posted_on, as: :datepicker
 
     %h4.font-bold.text-m.mb-2 Status
     = form.input :state, collection: OpportunityState.select_options
 
-    %div{ data: { controller: :datepicker, "datepicker-format-value": Date::DATE_FORMATS[:default] } }
-      %span{ data: { "datepicker-target": :toggle }}
-        = form.input :applied_on, as: :string, input_html: { data: { "datepicker-target": :input }, readonly: :true }
+    = form.input :applied_on, as: :datepicker
 
     = form.input :body, as: :rich_text_area
 
