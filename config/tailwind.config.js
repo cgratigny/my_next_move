@@ -8,6 +8,7 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}',
     './app/components/**/*.{erb,haml,html,slim,rb}',
     './app/enums/*.rb',
+    './config/initializers/simple_form_tailwind.rb'
   ],
   theme: {
     screens: {
