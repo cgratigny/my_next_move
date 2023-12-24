@@ -1,6 +1,8 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
 
+  breadcrumb "Opportunities", [:opportunities], match: :exact
+
   # GET /Opportunitys or /Opportunitys.json
   def index
     @opportunities = Opportunity.all.includes(:company).joins(:company).company_alphabetical
@@ -14,7 +16,7 @@ class OpportunitiesController < ApplicationController
   # GET /Opportunitys/new
   def new
     breadcrumb "New", [:new, :opportunity]
-    @opportunity = Opportunity.new(company: Company.new)
+    @opportunity = Opportunity.new
   end
 
   # GET /Opportunitys/1/edit
@@ -29,7 +31,7 @@ class OpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @opportunity.save
-        format.html { redirect_to :opportunities, notice: "Opportunity was successfully created." }
+        format.html { redirect_to :opportunities, notice: "#{@opportunity.short_name} created." }
         format.json { render :show, status: :created, location: @opportunity }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +44,7 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        format.html { redirect_to :opportunities, notice: "Opportunity was successfully updated." }
+        format.html { redirect_to :opportunities, notice: "#{@opportunity.short_name} saved." }
         format.json { render :show, status: :ok, location: @opportunity }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -69,7 +71,15 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params[:opportunity].present? ? params.require(:opportunity).permit(:name, :body, :uri, :state, :posted_on, :applied_on, company_attributes: [:id, :name, :uri]) : {}
+      opportunity_params = params[:opportunity].permit!.to_h
+      if opportunity_params[:company_id].present?
+        opportunity_params.delete(:company_attributes)
+      else
+        opportunity_params.delete(:company_id)
+      end
+
+      _params = ActionController::Parameters.new(opportunity: opportunity_params)
+      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :body, :uri, :state, :posted_on, :applied_on, :company_id, company_attributes: [:id, :name, :uri]) : {}
     end
 
 end

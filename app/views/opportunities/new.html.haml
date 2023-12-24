@@ -1,5 +1,4 @@
-%h1 New Opportunity
-%div.text-xs
-  = link_to "Back to opportunities", [:opportunities]
+.m-auto{ class: "lg:w-1/2 md:w-3/4" }
+  = render Common::Layout::TitleComponent.new(title: "New Opportunity")
 
-.w-96.m-auto= render "form", opportunity: @opportunity
+  = render "form", opportunity: @opportunity

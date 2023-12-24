@@ -1,0 +1,6 @@
+.breadcrumb.text-xs.mb-2.border-b.border-slate-200.pb-1
+  - breadcrumb_trail.with_index do |crumb, index|
+    %span.breadcrumb-item{class: crumb.current? ? "active" : "" }
+      - if index > 0
+        = " - "
+      = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {"aria-current" => "page"} : {})

@@ -58,5 +58,8 @@ class Opportunity < ApplicationRecord
     self.name.truncate(20)
   end
   
+  def destroy
+    raise
+  end
   
 end

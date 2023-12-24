@@ -1,10 +1,1 @@
-%h1 Editing opportunity
-
-= button_to "Destroy this opportunity", @opportunity, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }
-
-.w-96.m-auto= render "form", opportunity: @opportunity
-%br/
-%div.text-xs
-  = link_to "Show this opportunity", @opportunity
-  |
-  = link_to "Back to opportunitiess", [:opportunities]
+.m-auto{ class: "lg:w-1/2 md:w-3/4" }= render "form", opportunity: @opportunity

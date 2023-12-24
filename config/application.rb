@@ -23,5 +23,20 @@ module MyNextMove
     #
     config.time_zone = "Pacific Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |g|
+      g.orm :active_record
+      g.scaffold_stylesheet false
+
+      g.test_framework  :rspec,
+        fixture: true,
+        view_specs: false,
+        helper_specs: true,
+        routing_specs: false,
+        controller_specs: true,
+        request_specs: false
+
+        g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
   end
 end

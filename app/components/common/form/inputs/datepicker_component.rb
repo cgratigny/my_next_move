@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Common::Forms::Inputs::DatepickerComponent < ApplicationComponent
+class Common::Form::Inputs::DatepickerComponent < ApplicationComponent
   attr_reader :given_wrapper_options, :simple_form_input, :builder
 
   def attribute_name

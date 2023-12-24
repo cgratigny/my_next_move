@@ -29,6 +29,12 @@ class OpportunityState::Withdrawn < OpportunityState
   end
 end
 
+class OpportunityState::NotInterested < OpportunityState
+  def tailwind_classes
+    ["bg-red-100"]
+  end
+end
+
 class OpportunityState::Rejected < OpportunityState
   def tailwind_classes
     ["bg-red-100"]
