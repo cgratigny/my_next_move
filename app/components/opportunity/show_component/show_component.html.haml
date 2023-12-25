@@ -1,4 +1,4 @@
-%turbo-frame{:id => "#{dom_id opportunity}"}
+%turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
   %div{:id => "#{dom_id opportunity}"}
     %span{ class: opportunity.state.tailwind_class}
       = opportunity.state.text
