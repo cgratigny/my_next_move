@@ -41,6 +41,10 @@ gem "validate_url"
 
 # Postgres database gem
 gem "pg"
+gem "pg_search"
+
+# HasScope allows you to dynamically apply named scopes to your resources based on an incoming set of parameters.
+gem "has_scope"
 
 gem 'acts-as-taggable-on'
 
@@ -125,3 +129,5 @@ end
 gem "tailwindcss-rails", "~> 2.1"
 
 gem "mechanize", "~> 2.9"
+
+gem "devise", "~> 4.9"
