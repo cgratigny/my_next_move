@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
-  breadcrumb "Home", :root
+  before_action :authenticate_user!
+  include SetCurrentUser
 
 end
