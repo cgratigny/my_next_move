@@ -1,11 +1,13 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[ show edit update destroy ]
+  before_action :build_opportunities, only: :index
+
+  has_scope :search
 
   breadcrumb "Opportunities", [:opportunities], match: :exact
 
   # GET /Opportunitys or /Opportunitys.json
   def index
-    @opportunities = Opportunity.all.includes(:company).joins(:company).company_alphabetical
   end
 
   # GET /Opportunitys/1 or /Opportunitys/1.json
@@ -16,7 +18,7 @@ class OpportunitiesController < ApplicationController
   # GET /Opportunitys/new
   def new
     breadcrumb "New", [:new, :opportunity]
-    @opportunity = Opportunity.new
+    @opportunity = Opportunity.new(user: current_user)
   end
 
   # GET /Opportunitys/1/edit
@@ -69,6 +71,9 @@ class OpportunitiesController < ApplicationController
       @opportunity = Opportunity.find(params[:id])
     end
 
+    def build_opportunities
+      @opportunities = apply_scopes(current_user.opportunities).includes(:company).company_alphabetical
+    end
     # Only allow a list of trusted parameters through.
     def opportunity_params
       opportunity_params = params[:opportunity].permit!.to_h

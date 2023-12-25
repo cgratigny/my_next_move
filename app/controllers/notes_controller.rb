@@ -2,12 +2,12 @@ class NotesController < ApplicationController
   before_action :set_notable
   before_action :build_note, only: %i[ new create ]
   before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :build_notes, only: :index
 
   before_action :set_notable_breadcrumb
 
   # GET /notes or /notes.json
   def index
-    @notes = @notable.notes
   end
 
   # GET /notes/1 or /notes/1.json
@@ -61,12 +61,20 @@ class NotesController < ApplicationController
 
   def set_notable_breadcrumb
     breadcrumb "Opportunities", [:opportunities]
-    breadcrumb @notable.short_name, @notable, match: :exact
+    breadcrumb @notable.short_name, @notable, match: :exact if @notable.present?
   end
 
   private
     def build_note
       @note = Note.new( { notable: @notable }.merge(note_params))
+    end
+
+    def build_notes
+      if @notable.present?
+        @notes = @notable.notes
+      else
+        @notes = current_user.notes
+      end
     end
 
     def set_notable

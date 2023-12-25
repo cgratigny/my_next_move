@@ -12,21 +12,26 @@
 #  pay_maximum :integer
 #  pay_minimum :integer
 #  pay_period  :string
+#  posted_on   :string
 #  rating      :string
 #  state       :string
 #  uri         :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  company_id  :bigint
+#  user_id     :bigint
 #
 # Indexes
 #
 #  index_opportunities_on_company_id  (company_id)
+#  index_opportunities_on_user_id     (user_id)
 #
 class Opportunity < ApplicationRecord
+  include PgSearch::Model
   has_paper_trail
 
-  belongs_to :company
+  belongs_to :user
+  belongs_to :company, counter_cache: true
   has_many :notes, as: :notable
 
   accepts_nested_attributes_for :company
@@ -37,6 +42,16 @@ class Opportunity < ApplicationRecord
   validates :uri, url: { allow_nil: true, allow_blank: true }
 
   scope :company_alphabetical, -> { joins(:company).merge(Company.all.alphabetical) }
+
+  scope :search, -> (given_needle) { 
+    where(id: global_search(given_needle) + where(company: Company.global_search(given_needle) ))
+   }
+
+  pg_search_scope :global_search,
+    against: [:name, :state],
+    using: {
+      tsearch: { prefix: true }
+    }
 
   has_rich_text :body
 
@@ -52,6 +67,10 @@ class Opportunity < ApplicationRecord
     self.name = page.title
   rescue
     # this means we weren't able to get the name, not a big deal
+  end
+
+  def to_s
+    self.name
   end
 
   def short_name
