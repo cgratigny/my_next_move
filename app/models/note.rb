@@ -17,4 +17,7 @@ class Note < ApplicationRecord
   belongs_to :notable, polymorphic: true, counter_cache: true
 
   has_rich_text :body
+
+  scope :chronological, -> { order(created_at: :asc) }
+  scope :reverse_chronological, -> { order(created_at: :desc) }
 end

@@ -13,6 +13,7 @@
 class Company < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
+
   has_many :opportunities
 
   validates :name, presence: true

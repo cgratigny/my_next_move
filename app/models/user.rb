@@ -22,7 +22,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :opportunities
+  has_many :moves
+  has_many :opportunities, through: :moves
   has_many :companies, through: :opportunities
-  has_many :notes, through: :opportunities
+
+  def notes
+    Note.where(notable: (self.opportunities + self.moves + self.companies))
+  end
+
+  def default_move
+    moves.order(starts_on: :asc).first
+  end
+
 end

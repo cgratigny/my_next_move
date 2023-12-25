@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_24_185442) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_25_042645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_185442) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "moves", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "state"
+    t.bigint "user_id"
+    t.date "starts_on"
+    t.date "stops_on"
+    t.date "goal_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "notes_count"
+    t.index ["user_id"], name: "index_moves_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "notable_type"
     t.bigint "notable_id"
@@ -97,9 +111,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_185442) do
     t.text "body"
     t.integer "notes_count"
     t.string "posted_on"
-    t.bigint "user_id"
+    t.bigint "move_id"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
-    t.index ["user_id"], name: "index_opportunities_on_user_id"
+    t.index ["move_id"], name: "index_opportunities_on_move_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|

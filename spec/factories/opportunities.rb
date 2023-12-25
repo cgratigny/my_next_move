@@ -19,12 +19,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  company_id  :bigint
-#  user_id     :bigint
+#  move_id     :bigint
 #
 # Indexes
 #
 #  index_opportunities_on_company_id  (company_id)
-#  index_opportunities_on_user_id     (user_id)
+#  index_opportunities_on_move_id     (move_id)
 #
 
 FactoryBot.define do

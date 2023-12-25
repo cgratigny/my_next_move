@@ -1,0 +1,19 @@
+= simple_form_for move do |form|
+  - if move.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
+      %h2
+        = pluralize(move.errors.count, "error")
+        prohibited this move from being saved:
+      %ul
+        - move.errors.each do |error|
+          %li= error.full_message
+
+  = form.input :name
+  = form.input :description, as: :rich_text_area
+  = form.input :starts_on, as: :datepicker
+  = form.input :goal_on, as: :datepicker
+
+  = form.input :state, collection: MoveStateOptions.select_options
+  = form.input :stops_on, as: :datepicker
+  .inline
+    = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"

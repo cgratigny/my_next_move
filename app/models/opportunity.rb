@@ -19,19 +19,19 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  company_id  :bigint
-#  user_id     :bigint
+#  move_id     :bigint
 #
 # Indexes
 #
 #  index_opportunities_on_company_id  (company_id)
-#  index_opportunities_on_user_id     (user_id)
+#  index_opportunities_on_move_id     (move_id)
 #
 class Opportunity < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
 
-  belongs_to :user
   belongs_to :company, counter_cache: true
+  belongs_to :move
   has_many :notes, as: :notable
 
   accepts_nested_attributes_for :company

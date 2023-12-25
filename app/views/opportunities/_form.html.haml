@@ -30,6 +30,7 @@
   = form.input :applied_on, as: :datepicker, wrapper_html: { data: { form_toggler_target: :element, values: [:application_submitted, :on_hold, :withdrawn, :rejected].join(","), form_toggler_group: :opportunity } }, input_html: { class: "form-control" }
 
   = form.input :body, as: :rich_text_area
+  = form.association :move, input_html: { value: Current.user.default_move }
 
   = render Common::Form::SubmitComponent.new(form: form)
 

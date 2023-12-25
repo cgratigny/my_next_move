@@ -84,7 +84,7 @@ class OpportunitiesController < ApplicationController
       end
 
       _params = ActionController::Parameters.new(opportunity: opportunity_params)
-      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :body, :uri, :state, :posted_on, :applied_on, :company_id, company_attributes: [:id, :name, :uri]) : {}
+      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :move_id, :body, :uri, :state, :posted_on, :applied_on, :company_id, company_attributes: [:id, :name, :uri]) : {}
     end
 
 end

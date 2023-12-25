@@ -1,0 +1,18 @@
+= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 2)
+= Current.user.opportunities.count
+
+%br 
+= render Common::Layout::TitleComponent.new(title: "Moves", priority: 2)
+= Current.user.moves.count
+
+%br
+
+= render Common::Layout::TitleComponent.new(title: "Companies", priority: 2)
+= Current.user.companies.count
+
+%hr
+= render Common::Layout::TitleComponent.new(title: "Last 5 Notes", priority: 2)
+= Current.user.notes.reverse_chronological.limit(5).each do |note|
+  = render note
+  .mb-3
+  %hr
