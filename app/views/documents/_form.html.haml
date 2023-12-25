@@ -1,0 +1,11 @@
+= form_with(model: document, class: "contents") do |form|
+  - if document.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
+      %h2
+        = pluralize(document.errors.count, "error")
+        prohibited this document from being saved:
+      %ul
+        - document.errors.each do |error|
+          %li= error.full_message
+  .inline
+    = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"
