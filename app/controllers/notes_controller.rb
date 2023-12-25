@@ -73,7 +73,7 @@ class NotesController < ApplicationController
       if @notable.present?
         @notes = @notable.notes
       else
-        @notes = current_user.notes
+        @notes = Current.user.notes
       end
     end
 

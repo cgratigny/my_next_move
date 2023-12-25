@@ -18,7 +18,7 @@ class OpportunitiesController < ApplicationController
   # GET /Opportunitys/new
   def new
     breadcrumb "New", [:new, :opportunity]
-    @opportunity = Opportunity.new(user: current_user)
+    @opportunity = Opportunity.new(user: Current.user)
   end
 
   # GET /Opportunitys/1/edit
@@ -72,7 +72,7 @@ class OpportunitiesController < ApplicationController
     end
 
     def build_opportunities
-      @opportunities = apply_scopes(current_user.opportunities).includes(:company).company_alphabetical
+      @opportunities = apply_scopes(Current.user.opportunities).includes(:company).company_alphabetical
     end
     # Only allow a list of trusted parameters through.
     def opportunity_params

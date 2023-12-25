@@ -8,10 +8,6 @@ class ApplicationComponent < ViewComponent::Base
     end
   end
 
-  def current_user
-    Current.user
-  end
-
   private
 
   def validate_keys!(attributes)

@@ -7,7 +7,7 @@ class Common::Layout::BreadcrumbsComponent < ApplicationComponent
   end
 
   def render?
-    current_user.present?
+    Current.user.present?
   end
 
 end
