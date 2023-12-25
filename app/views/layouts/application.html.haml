@@ -12,6 +12,7 @@
     = javascript_importmap_tags
   %body.dark:bg-gray-900.dark:text-gray-100
     .container.mx-6.mt-6
-      = render Common::Layout::BreadcrumbsComponent.new        
-      = render Common::Layout::NoticesComponent.new
+      = render Common::Layout::NavigationComponent.new
+      = render Common::Layout::BreadcrumbsComponent.new  
+      = render Common::Layout::FlashMessagesComponent.new
       = yield

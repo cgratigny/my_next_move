@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @companies = Company.all
+    @companies = Current.user.companies.distinct.alphabetical
   end
 
   # GET /companies/1 or /companies/1.json

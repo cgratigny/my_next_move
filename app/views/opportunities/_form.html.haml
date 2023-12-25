@@ -11,7 +11,7 @@
   = render Common::Layout::TitleComponent.new(title: "Company Info", priority: 4)
 
   #existing-company
-    = form.association :company, label: "Choose Existing Company", collection: Company.alphabetical, include_blank: true, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :company } }
+    = form.association :company, label: "Choose Existing Company", collection: current_user.companies.distinct.alphabetical, include_blank: true, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :company } }
 
   -# This hack of adding values of "," will compare a blank value, making this show when the value is blank, and hiding when the value is present
   #new-company-fields.form-control{ data: { form_toggler_target: :element, values: ",", form_toggler_group: :company } }
@@ -33,4 +33,5 @@
 
   = render Common::Form::SubmitComponent.new(form: form)
 
-.text-red-800= button_to "Destroy this opportunity", @opportunity, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }
+- if opportunity.persisted?
+  .text-red-800= button_to "Destroy this opportunity", @opportunity, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }

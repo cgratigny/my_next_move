@@ -1,9 +1,9 @@
 %div{:id => "#{dom_id note}"}
   .text-s
     = note.body.to_s
-  - if note.body.to_s.blank?
-    - raise
   .text-xs
     = note.created_at.to_fs
+  - if action_name == "index"
+    = link_to note.notable.to_s, [note.notable]
   - if action_name != "show"
     %hr.mt-6

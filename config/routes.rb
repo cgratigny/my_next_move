@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  resources :documents
+  devise_for :users
   
+  resources :notes
+
   resources :companies
   resources :opportunities do
     resources :notes

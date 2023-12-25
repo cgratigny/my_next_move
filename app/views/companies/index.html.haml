@@ -2,7 +2,6 @@
 %h1 Companies
 #companies
   - @companies.each do |company|
-    = render company
-    %p
-      = link_to "Show this company", company
+    = link_to company do
+      = render company
 = link_to "New company", new_company_path
