@@ -9,11 +9,12 @@ class Common::Layout::NavigationComponent < ApplicationComponent
   def navigation_items
     [
       [ "Dashboard", [:dashboard] ],
-      [ "Moves", [:moves] ],
       [ "Opportunities", [:opportunities] ],
-      [ "Companies", [:companies] ],
-      [ "Notes", [:notes] ],
-      [ "Documents", [:documents] ],
+      [ "Moves", [:moves] ],
+      # [ "Companies", [:companies] ],
+      # [ "Notes", [:notes] ],
+      # [ "Tasks", [:tasks] ],
+      # [ "Documents", [:documents] ],
     ]
   end
 end

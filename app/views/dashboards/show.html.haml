@@ -6,7 +6,4 @@
 = render Task::ListComponent.new(tasks: @tasks)
 
 = render Common::Layout::TitleComponent.new(title: "Recent Notes", priority: 2)
-#notes.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
-  - Current.user.notes.reverse_chronological.limit(8).each do |note|
-    .max-w-sm.p-6.m-2.bg-white.border.border-gray-200.rounded-lg.shadow.dark:bg-gray-800.dark:border-gray-700.mb-4
-      = render note
+= render Note::ListComponent.new(notes: Current.user.notes.reverse_chronological.limit(8))
