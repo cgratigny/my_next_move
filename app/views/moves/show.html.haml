@@ -5,5 +5,5 @@
     = render @move
     = link_to "Edit this move", edit_move_path(@move), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
     .inline-block.ml-2
-      = button_to "Destroy this move", move_path(@move), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
+      = render Common::Element::DestroyLinkComponent.new(model: @move, text: "Destroy")
     = link_to "Back to moves", moves_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

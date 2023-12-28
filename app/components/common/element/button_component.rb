@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Common::Element::ButtonComponent < ApplicationComponent
-  attr_reader :given_args
+  attr_reader :given_args, :icon
   attr_accessor :label, :path, :custom_args
 
   def args

@@ -25,9 +25,14 @@ class User < ApplicationRecord
   has_many :moves
   has_many :opportunities, through: :moves
   has_many :companies, through: :opportunities
+  has_many :documents
 
   def notes
     Note.where(notable: (self.opportunities + self.moves + self.companies))
+  end
+
+  def tasks
+    Task.where(taskable: (self.opportunities + self.moves + self.companies))
   end
 
   def default_move

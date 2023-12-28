@@ -1,5 +1,21 @@
-%div{:id => "#{dom_id move}"}
-  - if action_name != "show"
-    = link_to "Show this move", move, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    = link_to "Edit this move", edit_move_path(move), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-    %hr.mt-6/
+%turbo-frame{:id => "#{dom_id move}", target: :_top }
+  %div{:id => "#{dom_id move}"}
+    %span{ class: move.state.tailwind_class}
+      = move.state.text
+
+    .font-semibold
+      = link_to_if action_name != "show", move.name, move
+      = link_to [:edit, move] do
+        = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+
+    - if action_name == "show"
+      = move.description.to_s
+    - else
+      .text-xs.max-h-40.overflow-scroll.mb-4
+        = move.description.to_s
+
+    %hr.m-2
+    %h3.text-s.font-semi-bold Notes (#{move.notes_count})
+    = render "notes/list", notes: move.notes
+    
+    = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, move, :note])

@@ -14,7 +14,12 @@ class OpportunityState::ApplicationSubmitted < OpportunityState
   def tailwind_classes
     ["bg-yellow-100"]
   end
+end
 
+class OpportunityState::InScreening < OpportunityState
+  def tailwind_classes
+    ["bg-yellow-100"]
+  end
 end
 
 class OpportunityState::OnHold < OpportunityState

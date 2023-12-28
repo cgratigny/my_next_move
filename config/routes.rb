@@ -14,6 +14,11 @@ Rails.application.routes.draw do
 
   resources :opportunities do
     resources :notes
+    resources :tasks
+  end
+
+  resources :tasks do
+    resources :notes
   end
 
   devise_for :users
@@ -25,5 +30,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "dashboard#show"
+  root "dashboards#show"
 end

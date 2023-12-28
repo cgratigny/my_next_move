@@ -4,7 +4,7 @@ class OpportunitiesController < ApplicationController
 
   has_scope :search
 
-  breadcrumb "Opportunities", [:opportunities], match: :exact
+  breadcrumb "Opportunities", [:opportunities], match: :exclusive
 
   # GET /Opportunitys or /Opportunitys.json
   def index
@@ -12,7 +12,7 @@ class OpportunitiesController < ApplicationController
 
   # GET /Opportunitys/1 or /Opportunitys/1.json
   def show
-    breadcrumb @opportunity.short_name, @opportunity
+    breadcrumb @opportunity.name, @opportunity
   end
 
   # GET /Opportunitys/new
@@ -23,7 +23,7 @@ class OpportunitiesController < ApplicationController
 
   # GET /Opportunitys/1/edit
   def edit
-    breadcrumb @opportunity.short_name, @opportunity, match: {order: :desc}
+    breadcrumb @opportunity.name, @opportunity, match: {order: :desc}
     breadcrumb "Edit", [:edit, @opportunity]
   end
 
@@ -33,7 +33,7 @@ class OpportunitiesController < ApplicationController
 
     respond_to do |format|
       if @opportunity.save
-        format.html { redirect_to :opportunities, notice: "#{@opportunity.short_name} created." }
+        format.html { redirect_to @opportunity, notice: "#{@opportunity.short_name} created." }
         format.json { render :show, status: :created, location: @opportunity }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class OpportunitiesController < ApplicationController
   def update
     respond_to do |format|
       if @opportunity.update(opportunity_params)
-        format.html { redirect_to :opportunities, notice: "#{@opportunity.short_name} saved." }
+        format.html { redirect_to @opportunity, notice: "#{@opportunity.short_name} saved." }
         format.json { render :show, status: :ok, location: @opportunity }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,7 +84,7 @@ class OpportunitiesController < ApplicationController
       end
 
       _params = ActionController::Parameters.new(opportunity: opportunity_params)
-      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :move_id, :body, :uri, :state, :posted_on, :applied_on, :company_id, company_attributes: [:id, :name, :uri]) : {}
+      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :move_id, :body, :rating, :uri, :state, :posted_on, :applied_on, :company_id, company_attributes: [:id, :name, :uri]) : {}
     end
 
 end

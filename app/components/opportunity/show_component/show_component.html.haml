@@ -1,35 +1,63 @@
 %turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
-  %div{:id => "#{dom_id opportunity}"}
-    %span{ class: opportunity.state.tailwind_class}
-      = opportunity.state.text
-    .title.mb-2
-      %div.font-semibold
-        = link_to_if opportunity.company.uri.present?, opportunity.company.name, opportunity.company.uri, target: :_blank
-      %div.text-s.text-slate-700.text-xs.dark:text-slate-200
-        = link_to_if opportunity.uri.present?, opportunity.name, opportunity.uri, target: :_blank
+  %div.text-xs{:id => "#{dom_id opportunity}"}
+    %div{ class: show? ? "card" : "" }
+      %span{ class: opportunity.state.tailwind_class}
+        = opportunity.state.text
+      .float-right
+        - OpportunityRating.selectable.each do |rating|
+          = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { rating: }}, form: { class: :inline } do
+            - if rating.to_i <= opportunity.rating.to_i
+              %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-orange-700")
+            - else
+              %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200")
 
-    %br
-    .text-xs
+      .title.mb-2.mt-1
+        %div.font-semibold
+          = opportunity.company.name
+          - if opportunity.company.uri.present?
+            %span
+              = link_to opportunity.company.uri, target: :_blank do
+                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+
+        %div.text-s.text-slate-700.text-xs.dark:text-slate-200
+          = link_to opportunity.name, opportunity
+          - if opportunity.uri.present?
+            %span
+              = link_to opportunity.uri, target: :_blank do
+                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+          = link_to [:edit, opportunity] do
+            = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+
+      %br
       Added
       = opportunity.created_at.to_fs
       - if show?
         .font-semibold
-          Job Details:
-        .text-xs.p-2.pb-4
-          = opportunity.body.to_s
-      - else
-        .text-xs.mt-1
-          = link_to "Edit", [:edit, opportunity], class: "inline-flex items-center text-slate-500 hover:underline"
-          = " | "
-          = link_to "Show", opportunity, class: "inline-flex items-center text-slate-500 hover:underline"
-  
+          Details:
+          
+        %div.text-xs.p-2.pb-4{"data-controller" => "read-more", "data-read-more-hide-class" => "hide"}
+          %div.content.max-h-32.truncate{"data-read-more-target" => "content"}
+            = opportunity.body.to_s
+          .fade-out
+          %button.text-center.py-1.w-full.display-block.mt-2{"data-action": "read-more#toggleContent", "data-read-more-target": "toggleButton"}
+            = heroicon("chevron-up-down", variant: :micro, class: "m-auto")
 
-      %hr.m-2
-      - if show?
-        %h3.text-lg.font-semi-bold Notes
-        = render "notes/list", notes: opportunity.notes
-      - else
-        = link_to [opportunity, :notes] do
-          #{opportunity.notes_count} Notes | 
-      
-      = link_to "Add Note", [:new, opportunity, :note], class: "font-semibold"
+    %hr.m-2
+    - if show?
+      %h3.text-lg.font-semi-bold Notes
+      = render "notes/list", notes: opportunity.notes
+    - else
+      = link_to [opportunity, :notes] do
+        #{opportunity.notes_count} Notes | 
+    
+    = link_to "Add Note", [:new, opportunity, :note], class: "font-semibold"
+
+    %br
+
+    - if show?
+      %h3.text-lg.font-semi-bold Tasks
+      = render "tasks/list", tasks: opportunity.tasks
+    - else
+      = link_to [opportunity, :tasks] do
+        #{opportunity.tasks_count} Tasks | 
+    = link_to "Add Task", [:new, opportunity, :task], class: "font-semibold"

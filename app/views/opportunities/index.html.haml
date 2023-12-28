@@ -1,15 +1,5 @@
 .float-right
-  = render Common::Element::ButtonComponent.new(label: "New", path: [:new, :opportunity])
-%h1.text-2xl.font-bold.mb-4 Opportunities (#{@opportunities.count})
-.mb-4
+  = render Common::Element::ButtonComponent.new(label: "New", path: [:new, :opportunity], icon: :plus)
+= render Common::Layout::TitleComponent.new(title: "Opportunities (#{@opportunities.count})")
 
-%div.w-96.dispay-inline.ml-2
-  = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
-    = form.input :search, label: false, placeholder: "Filter...", required: false, input_html: { name: :search, data: { target: :search, action: "input->search#search"} }
--# = link_to "Clear", [:opportunities]
-
-%turbo-frame#opportunities{ data: { target: :_top } }
-  #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
-    - @opportunities.each do |opportunity|
-      .max-w-sm.p-6.m-2.bg-white.border.border-gray-200.rounded-lg.shadow.dark:bg-gray-800.dark:border-gray-700.mb-4
-        = render opportunity
+= render Opportunity::ListComponent.new(opportunities: @opportunities)

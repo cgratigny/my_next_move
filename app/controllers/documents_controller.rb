@@ -1,9 +1,10 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: %i[ show edit update destroy ]
+  before_action :build_document, only: %i[ new create]
 
   # GET /documents or /documents.json
   def index
-    @documents = Document.all
+    @documents = Current.user.documents
   end
 
   # GET /documents/1 or /documents/1.json
@@ -12,7 +13,6 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
   end
 
   # GET /documents/1/edit
@@ -21,8 +21,6 @@ class DocumentsController < ApplicationController
 
   # POST /documents or /documents.json
   def create
-    @document = Document.new(document_params)
-
     respond_to do |format|
       if @document.save
         format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
@@ -58,6 +56,10 @@ class DocumentsController < ApplicationController
   end
 
   private
+    def build_document
+      @document = Document.new(document_params.merge( user: Current.user ))
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_document
       @document = Document.find(params[:id])
@@ -65,6 +67,6 @@ class DocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def document_params
-      params.fetch(:document, {})
+      params[:document].present? ? params.require(:document).permit(:name, :description, :file) : {}
     end
 end

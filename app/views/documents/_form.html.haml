@@ -1,4 +1,4 @@
-= form_with(model: document, class: "contents") do |form|
+= simple_form_for document do |form|
   - if document.errors.any?
     #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
       %h2
@@ -7,5 +7,10 @@
       %ul
         - document.errors.each do |error|
           %li= error.full_message
+
+  = form.input :name
+  = form.input :description, as: :rich_text_area
+  = form.input :file, input_html: { accept: 'application/pdf' }
+  
   .inline
     = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"

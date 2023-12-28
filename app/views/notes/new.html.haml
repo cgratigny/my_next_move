@@ -1,4 +1,4 @@
-.mx-auto.w-full{:class => "md:w-2/3"}
-  %h1.font-bold.text-4xl New note
-  .w-96.m-auto= render "form", note: @note
-  = link_to "Back to notes", @notable, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+.m-auto{ class: "lg:w-1/2 md:w-3/4" }
+  = render Common::Layout::TitleComponent.new(title: "New Note", priority: 1)
+  .card= render @note.notable
+  = render "form", note: @note

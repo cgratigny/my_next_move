@@ -1,9 +1,9 @@
-%div{:id => "#{dom_id note}"}
-  .text-s
+%div.text-xs{:id => "#{dom_id note}"}
+  .text-s.max-h-40.overflow-scroll.mb-4
     = note.body.to_s
-  .text-xs
+  %div
     = note.created_at.to_fs
-  - if action_name == "index"
+  .font-semibold
     = link_to note.notable.to_s, [note.notable]
   - if action_name != "show"
     %hr.mt-6

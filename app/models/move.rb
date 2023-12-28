@@ -26,10 +26,16 @@ class Move < ApplicationRecord
 
   has_many :notes, as: :notable
 
+  classy_enum_attr :state, enum: "MoveState", default: :open
+
   validates :name, presence: true
   has_rich_text :description
 
   def short_name
+    self.name
+  end
+
+  def to_s
     self.name
   end
 end

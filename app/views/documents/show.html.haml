@@ -5,5 +5,5 @@
     = render @document
     = link_to "Edit this document", edit_document_path(@document), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
     .inline-block.ml-2
-      = button_to "Destroy this document", document_path(@document), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
+      = render Common::Element::DestroyLinkComponent.new(model: @document, text: "Destroy")
     = link_to "Back to documents", documents_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

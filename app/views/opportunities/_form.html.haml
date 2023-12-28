@@ -1,12 +1,5 @@
 = simple_form_for @opportunity, data: { controller: "form-toggler" } do |form|
-  - if opportunity.errors.any?
-    %div{:style => "color: red"}
-      %h2
-        = pluralize(opportunity.errors.count, "error")
-        prohibited this job from being saved:
-      %ul
-        - opportunity.errors.each do |error|
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
 
   = render Common::Layout::TitleComponent.new(title: "Company Info", priority: 4)
 
@@ -21,8 +14,9 @@
 
   %h4.font-bold.text-m.mb-2 Opportunity Info
   = form.input :name
+  = form.input :rating, as: :radio_buttons, collection: OpportunityRating.select_options
   = form.input :uri, label: "Opportunity Website"
-  = form.input :posted_on, as: :datepicker
+  = form.input :posted_on, label: "Posting Website"
 
   %h4.font-bold.text-m.mb-2 Status
   = form.input :state, collection: OpportunityState.select_options, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :opportunity } }
@@ -34,5 +28,4 @@
 
   = render Common::Form::SubmitComponent.new(form: form)
 
-- if opportunity.persisted?
-  .text-red-800= button_to "Destroy this opportunity", @opportunity, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }
+= render Common::Element::DestroyLinkComponent.new(model: @opportunity, text: "Destroy")

@@ -1,18 +1,12 @@
-= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 2)
-= Current.user.opportunities.count
+= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 2, path: [:opportunities])
+= render Opportunity::ListComponent.new(opportunities: @opportunities)
 
-%br 
-= render Common::Layout::TitleComponent.new(title: "Moves", priority: 2)
-= Current.user.moves.count
+= render Common::Layout::TitleComponent.new(title: "Tasks", priority: 2)
 
-%br
+= render Task::ListComponent.new(tasks: @tasks)
 
-= render Common::Layout::TitleComponent.new(title: "Companies", priority: 2)
-= Current.user.companies.count
-
-%hr
-= render Common::Layout::TitleComponent.new(title: "Last 5 Notes", priority: 2)
-= Current.user.notes.reverse_chronological.limit(5).each do |note|
-  = render note
-  .mb-3
-  %hr
+= render Common::Layout::TitleComponent.new(title: "Recent Notes", priority: 2)
+#notes.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
+  - Current.user.notes.reverse_chronological.limit(8).each do |note|
+    .max-w-sm.p-6.m-2.bg-white.border.border-gray-200.rounded-lg.shadow.dark:bg-gray-800.dark:border-gray-700.mb-4
+      = render note

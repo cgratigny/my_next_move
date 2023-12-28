@@ -290,6 +290,9 @@ GEM
       json
       require_all (~> 3.0)
       ruby-progressbar
+    rails_heroicon (2.2.0)
+      actionview
+      railties
     railties (7.1.2)
       actionpack (= 7.1.2)
       activesupport (= 7.1.2)
@@ -457,6 +460,7 @@ DEPENDENCIES
   rails (~> 7.1.2)
   rails-erd
   rails_best_practices
+  rails_heroicon
   redis (>= 4.0.1)
   rspec-activemodel-mocks
   rspec-rails

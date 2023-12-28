@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_25_042645) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_27_071143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_25_042645) do
     t.integer "notes_count"
     t.string "posted_on"
     t.bigint "move_id"
+    t.integer "tasks_count"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
     t.index ["move_id"], name: "index_opportunities_on_move_id"
   end
@@ -123,6 +124,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_25_042645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "taskable_type"
+    t.bigint "taskable_id"
+    t.date "due_date"
+    t.string "name"
+    t.string "body"
+    t.string "state"
+    t.text "description"
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "notes_count"
+    t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable"
   end
 
   create_table "users", force: :cascade do |t|

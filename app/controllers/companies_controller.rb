@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[ show edit update destroy ]
 
+  breadcrumb "Companies", [:companies], match: :exact
+
   # GET /companies or /companies.json
   def index
     @companies = Current.user.companies.distinct.alphabetical

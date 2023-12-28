@@ -15,6 +15,7 @@
 #  posted_on   :string
 #  rating      :string
 #  state       :string
+#  tasks_count :integer
 #  uri         :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

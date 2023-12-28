@@ -1,1 +1,4 @@
-= link_to label, path, args
+= link_to path, args do
+  - if icon.present?
+    = heroicon icon, size: 16, class: "pb-0.5 inline"
+  = label

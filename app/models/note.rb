@@ -15,6 +15,7 @@
 #
 class Note < ApplicationRecord
   belongs_to :notable, polymorphic: true, counter_cache: true
+  has_one :user, through: :notable
 
   has_rich_text :body
 

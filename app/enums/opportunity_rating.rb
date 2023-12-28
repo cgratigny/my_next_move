@@ -1,4 +1,19 @@
 class OpportunityRating < ClassyEnum::Base
+  def self.selectable
+    all.select{ |option| option.to_i > 0 }
+  end
+
+  def to_i
+    # adding the -1 to make this start with zero for the to_i for no rating on some
+    index - 1
+  end
+
+  def text
+    to_i
+  end
+end
+
+class OpportunityRating::Zero < OpportunityRating
 end
 
 class OpportunityRating::One < OpportunityRating

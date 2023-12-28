@@ -60,7 +60,7 @@ class NotesController < ApplicationController
   end
 
   def set_notable_breadcrumb
-    breadcrumb "Opportunities", [:opportunities]
+    breadcrumb "Opportunities", [:opportunities], match: :exact
     breadcrumb @notable.short_name, @notable, match: :exact if @notable.present?
   end
 

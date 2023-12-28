@@ -15,4 +15,10 @@
 #  index_documents_on_user_id  (user_id)
 #
 class Document < ApplicationRecord
+  has_one_attached :file
+  belongs_to :user
+
+  validates :name, :file, presence: true
+
+  has_rich_text :description
 end

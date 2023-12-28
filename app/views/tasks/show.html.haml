@@ -1,0 +1,11 @@
+.mx-auto.w-full.flex{:class => "md:w-2/3"}
+  .mx-auto
+    - if notice.present?
+      %p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
+    = render @task
+
+    Task Notes:
+    - @task.notes.each do |note|
+      = render note
+
+    = link_to "Add Note", [:new, @task, :note]

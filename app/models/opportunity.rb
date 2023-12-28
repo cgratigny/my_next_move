@@ -15,6 +15,7 @@
 #  posted_on   :string
 #  rating      :string
 #  state       :string
+#  tasks_count :integer
 #  uri         :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -30,14 +31,16 @@ class Opportunity < ApplicationRecord
   include PgSearch::Model
   has_paper_trail
 
-  belongs_to :company, counter_cache: true
+  belongs_to :company
   belongs_to :move
+  has_one :user, through: :move
   has_many :notes, as: :notable
+  has_many :tasks, as: :taskable
 
   accepts_nested_attributes_for :company
 
   classy_enum_attr :state, enum: "OpportunityState", default: :interested
-  classy_enum_attr :rating, enum: "OpportunityRating", default: :one
+  classy_enum_attr :rating, enum: "OpportunityRating", default: :zero
   
   validates :uri, url: { allow_nil: true, allow_blank: true }
 

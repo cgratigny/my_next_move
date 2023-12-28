@@ -5,5 +5,5 @@
     = render @note
     = link_to "Edit this note", [:edit, @note.notable, @note], class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
     .inline-block.ml-2
-      = button_to "Destroy this note", [@note.notable, @note], method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
+      = render Common::Element::DestroyLinkComponent.new(model: @note, text: "Destroy")
     = link_to "Back to notes", [@note.notable, :notes], class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

@@ -32,7 +32,7 @@ SimpleForm.setup do |config|
   # add validation classes to `input_field`
   config.input_field_error_class = 'border-red-500'
   config.input_field_valid_class = 'border-green-400'
-  config.label_class = 'text-sm font-medium text-gray-600'
+  config.label_class = 'text-sm font-medium font-semibold text-gray-800 mb-1'
 
 
   # vertical forms
