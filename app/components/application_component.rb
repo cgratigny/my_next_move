@@ -1,4 +1,15 @@
+require "action_view"
+require "active_support/configurable"
+require "view_component/collection"
+require "view_component/compile_cache"
+require "view_component/slotable"
+require "action_text/engine"
 class ApplicationComponent < ViewComponent::Base
+
+  include ActiveSupport::Configurable
+  include ActionText::Engine.helpers 
+
+  delegate :form_authenticity_token, :protect_against_forgery?, :config, to: :helpers
 
   def initialize(args = {})
     validate_keys!(args)
@@ -6,6 +17,10 @@ class ApplicationComponent < ViewComponent::Base
     args.each do |attr, value|
       instance_variable_set("@#{attr}", value)
     end
+  end
+
+  def main_app
+    Rails.application.class.routes.url_helpers
   end
 
   private

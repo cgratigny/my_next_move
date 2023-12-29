@@ -8,8 +8,6 @@ class Common::Layout::FlashMessagesComponent < ApplicationComponent
 
   def flash_messages
     _flash_messages = []
-    if notice.present?
-    end
 
     if alert.present?
       _flash_messages << { message: alert, classes: alert_classes }

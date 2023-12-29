@@ -1,9 +1,1 @@
-%div.text-xs{:id => "#{dom_id note}"}
-  .text-s.max-h-40.overflow-scroll.mb-4
-    = note.body.to_s
-  %div
-    = note.created_at.to_fs
-  .font-semibold
-    = link_to note.notable.to_s, [note.notable]
-  - if action_name != "show"
-    %hr.mt-6
+= render Note::ShowComponent.new(note: note)

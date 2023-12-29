@@ -12,6 +12,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1 or /notes/1.json
   def show
+    raise NotImplementedError unless request.headers["Turbo-Frame"].present?
   end
 
   # GET /notes/new

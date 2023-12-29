@@ -1,4 +1,4 @@
 .m-auto{ class: "lg:w-1/2 md:w-3/4" }
   = render Common::Layout::TitleComponent.new(title: "New Note", priority: 1)
   .card= render @note.notable
-  = render "form", note: @note
+  = render List::FormComponent.new(note: @note)

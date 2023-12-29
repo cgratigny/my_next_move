@@ -1,0 +1,10 @@
+%turbo-frame{:id => "#{dom_id note}"}
+  %div.text-xs{:id => "#{dom_id note}"}
+    .text-s.max-h-40.overflow-scroll.mb-4
+      = note.body.to_s
+    %div
+      = note.created_at.to_fs
+    .font-semibold
+      = link_to note.notable.to_s, [note.notable], data: { turbo_frame: :_top } 
+    %hr.mt-6
+    = link_to "Edit", [:edit, note.notable, note]
