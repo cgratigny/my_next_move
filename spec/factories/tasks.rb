@@ -8,6 +8,7 @@
 #  description   :text
 #  due_date      :date
 #  name          :string
+#  notes_count   :integer
 #  state         :string
 #  taskable_type :string
 #  created_at    :datetime         not null
