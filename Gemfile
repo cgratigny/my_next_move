@@ -42,6 +42,8 @@ gem "validate_url"
 # Postgres database gem
 gem "pg"
 gem "pg_search"
+gem 'activerecord-import'
+
 
 # HasScope allows you to dynamically apply named scopes to your resources based on an incoming set of parameters.
 gem "has_scope"
@@ -64,6 +66,8 @@ gem 'hamlit-rails'
 gem 'html2haml' 
 
 gem 'view_component'
+
+gem "amazing_print"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
