@@ -137,3 +137,5 @@ gem "rails_heroicon"
 gem "mechanize", "~> 2.9"
 
 gem "devise", "~> 4.9"
+
+gem "honeybadger", "~> 5.4"
