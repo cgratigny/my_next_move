@@ -4,7 +4,7 @@
 
 @layer components {
   .card {
-    @apply p-6 m-2 border border-gray-300 rounded-lg shadow bg-gray-200 dark:bg-gray-800 dark:border-gray-700 mb-4;
+    @apply p-6 m-2 border border-gray-300 rounded-lg shadow bg-white dark:bg-gray-800 dark:border-gray-700 mb-4;
   }
 }
 
