@@ -15,6 +15,7 @@
 
     %h4.font-bold.text-m.mb-2 Opportunity Info
     = form.input :name
+    = form.input :tag_list, input_html: { value: form.object.tag_list.to_s }
     = form.input :rating, as: :radio_buttons, collection: OpportunityRating.select_options
     = form.input :uri, label: "Opportunity Website"
     = form.input :posted_on, label: "Posting Website"
