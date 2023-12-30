@@ -46,9 +46,9 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'block', error_class: 'text-red-500'
+    b.use :label, class: 'block', error_class: 'text-red-700'
     b.use :input, class: 'shadow appearance-none border border-slate-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out dark:bg-slate-700 dark:border-slate-600', error_class: 'border-red-500', valid_class: 'border-green-400'
-    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-500 text-xs italic' }
+    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
@@ -60,9 +60,9 @@ SimpleForm.setup do |config|
       ba.use :input, class: 'focus:ring-2 focus:ring-indigo-500:focus ring-offset-2 h-4 w-4 text-indigo-600 border-gray-300 rounded'
     end
     b.wrapper tag: 'div', class: 'ml-3 text-sm' do |bb|
-      bb.use :label, class: 'block', error_class: 'text-red-500'
+      bb.use :label, class: 'block', error_class: 'text-red-700'
       bb.use :hint, wrap_with: { tag: 'p', class: 'block text-grey-700 text-xs italic' }
-      bb.use :full_error, wrap_with: { tag: 'p', class: 'block text-red-500 text-xs italic' }
+      bb.use :full_error, wrap_with: { tag: 'p', class: 'block text-red-700 text-xs italic' }
     end
 
   end
@@ -71,11 +71,11 @@ SimpleForm.setup do |config|
   config.wrappers :vertical_collection, item_wrapper_class: 'flex items-center', item_label_class: 'my-1 ml-3 block text-sm font-medium text-gray-400', tag: 'div', class: 'my-4' do |b|
     b.use :html5
     b.optional :readonly
-    b.wrapper :legend_tag, tag: 'legend', class: 'text-sm font-medium text-gray-600', error_class: 'text-red-500' do |ba|
+    b.wrapper :legend_tag, tag: 'legend', class: 'text-sm font-medium text-gray-600', error_class: 'text-red-700' do |ba|
       ba.use :label_text
     end
     b.use :input, class: 'focus:ring-2 focus:ring-indigo-500 ring-offset-2 h-4 w-4 text-indigo-600 border-gray-300 rounded', error_class: 'text-red-500', valid_class: 'text-green-400'
-    b.use :full_error, wrap_with: { tag: 'p', class: 'block mt-2 text-red-500 text-xs italic' }
+    b.use :full_error, wrap_with: { tag: 'p', class: 'block mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
@@ -86,9 +86,9 @@ SimpleForm.setup do |config|
     b.optional :maxlength
     b.optional :minlength
     b.optional :readonly
-    b.use :label, class: 'text-sm font-medium text-gray-600 block', error_class: 'text-red-500'
-    b.use :input, class: 'w-full text-gray-500 px-3 py-2 border rounded', error_class: 'text-red-500 border-red-500', valid_class: 'text-green-400'
-    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-500 text-xs italic' }
+    b.use :label, class: 'text-sm font-medium text-gray-600 block', error_class: 'text-red-700'
+    b.use :input, class: 'w-full text-gray-500 px-3 py-2 border rounded', error_class: 'text-red-700 border-red-700', valid_class: 'text-green-400'
+    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
@@ -103,21 +103,21 @@ SimpleForm.setup do |config|
       # ba.use :input, class: 'flex w-auto w-auto text-gray-500 text-sm border-gray-300 rounded p-2', error_class: 'text-red-500', valid_class: 'text-green-400'
       ba.use :input, class: 'flex w-auto w-auto shadow appearance-none border border-gray-300 rounded w-full p-2 bg-white focus:outline-none focus:border-blue-500 text-gray-400 leading-4 transition-colors duration-200 ease-in-out'
     end
-    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-500 text-xs italic' }
+    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
   # vertical range input
-  config.wrappers :vertical_range, tag: 'div', class: 'my-4', error_class: 'text-red-500', valid_class: 'text-green-400' do |b|
+  config.wrappers :vertical_range, tag: 'div', class: 'my-4', error_class: 'text-red-700', valid_class: 'text-green-400' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :readonly
     b.optional :step
-    b.use :label, class: 'text-sm font-medium text-gray-600 block', error_class: 'text-red-500'
+    b.use :label, class: 'text-sm font-medium text-gray-600 block', error_class: 'text-red-700'
     b.wrapper tag: 'div', class: 'flex items-center h-5' do |ba|
-      ba.use :input, class: 'rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full text-gray-300', error_class: 'text-red-500', valid_class: 'text-green-400'
+      ba.use :input, class: 'rounded-lg overflow-hidden appearance-none bg-gray-400 h-3 w-full text-gray-300', error_class: 'text-red-700', valid_class: 'text-green-400'
     end
-    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-500 text-xs italic' }
+    b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-red-700 text-xs italic' }
     b.use :hint, wrap_with: { tag: 'p', class: 'mt-2 text-grey-700 text-xs italic' }
   end
 
