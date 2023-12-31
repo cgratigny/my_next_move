@@ -14,7 +14,7 @@
       = render Common::Layout::TitleComponent.new(title: "Company Info", priority: 4)
 
       #existing-company
-        = form.association :company, label: "Choose Existing Company", collection: Current.user.companies.distinct.alphabetical, include_blank: true, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :company } }
+        = form.association :company, label: (form.object.persisted? ? "Linked Company" : "Choose Existing Company"), collection: Current.user.companies.distinct.alphabetical, include_blank: true, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :company } }
 
       -# This hack of adding values of "," will compare a blank value, making this show when the value is blank, and hiding when the value is present
       #new-company-fields.form-control{ data: { form_toggler_target: :element, values: ",", form_toggler_group: :company } }
@@ -24,7 +24,7 @@
 
 
     .card
-      = render Common::Layout::TitleComponent.new(title: "Organization", priority: 4)
+      = render Common::Layout::TitleComponent.new(title: "Categorization", priority: 4)
 
       = form.input :tag_list, as: :hidden, input_html: { value: form.object.tag_list.join(','), id: 'hidden-tag-list' }
 

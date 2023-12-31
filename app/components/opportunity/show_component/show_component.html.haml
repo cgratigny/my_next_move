@@ -49,8 +49,7 @@
     %turbo-frame{ id: dom_id(Task.new) }
     = render "tasks/list", tasks: opportunity.tasks
 - else
-  = link_to [opportunity, :tasks] do
-    #{opportunity.tasks_count} Tasks | 
+  %span.text-xs= pluralize(opportunity.tasks_count, "Task")
 
 %br
 
@@ -62,8 +61,7 @@
     %turbo-frame{ id: dom_id(Note.new) }
     = render "notes/list", notes: opportunity.notes.reverse_chronological
 - else
-  = link_to [opportunity, :notes] do
-    #{opportunity.notes_count} Notes | 
+  %span.text-xs= pluralize(opportunity.notes_count, "Note")
 
 .mb-10
 
