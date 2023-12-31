@@ -1,9 +1,10 @@
-= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 2, path: [:opportunities])
+= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 3, path: [:opportunities])
 = render Opportunity::ListComponent.new(opportunities: @opportunities)
 
-= render Common::Layout::TitleComponent.new(title: "Tasks", priority: 2)
+.card
+  = render Common::Layout::TitleComponent.new(title: "Tasks", priority: 3)
+  = render Task::ListComponent.new(tasks: @tasks)
 
-= render Task::ListComponent.new(tasks: @tasks)
-
-= render Common::Layout::TitleComponent.new(title: "Recent Notes", priority: 2)
-= render Note::ListComponent.new(notes: Current.user.notes.reverse_chronological.limit(8))
+.card
+  = render Common::Layout::TitleComponent.new(title: "Recent Notes", priority: 3)
+  = render Note::ListComponent.new(notes: Current.user.notes.reverse_chronological.limit(8))

@@ -1,7 +1,7 @@
 %turbo-frame{:id => "#{dom_id task}"}
   %div.mb-4{:id => "#{dom_id task}"}
     %span.font-bold
-      = link_to [task.taskable, task], data: { turbo_frame: :_top } do
+      = link_to [task.taskable], data: { turbo_frame: :_top } do
         = task.name
     %span{ class: task.state.tailwind_class}
       = task.state.text
