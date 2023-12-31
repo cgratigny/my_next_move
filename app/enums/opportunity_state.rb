@@ -2,6 +2,14 @@ class OpportunityState < ClassyEnum::Base
   def tailwind_class
     (tailwind_classes + ["rounded-sm", "p-0.5", "text-xs", "border", "border-slate-100", "dark:text-gray-800", "mr-1", "whitespace-nowrap"]).join(" ")
   end
+
+  def self.active
+    all.select{ |option| option.active? }
+  end
+
+  def active?
+    true
+  end
 end
 
 class OpportunityState::Interested < OpportunityState
@@ -32,16 +40,29 @@ class OpportunityState::Withdrawn < OpportunityState
   def tailwind_classes
     ["bg-true-gray-100"]
   end
+
+  def active?
+    false
+  end
+
 end
 
 class OpportunityState::NotInterested < OpportunityState
   def tailwind_classes
     ["bg-red-100"]
   end
+
+  def active?
+    false
+  end
 end
 
 class OpportunityState::Rejected < OpportunityState
   def tailwind_classes
     ["bg-red-100"]
+  end
+
+  def active?
+    false
   end
 end

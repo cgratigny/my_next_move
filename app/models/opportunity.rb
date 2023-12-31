@@ -55,6 +55,8 @@ class Opportunity < ApplicationRecord
     where(id: global_search(given_needle) + where(company: Company.global_search(given_needle) ))
    }
 
+   scope :active, -> { where(state: OpportunityState.active.map(&:to_s)) }
+
   pg_search_scope :global_search,
     against: [:name, :state, :tags_string],
     using: {

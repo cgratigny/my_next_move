@@ -72,7 +72,7 @@ class OpportunitiesController < ApplicationController
     end
 
     def build_opportunities
-      @opportunities = apply_scopes(Current.user.opportunities).includes(:company).company_alphabetical
+      @opportunities = apply_scopes(Current.user.opportunities).includes(:company).active.company_alphabetical
     end
     # Only allow a list of trusted parameters through.
     def opportunity_params

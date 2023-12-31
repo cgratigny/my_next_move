@@ -5,7 +5,7 @@ class DashboardsController < ApplicationController
   breadcrumb "Dashboard", [:dashboard], match: :exact
 
   def build_opportunities
-    @opportunities = Current.user.opportunities.includes(:company).company_alphabetical.limit(4)
+    @opportunities = Current.user.opportunities.includes(:company).active.company_alphabetical.limit(4)
   end
 
   def build_tasks
