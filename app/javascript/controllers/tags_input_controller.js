@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="tags-input"
 export default class extends Controller {
   static targets = ["input", "tagsList"];
 
@@ -18,6 +17,7 @@ export default class extends Controller {
       const tagText = this.inputTarget.value.trim().replace(/,/, '');
       if (tagText) {
         this.createTag(tagText);
+        this.updateHiddenField();
       }
       this.inputTarget.value = '';
     }
@@ -30,8 +30,16 @@ export default class extends Controller {
     const removeBtn = document.createElement('span');
     removeBtn.textContent = 'x';
     removeBtn.className = 'remove-tag';
-    removeBtn.onclick = () => tag.remove();
+    removeBtn.onclick = () => {
+      tag.remove();
+      this.updateHiddenField();
+    };
     tag.appendChild(removeBtn);
     this.tagsListTarget.appendChild(tag);
+  }
+
+  updateHiddenField() {
+    const tags = Array.from(this.tagsListTarget.children).map(tag => tag.textContent.slice(0, -1)); // slice to remove 'x' from tag text
+    document.getElementById('hidden-tag-list').value = tags.join(',');
   }
 }

@@ -15,6 +15,8 @@
 #  posted_on   :string
 #  rating      :string
 #  state       :string
+#  tags        :string
+#  tags_string :string
 #  tasks_count :integer
 #  uri         :string
 #  created_at  :datetime         not null
@@ -28,8 +30,11 @@
 #  index_opportunities_on_move_id     (move_id)
 #
 class Opportunity < ApplicationRecord
+  attr_accessor :tags_input
+
   include PgSearch::Model
   has_paper_trail
+  acts_as_taggable_on :tags
 
   belongs_to :company
   belongs_to :move
@@ -51,13 +56,14 @@ class Opportunity < ApplicationRecord
    }
 
   pg_search_scope :global_search,
-    against: [:name, :state],
+    against: [:name, :state, :tags_string],
     using: {
       tsearch: { prefix: true }
     }
 
   has_rich_text :body
 
+  before_save :set_tags_string
   validates :name, presence: true
 
   before_validation :set_name_from_uri_title
@@ -82,6 +88,10 @@ class Opportunity < ApplicationRecord
   
   def destroy
     raise
+  end
+
+  def set_tags_string
+    self.tags_string = self.tag_list
   end
   
 end

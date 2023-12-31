@@ -15,7 +15,14 @@
 
     %h4.font-bold.text-m.mb-2 Opportunity Info
     = form.input :name
-    = form.input :tag_list, input_html: { value: form.object.tag_list.to_s }
+
+
+    = form.input :tag_list, as: :hidden, input_html: { value: form.object.tag_list.join(','), id: 'hidden-tag-list' }
+
+    %div{"data-controller" => "tags-input"}
+      = form.input :tags_input, name: nil, label: "Tags", input_html: {"data-action" => "keyup->tags-input#addTag", "data-target" => "tags-input.input", placeholder: "Enter tags", type: "text"}
+      %span.tags-list{"data-target" => "tags-input.tagsList"}
+
     = form.input :rating, as: :radio_buttons, collection: OpportunityRating.select_options
     = form.input :uri, label: "Opportunity Website"
     = form.input :posted_on, label: "Posting Website"

@@ -2,7 +2,13 @@
   %div.text-xs{:id => "#{dom_id opportunity}"}
     %div{ class: show? ? "card" : "" }
       %span{ class: opportunity.state.tailwind_class}
-        = opportunity.state.text
+        = link_to [:opportunities, { search: opportunity.state.text } ] do
+          = opportunity.state.text
+
+      - opportunity.tags.each do |tag|
+        = link_to [:opportunities, { search: tag.to_s } ] do
+          %span.p-1.bg-slate-200.dark:bg-slate-700.rounded= tag
+
       .float-right
         - OpportunityRating.selectable.each do |rating|
           = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { rating: }}, form: { class: :inline } do
