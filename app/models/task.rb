@@ -27,6 +27,8 @@ class Task < ApplicationRecord
 
   classy_enum_attr :state, enum: "TaskState", default: :todo
 
+  validates :due_date, presence: true
+
   scope :todo, -> { where.not(state: :complete) }
   scope :chronological, -> { order(due_date: :asc) }
 

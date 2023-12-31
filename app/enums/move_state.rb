@@ -1,6 +1,6 @@
 class MoveState < ClassyEnum::Base
   def tailwind_class
-    (tailwind_classes + ["rounded-md", "p-1", "text-xs", "border", "border-slate-100", "dark:text-gray-800"]).join(" ")
+    (tailwind_classes + ["rounded-sm", "p-0.5", "text-xs", "border", "border-slate-100", "dark:text-gray-800"]).join(" ")
   end
 end
 

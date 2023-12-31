@@ -28,8 +28,9 @@ class NotesController < ApplicationController
   def create
     respond_to do |format|
       if @note.save
-        format.html { redirect_to [@note.notable, @note], notice: "Note was successfully created." }
+        format.html { redirect_to [@note.notable], notice: "Note was successfully created." }
         format.json { render :show, status: :created, location: [@note.notable, @note] }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -57,6 +58,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 
@@ -97,6 +99,6 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.fetch(:note, {}).permit!
+      params[:note].present? ? params.require(:note).permit(:body) : {}
     end
 end

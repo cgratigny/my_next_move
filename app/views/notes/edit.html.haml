@@ -1,1 +1,2 @@
-= render Note::FormComponent.new(note: @note)
+%turbo-frame{:id => "#{dom_id @note}"}
+  = render Note::FormComponent.new(note: @note)

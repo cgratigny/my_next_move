@@ -1,4 +1,5 @@
-.m-auto{ class: "lg:w-1/2 md:w-3/4" }
-  = render Common::Layout::TitleComponent.new(title: "New Opportunity")
+%turbo-frame{:id => "#{dom_id @opportunity}" }
+  .m-auto{ class: "lg:w-1/2 md:w-3/4" }
+    = render Common::Layout::TitleComponent.new(title: "New Opportunity")
 
-  = render "form", opportunity: @opportunity
+    = render "form", opportunity: @opportunity

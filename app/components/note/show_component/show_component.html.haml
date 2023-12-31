@@ -1,10 +1,17 @@
 %turbo-frame{:id => "#{dom_id note}"}
   %div.text-xs{:id => "#{dom_id note}"}
-    .text-s.max-h-40.overflow-scroll.mb-4
+    .text-s.max-h-40.overflow-scroll
       = note.body.to_s
-    %div
-      = note.created_at.to_fs
+
+
+    -# = render Common::Element::DestroyLinkComponent.new(model: @note, text: "Destroy")    
     .font-semibold
       = link_to note.notable.to_s, [note.notable], data: { turbo_frame: :_top } 
-    %hr.mt-6
-    = link_to "Edit", [:edit, note.notable, note]
+    %div.mt-4
+      = note.created_at.to_fs
+      = link_to [:edit, note.notable, note] do
+        = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+      
+      = render Common::Element::DestroyLinkComponent.new(model: @note, text: heroicon("trash", size: 16, class: "pb-0.5 inline"), args: { class: "inline" } )
+
+    %hr.my-4.bg-slate-300.dark:bg-slate-700.h-px.border-0

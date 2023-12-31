@@ -19,6 +19,9 @@ class Note < ApplicationRecord
 
   has_rich_text :body
 
+  validates :body, presence: true
+
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }
+
 end

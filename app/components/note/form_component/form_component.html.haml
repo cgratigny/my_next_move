@@ -1,5 +1,6 @@
-%turbo-frame{:id => "#{dom_id note}"}
-  = simple_form_for [note.notable, note] do |form|
+= simple_form_for [note.notable, note], data: { turbo_frame: dom_id(note) } do |form|
+  .card
+
     - if note.errors.any?
       #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
         %h2
@@ -10,8 +11,5 @@
             %li= error.full_message
     = form.input :body, as: :rich_text_area
 
-
+  .card
     = render Common::Form::SubmitComponent.new(form: form)
-
-  .position-absolute.-mt-12.ml-1.text-xs
-    = render Common::Element::DestroyLinkComponent.new(model: @note, text: "Destroy")

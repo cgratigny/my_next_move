@@ -7,7 +7,7 @@
     @apply p-6 m-2 border border-gray-300 rounded-lg shadow bg-white dark:bg-gray-800 dark:border-gray-700 mb-4;
   }
   .tag {
-    @apply inline-block bg-slate-200 rounded p-1 m-1 pr-4; 
+    @apply inline-block bg-slate-200 rounded p-1 m-1 pr-4 dark:bg-slate-900 dark:text-slate-200; 
   }
 
   .tag .remove-tag {

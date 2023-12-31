@@ -1,5 +1,3 @@
-.float-right
-  = render Common::Element::ButtonComponent.new(label: "New", path: [:new, :opportunity], icon: :plus)
 = render Common::Layout::TitleComponent.new(title: "Opportunities (#{@opportunities.count})")
 
 = render Opportunity::ListComponent.new(opportunities: @opportunities)

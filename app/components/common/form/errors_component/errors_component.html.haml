@@ -1,8 +1,9 @@
 - if resource.errors.any?
-  %div{:style => "color: red"}
+  .card.bg-red-900.text-gray-400
     %h2
       = pluralize(resource.errors.count, "error")
-      prohibited this from being saved:
-    %ul
-      - resource.errors.each do |error|
-        %li= error.full_message
+      prohibited this from being saved.
+    .hidden
+      %ul
+        - resource.errors.each do |error|
+          %li= error.full_message

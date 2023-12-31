@@ -1,0 +1,6 @@
+%div.text-xs{"data-controller" => "read-more", "data-read-more-hide-class" => "hide"}
+  %div.content.max-h-32.truncate.text-gray-700.dark:text-gray-500{"data-read-more-target" => "content"}
+    = content
+  .fade-out
+  %button.text-center.py-1.w-full.display-block.mt-2{"data-action": "read-more#toggleContent", "data-read-more-target": "toggleButton"}
+    = heroicon("chevron-up-down", variant: :micro, class: "m-auto")

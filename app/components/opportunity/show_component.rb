@@ -4,7 +4,7 @@ class Opportunity::ShowComponent < ApplicationComponent
   attr_reader :opportunity, :card
 
   def list?
-    request.headers["Turbo-Frame"].present?
+    @list ||= request.headers["Turbo-Frame"].present?
   end
 
   def show?

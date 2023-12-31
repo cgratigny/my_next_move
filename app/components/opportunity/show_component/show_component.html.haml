@@ -1,5 +1,5 @@
-%turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
-  %div.text-xs{:id => "#{dom_id opportunity}"}
+%div.text-xs{:id => "#{dom_id opportunity}"}
+  %turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
     %div{ class: show? ? "card" : "" }
       %span{ class: opportunity.state.tailwind_class}
         = link_to [:opportunities, { search: opportunity.state.text } ] do
@@ -17,7 +17,7 @@
             - else
               %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
 
-      .title.mb-2.mt-1
+      .title.mb-2.mt-2
         %div.font-semibold
           = opportunity.company.name
           - if opportunity.company.uri.present?
@@ -38,32 +38,32 @@
       Added
       = opportunity.created_at.to_fs
       - if show?
-        .font-semibold
-          Details:
-          
-        %div.text-xs.p-2.pb-4{"data-controller" => "read-more", "data-read-more-hide-class" => "hide"}
-          %div.content.max-h-32.truncate{"data-read-more-target" => "content"}
-            = opportunity.body.to_s
-          .fade-out
-          %button.text-center.py-1.w-full.display-block.mt-2{"data-action": "read-more#toggleContent", "data-read-more-target": "toggleButton"}
-            = heroicon("chevron-up-down", variant: :micro, class: "m-auto")
+        = render Common::Element::ExpandableContentComponent.new(content: opportunity.body.to_s)
 
-    %hr.m-2
-    - if show?
-      %h3.text-lg.font-semi-bold Notes
-      = render "notes/list", notes: opportunity.notes
-    - else
-      = link_to [opportunity, :notes] do
-        #{opportunity.notes_count} Notes | 
-    
-    = link_to "Add Note", [:new, opportunity, :note], class: "font-semibold"
+.m-2
+- if show?
+  .card
+    .float-right
+      = render Common::Element::ButtonComponent.new(label: "Add Task", path: [:new, opportunity, :task], custom_args: { data: { turbo_frame: :new_task } } )
+    %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Tasks
+    %turbo-frame{ id: dom_id(Task.new) }
+    = render "tasks/list", tasks: opportunity.tasks
+- else
+  = link_to [opportunity, :tasks] do
+    #{opportunity.tasks_count} Tasks | 
 
-    %br
+%br
 
-    - if show?
-      %h3.text-lg.font-semi-bold Tasks
-      = render "tasks/list", tasks: opportunity.tasks
-    - else
-      = link_to [opportunity, :tasks] do
-        #{opportunity.tasks_count} Tasks | 
-    = link_to "Add Task", [:new, opportunity, :task], class: "font-semibold"
+- if show?
+  .card
+    .float-right
+      = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, opportunity, :note], custom_args: { data: { turbo_frame: :new_note } } )
+    %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Notes
+    %turbo-frame{ id: dom_id(Note.new) }
+    = render "notes/list", notes: opportunity.notes.reverse_chronological
+- else
+  = link_to [opportunity, :notes] do
+    #{opportunity.notes_count} Notes | 
+
+.mb-10
+

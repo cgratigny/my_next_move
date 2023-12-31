@@ -1,1 +1,2 @@
-.m-auto{ class: "lg:w-1/2 md:w-3/4" }= render "form", opportunity: @opportunity
+%turbo-frame{:id => "#{dom_id @opportunity}" }
+  .m-auto{ class: "lg:w-1/2 md:w-3/4" }= render "form", opportunity: @opportunity

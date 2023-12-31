@@ -1,4 +1,5 @@
 .m-auto{ class: "lg:w-1/2 md:w-3/4" }
   = render Common::Layout::TitleComponent.new(title: "New Task", priority: 1)
   .card= render @task.taskable
-  = render "form", task: @task
+  %turbo-frame{:id => "#{dom_id @task}" }
+    = render "form", task: @task
