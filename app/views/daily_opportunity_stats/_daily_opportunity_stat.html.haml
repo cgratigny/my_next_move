@@ -1,0 +1,7 @@
+%div{:id => "#{dom_id daily_opportunity_stat}"}
+  %h2
+    = daily_opportunity_stat.date.to_fs
+  - daily_opportunity_stat.stats_data.each do |key, value|
+    = OpportunityState[key.gsub("_count", "")].text
+    = value
+  = daily_opportunity_stat.sum

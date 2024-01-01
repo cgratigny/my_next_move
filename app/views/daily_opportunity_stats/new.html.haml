@@ -1,0 +1,4 @@
+.mx-auto.w-full{:class => "md:w-2/3"}
+  %h1.font-bold.text-4xl New daily opportunity stat
+  = render "form", daily_opportunity_stat: @daily_opportunity_stat
+  = link_to "Back to daily opportunity stats", daily_opportunity_stats_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

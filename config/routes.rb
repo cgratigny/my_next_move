@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :daily_opportunity_stats
 
   resources :companies
 

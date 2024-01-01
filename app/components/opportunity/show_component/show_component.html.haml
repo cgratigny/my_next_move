@@ -18,14 +18,7 @@
               %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
 
       .title.mb-2.mt-2
-        %div.font-semibold
-          = opportunity.company.name
-          - if opportunity.company.uri.present?
-            %span
-              = link_to opportunity.company.uri, target: :_blank do
-                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
-
-        %div.text-l.text-slate-700.text-xs.dark:text-slate-200
+        %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
           = link_to opportunity.name, opportunity
           - if opportunity.uri.present?
             %span
@@ -33,6 +26,13 @@
                 = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
           = link_to [:edit, opportunity] do
             = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+
+        %div
+          = opportunity.company.name
+          - if opportunity.company.uri.present?
+            %span
+              = link_to opportunity.company.uri, target: :_blank do
+                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
 
       %br
       Added

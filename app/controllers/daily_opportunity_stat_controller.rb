@@ -1,0 +1,2 @@
+class DailyOpportunityStatController < ApplicationController
+end
