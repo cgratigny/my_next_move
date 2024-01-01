@@ -1,5 +1,16 @@
 .w-full
   .flex.justify-between.items-center
-    %h1.font-bold.text-4xl Daily opportunity stats
+    = render Common::Layout::TitleComponent.new(title: "Stats")
   #daily_opportunity_stats.min-w-full
-    = render @daily_opportunity_stats
+    %table.min-w-full.divide-y.divide-gray-200.dark:divide-gray-700
+      %thead
+        %tr.bg-slate-100
+          %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col } Date
+          - OpportunityState.each do |opportunity_state|
+            %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col }= opportunity_state.text
+          %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col } Total
+      %tbody.divide-y.divide-gray-200.dark:divide-gray-700
+        - @daily_opportunity_stats.each do |daily_opportunity_stat|
+          = render "table_row", daily_opportunity_stat: daily_opportunity_stat
+      
+

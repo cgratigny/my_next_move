@@ -3,7 +3,7 @@ class DailyOpportunityStatsController < ApplicationController
 
   # GET /daily_opportunity_stats or /daily_opportunity_stats.json
   def index
-    @daily_opportunity_stats = DailyOpportunityStat.all
+    @daily_opportunity_stats = DailyOpportunityStat.order(date: :desc)
   end
 
   # GET /daily_opportunity_stats/1 or /daily_opportunity_stats/1.json
