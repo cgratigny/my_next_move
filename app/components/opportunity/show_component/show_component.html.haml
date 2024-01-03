@@ -1,5 +1,3 @@
-= render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
-
 %div.text-xs{:id => "#{dom_id opportunity}"}
   %turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
     %div{ class: show? ? "card" : "" }
