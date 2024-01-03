@@ -129,7 +129,6 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
-    domain_name (0.6.20231109)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -165,8 +164,9 @@ GEM
       haml (>= 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    http-cookie (1.0.5)
-      domain_name (~> 0.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -199,29 +199,13 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
-    mechanize (2.9.1)
-      addressable (~> 2.8)
-      domain_name (~> 0.5, >= 0.5.20190701)
-      http-cookie (~> 1.0, >= 1.0.3)
-      mime-types (~> 3.0)
-      net-http-digest_auth (~> 1.4, >= 1.4.1)
-      net-http-persistent (>= 2.5.2, < 5.0.dev)
-      nokogiri (~> 1.11, >= 1.11.2)
-      rubyntlm (~> 0.6, >= 0.6.3)
-      webrick (~> 1.7)
-      webrobots (~> 0.1.2)
     method_source (1.0.0)
-    mime-types (3.5.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.1205)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
     mutex_m (0.2.0)
-    net-http-digest_auth (1.4.1)
-    net-http-persistent (4.0.2)
-      connection_pool (~> 2.2)
     net-imap (0.4.8)
       date
       net-protocol
@@ -357,7 +341,6 @@ GEM
     ruby2_keywords (0.0.5)
     ruby_parser (3.20.3)
       sexp_processor (~> 4.16)
-    rubyntlm (0.6.3)
     rubyzip (2.3.2)
     selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -421,7 +404,6 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.8.1)
-    webrobots (0.1.2)
     websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -453,12 +435,13 @@ DEPENDENCIES
   has_scope
   honeybadger (~> 5.4)
   html2haml
+  httparty
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   listen
   loaf
-  mechanize (~> 2.9)
+  nokogiri
   paper_trail
   pg
   pg_search

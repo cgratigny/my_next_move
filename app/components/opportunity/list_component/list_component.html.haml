@@ -1,10 +1,14 @@
-%div.w-96.dispay-inline.ml-2
-  = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
-    .inline-flex
-      = form.input :search, label: false, placeholder: "Filter...", required: false, input_html: { name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
-    .inline-flex.ml-3.text-xs
-      = link_to "Reset", [:opportunities]
+.flex.flex-row.card.bg-slate-400
 
+  %div.w-96.dispay-inline.ml-2{ class: "basis-1/2 sm:basis-full"}
+    = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
+      .inline-flex
+        = form.input :search, label: false, placeholder: "Filter...", required: false, input_html: { name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
+      .inline-flex.ml-3.text-xs
+        = link_to "Reset", [:opportunities]
+
+  %div.w-96.dispay-inline.ml-2{ class: "basis-1/2 sm:basis-full"}
+    = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
 
 %turbo-frame#opportunities{ data: { target: :_top } }
   #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4

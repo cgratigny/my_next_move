@@ -30,7 +30,9 @@
 #  index_opportunities_on_move_id     (move_id)
 #
 class Opportunity < ApplicationRecord
-  attr_accessor :tags_input
+  attr_accessor :tags_input, :quick_add
+  
+  attr_accessor :company_name
 
   include PgSearch::Model
   has_paper_trail
@@ -70,15 +72,28 @@ class Opportunity < ApplicationRecord
   validates :name, presence: true
 
   before_validation :set_name_from_uri_title
+  before_validation :process_company_name
 
   def set_name_from_uri_title
     return if self.name.present?
     return if self.uri.blank?
-    agent = Mechanize.new
-    page = agent.get(self.uri)
-    self.name = page.title
-  rescue
+    return unless self.quick_add.present?
+
+    self.assign_attributes(
+      OpportunityUrlParserService.new(uri: self.uri).perform
+    )
+  # rescue
     # this means we weren't able to get the name, not a big deal
+  end
+
+  def process_company_name
+    return if company_name.nil?
+    found_company = self.user.companies.find_by(name: self.company_name)
+    if found_company.present?
+      self.company = found_company
+    else
+      self.company = Company.new(name: company_name)
+    end
   end
 
   def to_s

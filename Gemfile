@@ -134,7 +134,8 @@ gem "tailwindcss-rails", "~> 2.1"
 
 gem "rails_heroicon"
 
-gem "mechanize", "~> 2.9"
+gem "httparty"
+gem "nokogiri"
 
 gem "devise", "~> 4.9"
 
