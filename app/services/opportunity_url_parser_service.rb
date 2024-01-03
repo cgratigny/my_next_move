@@ -4,7 +4,7 @@ class OpportunityUrlParserService < ApplicationService
   attr_accessor :parsed_data
 
   def perform
-    response = HTTParty.get(self.uri)
+    response = HTTParty.get(uri)
     html = response.body
     # puts response.body, response.code, response.message, response.headers.inspect
 
@@ -33,8 +33,15 @@ class OpportunityUrlParserService < ApplicationService
     }
   end
 
-  def perform_for_indeed
+  def perform_for_greenhouse
+    string = self.parsed_data.title
 
+    # Find the position of the last occurrence of 'at'
+    last_at_index = string.rindex('at')
+    {
+      name: string[0...last_at_index].strip,
+      company_name: string[(last_at_index + 3)..-1].strip
+    }
   end
 
   def perform_for_all
