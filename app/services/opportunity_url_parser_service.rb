@@ -10,6 +10,10 @@ class OpportunityUrlParserService < ApplicationService
 
     self.parsed_data = Nokogiri::HTML.parse(html)
     self.send(build_domain_perform_method)
+  rescue => e
+    # if there was an error, it was likely due to not being able to parse the url properly
+    Honeybadger.notify(e)
+    { }
   end
 
   def build_domain_perform_method
