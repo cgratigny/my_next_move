@@ -1,6 +1,9 @@
 %tr
   %td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-800.dark:text-gray-200
-    = daily_opportunity_stat.date.to_fs
+    - if daily_opportunity_stat.persisted?
+      = daily_opportunity_stat.date.to_fs
+    - else
+      Current
   - OpportunityState.each do |opportunity_state|
     %td.px-6.py-4.whitespace-nowrap.text-sm.text-center.text-gray-800.dark:text-gray-200
       = daily_opportunity_stat.stats_data["#{opportunity_state.to_s}_count"]

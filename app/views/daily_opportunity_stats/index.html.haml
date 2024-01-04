@@ -12,6 +12,7 @@
                 = opportunity_state.text
           %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col } Total
       %tbody.divide-y.divide-gray-200.dark:divide-gray-700
+        = render "table_row", daily_opportunity_stat: @current_daily_opportunity_stat
         - @daily_opportunity_stats.each do |daily_opportunity_stat|
           = render "table_row", daily_opportunity_stat: daily_opportunity_stat
       

@@ -5,13 +5,21 @@ class GenerateDailyOpportunityStatService < ApplicationService
 
   def perform
     Move.find_each do |move|
-      stats_data = {}
-      OpportunityState.each do |state|
-        stats_data["#{state.to_s}_count"] = Opportunity.by_state(state.to_s).count
-      end
       DailyOpportunityStat.find_or_create_by(move: move, date: self.date).update(
-        stats_data: stats_data
+        build_daily_opportunity_stat 
       )
     end
+  end
+
+  def build_stat_data
+    stats_data = {}
+    OpportunityState.each do |state|
+      stats_data["#{state.to_s}_count"] = Opportunity.by_state(state.to_s).count
+    end
+    stats_data
+  end
+
+  def build_daily_opportunity_stat
+    { stats_data: build_stat_data }
   end
 end
