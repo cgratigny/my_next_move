@@ -104,10 +104,6 @@ class Opportunity < ApplicationRecord
     self.name.truncate(20)
   end
   
-  def destroy
-    raise
-  end
-
   def set_tags_string
     self.tags_string = self.tag_list
   end

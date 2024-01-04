@@ -49,4 +49,4 @@
     .card
       = render Common::Form::SubmitComponent.new(form: form)
 
-  = render Common::Element::DestroyLinkComponent.new(model: @opportunity, text: "Destroy")
+= render Common::Element::DestroyLinkComponent.new(model: @opportunity, text: "Destroy", args: { data: { turbo_frame: :_top } } )
