@@ -7,8 +7,7 @@
       = form.input :name
       = form.input :uri, label: "Posting URL"
 
-      = form.input :state, label: "Status", collection: OpportunityState.select_options, input_html: { class: "form-control", data: { action: "input->form-toggler#changed", form_toggler_target: :select, form_toggler_group: :opportunity } }
-      = form.input :applied_on, as: :datepicker, wrapper_html: { data: { form_toggler_target: :element, values: [:application_submitted, :on_hold, :withdrawn, :rejected].join(","), form_toggler_group: :opportunity } }, input_html: { class: "form-control" }
+      = form.input :state, label: "Status", collection: OpportunityState.select_options
 
     .card
       = render Common::Layout::TitleComponent.new(title: "Company Info", priority: 4)

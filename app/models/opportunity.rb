@@ -50,6 +50,7 @@ class Opportunity < ApplicationRecord
   classy_enum_attr :rating, enum: "OpportunityRating", default: :zero
   
   validates :uri, url: { allow_nil: true, allow_blank: true }
+  before_save :set_applied_on
 
   scope :company_alphabetical, -> { joins(:company).merge(Company.all.alphabetical) }
 
@@ -93,6 +94,12 @@ class Opportunity < ApplicationRecord
       self.company = found_company
     else
       self.company = Company.new(name: company_name)
+    end
+  end
+
+  def set_applied_on
+    if self.applied_on.nil? && self.state.application_submitted?
+      self.applied_on = Time.zone.now.to_date
     end
   end
 
