@@ -1,5 +1,5 @@
 %turbo-frame{:id => "#{dom_id note}"}
-  %div.text-xs{:id => "#{dom_id note}"}
+  %div.text-xs{:id => "#{dom_id note}", class: note.source.try(:tailwind_class)}
     .text-s.max-h-40.overflow-scroll
       = note.body.to_s
 

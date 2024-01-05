@@ -60,7 +60,7 @@ class DailyOpportunityStatsController < ApplicationController
 
   private
     def build_current_daily_opportunity_stat
-      @current_daily_opportunity_stat = DailyOpportunityStat.new(GenerateDailyOpportunityStatService.new(date: Date.today).build_daily_opportunity_stat)
+      @current_daily_opportunity_stat = DailyOpportunityStat.new(DailyOpportunityStatGeneratorService.new(date: Date.today).build_daily_opportunity_stat)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_daily_opportunity_stat

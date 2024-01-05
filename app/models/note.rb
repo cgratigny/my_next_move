@@ -5,6 +5,7 @@
 #  id           :bigint           not null, primary key
 #  body         :text
 #  notable_type :string
+#  source       :string           default("user")
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  notable_id   :bigint
@@ -23,5 +24,7 @@ class Note < ApplicationRecord
 
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }
+
+  classy_enum_attr :source, enum: "NoteSource", default: :user
 
 end

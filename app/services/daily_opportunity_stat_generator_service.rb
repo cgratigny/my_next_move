@@ -1,6 +1,4 @@
-class GenerateDailyOpportunityStatService < ApplicationService
-  include ActiveModel::Model
-
+class DailyOpportunityStatGeneratorService < ApplicationService
   attr_accessor :date
 
   def perform

@@ -7,9 +7,18 @@ class OpportunityState < ClassyEnum::Base
     all.select{ |option| option.active? }
   end
 
+  def self.ageable
+    all.select{ |option| option.ageable? }
+  end
+
   def active?
     true
   end
+
+  def ageable?
+    false
+  end
+
 end
 
 class OpportunityState::Interested < OpportunityState
@@ -22,6 +31,24 @@ class OpportunityState::ApplicationSubmitted < OpportunityState
   def tailwind_classes
     ["bg-yellow-100"]
   end
+
+  def text
+    "Applied"
+  end
+
+  def ageable?
+    true
+  end
+
+  # after 14 days, a role will automatically be marked as stale
+  def ageable_days
+    14
+  end
+
+  def ageable_attribute
+     :applied_on
+  end
+
 end
 
 class OpportunityState::InScreening < OpportunityState
@@ -30,6 +57,11 @@ class OpportunityState::InScreening < OpportunityState
   end
 end
 
+class OpportunityState::Stale < OpportunityState
+  def tailwind_classes
+    ["bg-orange-100"]
+  end
+end
 class OpportunityState::OnHold < OpportunityState
   def tailwind_classes
     ["bg-orange-100"]

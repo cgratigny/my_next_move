@@ -6,6 +6,6 @@
       Current
   - OpportunityState.each do |opportunity_state|
     %td.px-6.py-4.whitespace-nowrap.text-sm.text-center.text-gray-800.dark:text-gray-200
-      = daily_opportunity_stat.stats_data["#{opportunity_state.to_s}_count"]
+      = daily_opportunity_stat.stats_data["#{opportunity_state.to_s}_count"] || 0
   %td.px-6.py-4.whitespace-nowrap.text-center.text-sm.font-medium
     = daily_opportunity_stat.sum
