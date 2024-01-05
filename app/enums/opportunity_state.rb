@@ -33,7 +33,11 @@ class OpportunityState::ApplicationSubmitted < OpportunityState
   end
 
   def text
-    "Applied #{owner.applied_on.to_fs}"
+    if owner.present?
+      "Applied #{owner.applied_on.to_fs}"
+    else
+      "Applied"
+    end
   end
 
   def ageable?
