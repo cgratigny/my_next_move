@@ -44,7 +44,7 @@ class OpportunityUrlParserService < ApplicationService
     last_at_index = string.rindex("at")
     {
       name: string[0...last_at_index].strip,
-      company_name: string[(last_at_index + 3)..-1].strip
+      company_name: string[(last_at_index + 3)..].strip
     }
   end
 

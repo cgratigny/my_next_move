@@ -16,7 +16,7 @@ class Common::Form::Inputs::DatepickerComponent < ApplicationComponent
   end
 
   def datepicker_input_options
-    {data: {"datepicker-target": :input}, readonly: :true}
+    {data: {"datepicker-target": :input}, readonly: true}
   end
 
   def wrapper_options
