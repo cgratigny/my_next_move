@@ -9,13 +9,13 @@ class Common::Layout::FlashMessagesComponent < ApplicationComponent
     _flash_messages = []
 
     if alert.present?
-      _flash_messages << {message: alert, classes: alert_classes}
+      tmp_flash_messages << {message: alert, classes: alert_classes}
     end
 
     if notice.present?
-      _flash_messages << {message: notice, classes: notice_classes}
+      tmp_flash_messages << {message: notice, classes: notice_classes}
     end
-    _flash_messages
+    tmp_flash_messages
   end
 
   def notice

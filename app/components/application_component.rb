@@ -36,6 +36,10 @@ class ApplicationComponent < ViewComponent::Base
     end
   end
 
+  def respond_to_missing?(m, include_private = false)
+    m.to_s.end_with?("?") && respond_to?(m.to_s.chomp("?")) || super
+  end
+
   def method_missing(m, *args, &block)
     if m.to_s.end_with?("?") && respond_to?(m.to_s.chomp("?"))
       send(m.to_s.chomp("?")).to_s.to_boolean

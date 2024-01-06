@@ -11,8 +11,8 @@ class Common::Element::DestroyLinkComponent < ApplicationComponent
     default_args.merge(args.is_a?(Hash) ? args : {})
   end
 
-  def text
-    @text || heroicon(:trash, size: 16, class: "pb-0.5 inline")
+  def label_text
+    text || heroicon(:trash, size: 16, class: "pb-0.5 inline")
   end
 
   def default_args
