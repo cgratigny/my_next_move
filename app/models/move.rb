@@ -32,10 +32,10 @@ class Move < ApplicationRecord
   has_rich_text :description
 
   def short_name
-    self.name
+    name
   end
 
   def to_s
-    self.name
+    name
   end
 end

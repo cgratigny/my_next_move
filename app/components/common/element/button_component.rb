@@ -5,7 +5,7 @@ class Common::Element::ButtonComponent < ApplicationComponent
   attr_accessor :label, :path, :custom_args
 
   def args
-    if custom_args.is_a?(Hash) 
+    if custom_args.is_a?(Hash)
       default_args.deep_merge(custom_args)
     else
       default_args
@@ -13,9 +13,9 @@ class Common::Element::ButtonComponent < ApplicationComponent
   end
 
   def default_args
-    { class: "text-slate-100 bg-cyan-900 p-2 rounded" }
+    {class: "text-slate-100 bg-cyan-900 p-2 rounded"}
   end
-  
+
   def submit_button_args
     default_args
   end

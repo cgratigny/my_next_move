@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Common::Layout::FlashMessagesComponent < ApplicationComponent
-
   def render?
     flash_messages.any?
   end
@@ -10,11 +9,11 @@ class Common::Layout::FlashMessagesComponent < ApplicationComponent
     _flash_messages = []
 
     if alert.present?
-      _flash_messages << { message: alert, classes: alert_classes }
+      _flash_messages << {message: alert, classes: alert_classes}
     end
 
     if notice.present?
-      _flash_messages << { message: notice, classes: notice_classes }
+      _flash_messages << {message: notice, classes: notice_classes}
     end
     _flash_messages
   end

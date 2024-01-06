@@ -8,7 +8,7 @@ class Opportunity::ShowComponent < ApplicationComponent
   end
 
   def show?
-    return false if self.card.present?
+    return false if card.present?
     controller.action_name == "show" && !list?
   end
 end

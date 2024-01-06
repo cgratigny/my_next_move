@@ -1,6 +1,5 @@
 namespace :deploy do
- 
-  task :notify => :environment do
+  task notify: :environment do
     Honeybadger.track_deployment(
       environment: Rails.env,
       revision: `git rev-parse HEAD`.strip,
@@ -8,6 +7,4 @@ namespace :deploy do
       repository: "https://github.com/cgratigny/my_next_move"
     )
   end
-
- 
 end

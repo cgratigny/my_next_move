@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_notable
-  before_action :build_note, only: %i[ new create ]
-  before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :build_note, only: %i[new create]
+  before_action :set_note, only: %i[show edit update destroy]
   before_action :build_notes, only: :index
 
   before_action :set_notable_breadcrumb
@@ -68,37 +68,38 @@ class NotesController < ApplicationController
   end
 
   private
-    def build_note
-      @note = Note.new( { notable: @notable }.merge(note_params))
-    end
 
-    def build_notes
-      if @notable.present?
-        @notes = @notable.notes
-      else
-        @notes = Current.user.notes
+  def build_note
+    @note = Note.new({notable: @notable}.merge(note_params))
+  end
+
+  def build_notes
+    @notes = if @notable.present?
+      @notable.notes
+    else
+      Current.user.notes
+    end
+  end
+
+  def set_notable
+    params.each do |key, value|
+      if key.include?("_id")
+        @notable = key.gsub("_id", "").camelcase.constantize.find(value)
       end
     end
+  end
 
-    def set_notable
-      params.each do |key, value|
-        if key.include?("_id")
-          @notable = key.gsub("_id", "").camelcase.constantize.find(value)
-        end
-      end
-    end
+  def allowed_objects
+    [Opportunity, Company]
+  end
 
-    def allowed_objects
-      [Opportunity, Company]
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_note
+    @note = Note.find(params[:id])
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_note
-      @note = Note.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def note_params
-      params[:note].present? ? params.require(:note).permit(:body) : {}
-    end
+  # Only allow a list of trusted parameters through.
+  def note_params
+    params[:note].present? ? params.require(:note).permit(:body) : {}
+  end
 end

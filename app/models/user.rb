@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   has_many :moves
   has_many :opportunities, through: :moves
@@ -28,15 +28,14 @@ class User < ApplicationRecord
   has_many :documents
 
   def notes
-    Note.where(notable: (self.opportunities + self.moves + self.companies))
+    Note.where(notable: (opportunities + moves + companies))
   end
 
   def tasks
-    Task.where(taskable: (self.opportunities + self.moves + self.companies))
+    Task.where(taskable: (opportunities + moves + companies))
   end
 
   def default_move
     moves.order(starts_on: :asc).first
   end
-
 end

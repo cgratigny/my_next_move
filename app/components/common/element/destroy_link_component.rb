@@ -16,6 +16,6 @@ class Common::Element::DestroyLinkComponent < ApplicationComponent
   end
 
   def default_args
-    { class: "mt-2 rounded-lg py-3 font-medium", method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }, class: "inline" } }
+    {class: "mt-2 rounded-lg py-3 font-medium", method: :delete, form: {data: {turbo_confirm: "Are you sure?"}, class: "inline"}}
   end
 end

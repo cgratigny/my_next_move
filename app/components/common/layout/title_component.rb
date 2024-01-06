@@ -6,7 +6,7 @@ class Common::Layout::TitleComponent < ApplicationComponent
 
   def initialize(*args)
     super
-    self.priority = self.default_priority if self.priority.blank?
+    self.priority = default_priority if priority.blank?
   end
 
   def default_priority

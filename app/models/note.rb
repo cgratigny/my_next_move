@@ -26,5 +26,4 @@ class Note < ApplicationRecord
   scope :reverse_chronological, -> { order(created_at: :desc) }
 
   classy_enum_attr :source, enum: "NoteSource", default: :user
-
 end

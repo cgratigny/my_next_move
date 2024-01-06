@@ -9,16 +9,16 @@ class OpportunityUrlParserService < ApplicationService
     # puts response.body, response.code, response.message, response.headers.inspect
 
     self.parsed_data = Nokogiri::HTML.parse(html)
-    self.send(build_domain_perform_method)
+    send(build_domain_perform_method)
   rescue => e
     # if there was an error, it was likely due to not being able to parse the url properly
     Honeybadger.notify(e)
-    { }
+    {}
   end
 
   def build_domain_perform_method
-    domain_method = "perform_for_#{self.get_domain}"
-    if self.respond_to?(domain_method)
+    domain_method = "perform_for_#{get_domain}"
+    if respond_to?(domain_method)
       domain_method
     else
       :perform_for_all
@@ -26,11 +26,11 @@ class OpportunityUrlParserService < ApplicationService
   end
 
   def get_domain
-    URI.parse(self.uri).host.split(".").second
+    URI.parse(uri).host.split(".").second
   end
 
   def perform_for_linkedin
-    parts = self.parsed_data.title.split("hiring")
+    parts = parsed_data.title.split("hiring")
     {
       name: parts.last.split("|").first.strip,
       company_name: parts.first.strip
@@ -38,10 +38,10 @@ class OpportunityUrlParserService < ApplicationService
   end
 
   def perform_for_greenhouse
-    string = self.parsed_data.title
+    string = parsed_data.title
 
     # Find the position of the last occurrence of 'at'
-    last_at_index = string.rindex('at')
+    last_at_index = string.rindex("at")
     {
       name: string[0...last_at_index].strip,
       company_name: string[(last_at_index + 3)..-1].strip
@@ -50,7 +50,7 @@ class OpportunityUrlParserService < ApplicationService
 
   def perform_for_all
     {
-      name: self.parsed_data.title
+      name: parsed_data.title
     }
   end
 end

@@ -11,9 +11,9 @@ class CreateOpportunities < ActiveRecord::Migration[7.1]
       t.string :pay_period
       t.text :description
       t.references :company
-    
+
       t.date :applied_on
-    
+
       t.timestamps
     end
   end

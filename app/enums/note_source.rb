@@ -8,7 +8,6 @@ class NoteSource::User < NoteSource
   def tailwind_classes
     [""]
   end
-
 end
 
 class NoteSource::System < NoteSource

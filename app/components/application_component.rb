@@ -5,9 +5,8 @@ require "view_component/compile_cache"
 require "view_component/slotable"
 require "action_text/engine"
 class ApplicationComponent < ViewComponent::Base
-
   include ActiveSupport::Configurable
-  include ActionText::Engine.helpers 
+  include ActionText::Engine.helpers
 
   delegate :form_authenticity_token, :protect_against_forgery?, :config, to: :helpers
 
@@ -15,7 +14,7 @@ class ApplicationComponent < ViewComponent::Base
     validate_keys!(args)
 
     args.each do |attr, value|
-      instance_variable_set("@#{attr}", value)
+      instance_variable_set(:"@#{attr}", value)
     end
   end
 
@@ -31,15 +30,15 @@ class ApplicationComponent < ViewComponent::Base
     end
 
     attributes.keys.each do |key|
-      unless self.respond_to?(key)
+      unless respond_to?(key)
         raise ArgumentError, "Invalid attribute: #{key}"
       end
     end
   end
 
   def method_missing(m, *args, &block)
-    if m.to_s.end_with?("?") && self.respond_to?(m.to_s.chomp("?"))
-      self.send(m.to_s.chomp("?")).to_s.to_boolean
+    if m.to_s.end_with?("?") && respond_to?(m.to_s.chomp("?"))
+      send(m.to_s.chomp("?")).to_s.to_boolean
     else
       super
     end

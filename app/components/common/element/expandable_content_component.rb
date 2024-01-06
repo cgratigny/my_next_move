@@ -2,5 +2,4 @@
 
 class Common::Element::ExpandableContentComponent < ApplicationComponent
   attr_reader :content
-
 end

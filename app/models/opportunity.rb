@@ -31,7 +31,7 @@
 #
 class Opportunity < ApplicationRecord
   attr_accessor :tags_input, :quick_add
-  
+
   attr_accessor :company_name
 
   include PgSearch::Model
@@ -48,23 +48,23 @@ class Opportunity < ApplicationRecord
 
   classy_enum_attr :state, enum: "OpportunityState", default: :interested
   classy_enum_attr :rating, enum: "OpportunityRating", default: :zero
-  
-  validates :uri, url: { allow_nil: true, allow_blank: true }
+
+  validates :uri, url: {allow_nil: true, allow_blank: true}
   before_save :set_applied_on
 
   scope :company_alphabetical, -> { joins(:company).merge(Company.all.alphabetical) }
 
-  scope :search, -> (given_needle) { 
-    where(id: global_search(given_needle) + where(company: Company.global_search(given_needle) ))
-   }
+  scope :search, ->(given_needle) {
+                   where(id: global_search(given_needle) + where(company: Company.global_search(given_needle)))
+                 }
 
-   scope :by_state, -> (given_state) { where(state: given_state.to_s) }
-   scope :active, -> { where(state: OpportunityState.active.map(&:to_s)) }
+  scope :by_state, ->(given_state) { where(state: given_state.to_s) }
+  scope :active, -> { where(state: OpportunityState.active.map(&:to_s)) }
 
   pg_search_scope :global_search,
     against: [:name, :state, :tags_string],
     using: {
-      tsearch: { prefix: true }
+      tsearch: {prefix: true}
     }
 
   has_rich_text :body
@@ -76,43 +76,42 @@ class Opportunity < ApplicationRecord
   before_validation :process_company_name
 
   def set_name_from_uri_title
-    return if self.name.present?
-    return if self.uri.blank?
-    return unless self.quick_add.present?
+    return if name.present?
+    return if uri.blank?
+    return unless quick_add.present?
 
-    self.assign_attributes(
-      OpportunityUrlParserService.new(uri: self.uri).perform
+    assign_attributes(
+      OpportunityUrlParserService.new(uri: uri).perform
     )
-  # rescue
+    # rescue
     # this means we weren't able to get the name, not a big deal
   end
 
   def process_company_name
     return if company_name.nil?
-    found_company = self.user.companies.find_by(name: self.company_name)
-    if found_company.present?
-      self.company = found_company
+    found_company = user.companies.find_by(name: company_name)
+    self.company = if found_company.present?
+      found_company
     else
-      self.company = Company.new(name: company_name)
+      Company.new(name: company_name)
     end
   end
 
   def set_applied_on
-    if self.applied_on.nil? && self.state.application_submitted?
+    if applied_on.nil? && state.application_submitted?
       self.applied_on = Time.zone.now.to_date
     end
   end
 
   def to_s
-    self.name
+    name
   end
 
   def short_name
-    self.name.truncate(20)
+    name.truncate(20)
   end
-  
+
   def set_tags_string
-    self.tags_string = self.tag_list
+    self.tags_string = tag_list
   end
-  
 end

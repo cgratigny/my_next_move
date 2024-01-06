@@ -6,12 +6,12 @@ class OpportunityAgerService < ApplicationService
       Opportunity.by_state(opportunity_state.to_s).where("#{opportunity_state.ageable_attribute} <= ?", opportunity_state.ageable_days.days.ago).each do |opportunity|
         OpportunityAgerService.new(opportunity: opportunity, opportunity_state: opportunity_state).perform_single
       end
-    end  
+    end
   end
 
   def perform_single
-    return unless self.ageable_date_value.present?
-  
+    return unless ageable_date_value.present?
+
     opportunity.update!(
       state: :stale,
       notes: opportunity.notes + [Note.new(notable: opportunity, body: build_note_body, source: :system)]
@@ -22,10 +22,10 @@ class OpportunityAgerService < ApplicationService
     body_parts = []
     body_parts << "Marking opportunity as stale because value of"
     body_parts << opportunity_state.ageable_attribute.to_s.titleize
-    if self.ageable_date_value.present? && self.ageable_date_value.respond_to?(:to_fs)
+    if ageable_date_value.present? && ageable_date_value.respond_to?(:to_fs)
       body_parts << "is"
-      body_parts << self.ageable_date_value.to_fs
-      body_parts << "and is more than" 
+      body_parts << ageable_date_value.to_fs
+      body_parts << "and is more than"
     else
       body_parts << "is blank, which calculates to more than"
     end
@@ -37,6 +37,4 @@ class OpportunityAgerService < ApplicationService
   def ageable_date_value
     opportunity.public_send(opportunity_state.ageable_attribute)
   end
-
-
 end

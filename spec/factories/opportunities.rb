@@ -33,6 +33,6 @@
 FactoryBot.define do
   factory :opportunity do
     company { build(:company) }
-    name { Forgery('name').industry }
+    name { Forgery("name").industry }
   end
 end

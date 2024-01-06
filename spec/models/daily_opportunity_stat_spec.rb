@@ -15,7 +15,7 @@
 #  index_daily_opportunity_stats_on_move_id           (move_id)
 #  index_daily_opportunity_stats_on_move_id_and_date  (move_id,date) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe DailyOpportunityStat, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"

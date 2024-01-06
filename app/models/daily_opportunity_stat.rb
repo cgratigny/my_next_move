@@ -19,6 +19,6 @@ class DailyOpportunityStat < ApplicationRecord
   belongs_to :move
 
   def sum
-    self.stats_data.values.sum
+    stats_data.values.sum
   end
 end

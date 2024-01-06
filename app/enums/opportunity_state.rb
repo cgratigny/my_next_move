@@ -4,11 +4,11 @@ class OpportunityState < ClassyEnum::Base
   end
 
   def self.active
-    all.select{ |option| option.active? }
+    all.select { |option| option.active? }
   end
 
   def self.ageable
-    all.select{ |option| option.ageable? }
+    all.select { |option| option.ageable? }
   end
 
   def active?
@@ -18,7 +18,6 @@ class OpportunityState < ClassyEnum::Base
   def ageable?
     false
   end
-
 end
 
 class OpportunityState::Interested < OpportunityState
@@ -50,9 +49,8 @@ class OpportunityState::ApplicationSubmitted < OpportunityState
   end
 
   def ageable_attribute
-     :applied_on
+    :applied_on
   end
-
 end
 
 class OpportunityState::InScreening < OpportunityState
@@ -66,6 +64,7 @@ class OpportunityState::Stale < OpportunityState
     ["bg-orange-100"]
   end
 end
+
 class OpportunityState::OnHold < OpportunityState
   def tailwind_classes
     ["bg-orange-100"]
@@ -80,7 +79,6 @@ class OpportunityState::Withdrawn < OpportunityState
   def active?
     false
   end
-
 end
 
 class OpportunityState::NotInterested < OpportunityState

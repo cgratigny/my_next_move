@@ -17,14 +17,13 @@ class Company < ApplicationRecord
   has_many :opportunities
 
   validates :name, presence: true
-  validates :uri, url: { allow_nil: true, allow_blank: true }
+  validates :uri, url: {allow_nil: true, allow_blank: true}
 
   scope :alphabetical, -> { order(name: :asc) }
 
   pg_search_scope :global_search,
-  against: [:name],
-  using: {
-    tsearch: { prefix: true }
-  }
-
+    against: [:name],
+    using: {
+      tsearch: {prefix: true}
+    }
 end

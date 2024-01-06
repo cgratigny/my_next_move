@@ -30,11 +30,11 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 
 # way to build random stuff
-gem 'forgery', require: false
+gem "forgery", require: false
 
 # Use for forms
 gem "simple_form"
-gem 'simple_form-tailwind'
+gem "simple_form-tailwind"
 
 # validate urls
 gem "validate_url"
@@ -42,30 +42,29 @@ gem "validate_url"
 # Postgres database gem
 gem "pg"
 gem "pg_search"
-gem 'activerecord-import'
-
+gem "activerecord-import"
 
 # HasScope allows you to dynamically apply named scopes to your resources based on an incoming set of parameters.
 gem "has_scope"
 
-gem 'acts-as-taggable-on'
+gem "acts-as-taggable-on"
 
 # Track database changes
-gem 'paper_trail'
+gem "paper_trail"
 
 # annotate the model files
-gem 'annotate'
+gem "annotate"
 
 # for breadcrumbs
-gem 'loaf'
+gem "loaf"
 
 # Provides hamlit generators for Rails. It also enables hamlit as the templating engine and "hamlit:erb2haml" rake task that converts erb files to haml.
-gem 'hamlit-rails'
+gem "hamlit-rails"
 
 # allows us to use rake hamlit:erb2haml to convert any stray erb files to haml
-gem 'html2haml' 
+gem "html2haml"
 
-gem 'view_component'
+gem "view_component"
 
 gem "amazing_print"
 
@@ -79,7 +78,7 @@ gem "amazing_print"
 gem "classy_enum"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -89,7 +88,8 @@ gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[mri windows]
+  gem "standard"
 end
 
 group :development do
@@ -100,30 +100,30 @@ group :development do
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   gem "rack-mini-profiler"
 
-  gem 'rails-erd'
+  gem "rails-erd"
 
   gem "rails_best_practices"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
 
-  gem 'better_errors'
+  gem "better_errors"
 
-  gem 'listen'
+  gem "listen"
 
   # finds syntax errors
   gem "brakeman", "~> 5.4"
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rspec_junit_formatter'
-  gem 'shoulda'
-  gem 'factory_bot_rails'
-  gem 'shoulda-matchers'
-  gem 'rspec-activemodel-mocks'
+  gem "rspec-rails"
+  gem "rspec_junit_formatter"
+  gem "shoulda"
+  gem "factory_bot_rails"
+  gem "shoulda-matchers"
+  gem "rspec-activemodel-mocks"
 
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
 
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"

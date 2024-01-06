@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'action_text'
+
+require "action_text"
 
 class Note::FormComponent < ApplicationComponent
   include ActionText::Engine.helpers

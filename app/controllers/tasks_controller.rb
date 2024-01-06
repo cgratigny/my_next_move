@@ -1,11 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_taskable
-  before_action :build_task, only: %i[ new create ]
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :build_task, only: %i[new create]
+  before_action :set_task, only: %i[show edit update destroy]
   before_action :build_tasks, only: :index
 
   before_action :set_taskable_breadcrumb
-
 
   # GET /tasks or /tasks.json
   def index
@@ -69,38 +68,39 @@ class TasksController < ApplicationController
   def set_taskable_breadcrumb
     if @taskable.present?
       breadcrumb @taskable.class.name.to_s.pluralize, [:opportunities], match: :exact
-      breadcrumb @taskable.short_name, @taskable, match: :exact 
+      breadcrumb @taskable.short_name, @taskable, match: :exact
     end
   end
 
   private
-    def build_task
-      @task = Task.new( { taskable: @taskable }.merge(task_params))
-    end
 
-    def build_tasks
-      if @taskable.present?
-        @tasks = @taskable.tasks.todo
-      else
-        @tasks = Current.user.tasks.todo
+  def build_task
+    @task = Task.new({taskable: @taskable}.merge(task_params))
+  end
+
+  def build_tasks
+    @tasks = if @taskable.present?
+      @taskable.tasks.todo
+    else
+      Current.user.tasks.todo
+    end
+  end
+
+  def set_taskable
+    params.each do |key, value|
+      if key.include?("_id")
+        @taskable = key.gsub("_id", "").camelcase.constantize.find(value)
       end
     end
+  end
 
-    def set_taskable
-      params.each do |key, value|
-        if key.include?("_id")
-          @taskable = key.gsub("_id", "").camelcase.constantize.find(value)
-        end
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.fetch(:task, {}).permit!
-    end
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.fetch(:task, {}).permit!
+  end
 end

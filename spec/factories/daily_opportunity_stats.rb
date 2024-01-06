@@ -17,6 +17,5 @@
 #
 FactoryBot.define do
   factory :daily_opportunity_stat do
-    
   end
 end

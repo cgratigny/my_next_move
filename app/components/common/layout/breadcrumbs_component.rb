@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Common::Layout::BreadcrumbsComponent < ApplicationComponent
-
   def breadcrumb_trail
     helpers.breadcrumb_trail
   end
@@ -9,5 +8,4 @@ class Common::Layout::BreadcrumbsComponent < ApplicationComponent
   def render?
     Current.user.present?
   end
-
 end

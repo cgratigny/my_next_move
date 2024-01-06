@@ -1,5 +1,5 @@
 class MovesController < ApplicationController
-  before_action :set_move, only: %i[ show edit update destroy ]
+  before_action :set_move, only: %i[show edit update destroy]
   before_action :build_move, only: [:new, :create]
 
   # GET /moves or /moves.json
@@ -56,17 +56,18 @@ class MovesController < ApplicationController
   end
 
   private
-    def build_move
-      @move = Move.new( move_params.merge( { user: Current.user } ))
-    end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_move
-      @move = Move.find(params[:id])
-    end
+  def build_move
+    @move = Move.new(move_params.merge({user: Current.user}))
+  end
 
-    # Only allow a list of trusted parameters through.
-    def move_params
-      params[:move].present? ? params.require(:move).permit(:name, :description, :starts_on, :goal_on, :state, :stops_on) : {}
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_move
+    @move = Move.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def move_params
+    params[:move].present? ? params.require(:move).permit(:name, :description, :starts_on, :goal_on, :state, :stops_on) : {}
+  end
 end

@@ -78,7 +78,5 @@ Rails.application.configure do
   config.action_controller.action_on_unpermitted_parameters = :raise
 
   # devise configuration
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = {host: "localhost", port: 3000}
 end
-
-

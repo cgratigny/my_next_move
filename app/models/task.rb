@@ -33,18 +33,18 @@ class Task < ApplicationRecord
   scope :chronological, -> { order(due_date: :asc) }
 
   def short_name
-    self.name
+    name
   end
 
   def to_s
-    self.name
+    name
   end
 
   def due_today?
-    Time.zone.now.to_date == self.due_date
+    Time.zone.now.to_date == due_date
   end
 
   def past_due?
-    Time.zone.now.to_date > self.due_date
+    Time.zone.now.to_date > due_date
   end
 end

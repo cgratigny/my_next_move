@@ -11,5 +11,4 @@ class DashboardsController < ApplicationController
   def build_tasks
     @tasks = Current.user.tasks.todo.chronological
   end
-
 end

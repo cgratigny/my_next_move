@@ -1,5 +1,5 @@
 class OpportunitiesController < ApplicationController
-  before_action :set_opportunity, only: %i[ show edit update destroy ]
+  before_action :set_opportunity, only: %i[show edit update destroy]
   before_action :build_opportunities, only: :index
 
   has_scope :search
@@ -66,27 +66,28 @@ class OpportunitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_opportunity
-      @opportunity = Opportunity.find(params[:id])
-    rescue
-      redirect_to [:opportunities], alert: "Sorry, that opportunity does not exist."
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_opportunity
+    @opportunity = Opportunity.find(params[:id])
+  rescue
+    redirect_to [:opportunities], alert: "Sorry, that opportunity does not exist."
+  end
+
+  def build_opportunities
+    @opportunities = apply_scopes(Current.user.opportunities).includes(:company).active.company_alphabetical
+  end
+
+  # Only allow a list of trusted parameters through.
+  def opportunity_params
+    opportunity_params = params[:opportunity].permit!.to_h
+    if opportunity_params[:company_id].present?
+      opportunity_params.delete(:company_attributes)
+    else
+      opportunity_params.delete(:company_id)
     end
 
-    def build_opportunities
-      @opportunities = apply_scopes(Current.user.opportunities).includes(:company).active.company_alphabetical
-    end
-    # Only allow a list of trusted parameters through.
-    def opportunity_params
-      opportunity_params = params[:opportunity].permit!.to_h
-      if opportunity_params[:company_id].present?
-        opportunity_params.delete(:company_attributes)
-      else
-        opportunity_params.delete(:company_id)
-      end
-
-      _params = ActionController::Parameters.new(opportunity: opportunity_params)
-      _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :tags_input, :quick_add, :move_id, :body, :rating, :uri, :state, :posted_on, :applied_on, :company_id, :tag_list, company_attributes: [:id, :name, :uri]) : {}
-    end
-
+    _params = ActionController::Parameters.new(opportunity: opportunity_params)
+    _params[:opportunity].present? ? _params.require(:opportunity).permit(:name, :tags_input, :quick_add, :move_id, :body, :rating, :uri, :state, :posted_on, :applied_on, :company_id, :tag_list, company_attributes: [:id, :name, :uri]) : {}
+  end
 end
