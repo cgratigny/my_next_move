@@ -69,6 +69,8 @@ class OpportunitiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_opportunity
       @opportunity = Opportunity.find(params[:id])
+    rescue
+      redirect_to [:opportunities], alert: "Sorry, that opportunity does not exist."
     end
 
     def build_opportunities
