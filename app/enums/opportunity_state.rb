@@ -33,7 +33,7 @@ class OpportunityState::ApplicationSubmitted < OpportunityState
   end
 
   def text
-    if owner.present?
+    if owner.present? && owner.applied_on.present?
       "Applied #{owner.applied_on.to_fs}"
     else
       "Applied"
