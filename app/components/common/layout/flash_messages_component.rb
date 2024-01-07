@@ -6,7 +6,7 @@ class Common::Layout::FlashMessagesComponent < ApplicationComponent
   end
 
   def flash_messages
-    _flash_messages = []
+    tmp_flash_messages = []
 
     if alert.present?
       tmp_flash_messages << {message: alert, classes: alert_classes}
