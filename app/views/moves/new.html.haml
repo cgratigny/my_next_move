@@ -1,4 +1,5 @@
-.mx-auto.w-full{:class => "md:w-2/3"}
-  %h1.font-bold.text-4xl New move
-  = render "form", move: @move
-  = link_to "Back to moves", moves_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+.m-auto{ class: "lg:w-1/2 md:w-3/4" }
+  = render Common::Layout::TitleComponent.new(title: "New Move", priority: 1)
+  .card
+    %turbo-frame{:id => "new_move", target: :_top}
+      = render "form", move: @move

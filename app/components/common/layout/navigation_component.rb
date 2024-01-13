@@ -2,7 +2,7 @@
 
 class Common::Layout::NavigationComponent < ApplicationComponent
   def render?
-    Current.user.present?
+    Current.user.present? && Current.user.default_move.present?
   end
 
   def navigation_items

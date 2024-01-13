@@ -4,7 +4,7 @@ class MovesController < ApplicationController
 
   # GET /moves or /moves.json
   def index
-    @moves = Move.all
+    @moves = Current.user.moves
   end
 
   # GET /moves/1 or /moves/1.json
@@ -23,7 +23,7 @@ class MovesController < ApplicationController
   def create
     respond_to do |format|
       if @move.save
-        format.html { redirect_to move_url(@move), notice: "Move was successfully created." }
+        format.html { redirect_to [:dashboard], notice: "Move was successfully created." }
         format.json { render :show, status: :created, location: @move }
       else
         format.html { render :new, status: :unprocessable_entity }

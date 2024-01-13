@@ -21,7 +21,6 @@
           = company_form.input :name, label: "Company Name"
           = company_form.input :uri, label: "Company Website"
 
-
     .card
       = render Common::Layout::TitleComponent.new(title: "Categorization", priority: 4)
 
@@ -33,15 +32,8 @@
 
       = form.input :rating, as: :radio_buttons, collection: OpportunityRating.select_options
 
-
     .card
       = render Common::Layout::TitleComponent.new(title: "Details", priority: 4)
-
-      = form.input :posted_on, label: "Posting Service"
-
-
-      = form.input :body, as: :rich_text_area
-
 
     = form.input :move_id, as: :hidden, input_html: { value: Current.user.default_move.id }
 

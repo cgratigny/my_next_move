@@ -43,8 +43,6 @@
       %br
       Added
       = opportunity.created_at.to_fs
-      - if show?
-        = render Common::Element::ExpandableContentComponent.new(content: opportunity.body.to_s)
 
 .m-2
 - if show?

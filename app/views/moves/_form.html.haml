@@ -8,12 +8,12 @@
         - move.errors.each do |error|
           %li= error.full_message
 
-  = form.input :name
-  = form.input :description, as: :rich_text_area
-  = form.input :starts_on, as: :datepicker
-  = form.input :goal_on, as: :datepicker
+  %p 
+    Everything you are setting up is based on a "Move" you are making in your life. Start the setup by 
+    creating a move. Optionally, you can choose a goal date for this move.
 
-  = form.input :state, collection: MoveState.select_options
-  = form.input :stops_on, as: :datepicker
+
+  = form.input :name
+  = form.input :goal_on, as: :datepicker, label: "Goal Date"  
   .inline
     = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"

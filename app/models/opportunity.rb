@@ -4,15 +4,12 @@
 #
 #  id          :bigint           not null, primary key
 #  applied_on  :date
-#  body        :text
 #  data        :jsonb
-#  description :text
 #  name        :string
 #  notes_count :integer
 #  pay_maximum :integer
 #  pay_minimum :integer
 #  pay_period  :string
-#  posted_on   :string
 #  rating      :string
 #  state       :string
 #  tags        :string
@@ -66,8 +63,6 @@ class Opportunity < ApplicationRecord
     using: {
       tsearch: {prefix: true}
     }
-
-  has_rich_text :body
 
   before_save :set_tags_string
   validates :name, presence: true
