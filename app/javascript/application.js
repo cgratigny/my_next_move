@@ -5,3 +5,5 @@ import "controllers"
 import * as Trix from "trix"
 import "trix"
 import "@rails/actiontext"
+
+import '@primer/view-components'

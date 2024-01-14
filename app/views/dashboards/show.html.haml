@@ -1,10 +1,11 @@
-= render Common::Layout::TitleComponent.new(title: "Opportunities", priority: 3, path: [:opportunities])
+= link_to [:opportunities] do
+  = render(Primer::Beta::Heading.new(tag: :h3)) { "Opportunities" }
 = render Opportunity::ListComponent.new(opportunities: @opportunities)
 
 .card
-  = render Common::Layout::TitleComponent.new(title: "Tasks", priority: 3)
+  = render(Primer::Beta::Heading.new(tag: :h3)) { "Tasks" }
   = render Task::ListComponent.new(tasks: @tasks)
 
 .card
-  = render Common::Layout::TitleComponent.new(title: "Recent Notes", priority: 3)
+  = render(Primer::Beta::Heading.new(tag: :h3)) { "Recent Notes" }
   = render Note::ListComponent.new(notes: Current.user.notes.reverse_chronological.limit(8))

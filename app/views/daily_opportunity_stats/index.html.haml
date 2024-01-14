@@ -1,6 +1,6 @@
 .w-full
   .flex.justify-between.items-center
-    = render Common::Layout::TitleComponent.new(title: "Stats")
+    = render(Primer::Beta::Heading.new(tag: :h1)) { "Stats" }
   #daily_opportunity_stats.min-w-full
     %table.min-w-full.divide-y.divide-gray-200.dark:divide-gray-700
       %thead

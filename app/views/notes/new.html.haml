@@ -1,5 +1,5 @@
 .m-auto{ class: "lg:w-1/2 md:w-3/4" }
-  = render Common::Layout::TitleComponent.new(title: "New Note", priority: 1)
+  = render(Primer::Beta::Heading.new(tag: :h1)) { "New Note" }
   .card= render @note.notable
   %turbo-frame{:id => "new_note"}
     = render Note::FormComponent.new(note: @note)

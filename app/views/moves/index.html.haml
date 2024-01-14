@@ -1,6 +1,6 @@
 .float-right
   = render Common::Element::ButtonComponent.new(label: "New", path: [:new, :move], icon: :plus)
-= render Common::Layout::TitleComponent.new(title: "Moves (#{@moves.count})")
+= render(Primer::Beta::Heading.new(tag: :h1)) { "Moves (#{@moves.count})" }
 
 
 %turbo-frame#moves{ data: { target: :_top } }

@@ -1,5 +1,5 @@
 %turbo-frame{:id => "#{dom_id @opportunity}" }
   .m-auto{ class: "lg:w-1/2 md:w-3/4" }
-    = render Common::Layout::TitleComponent.new(title: "New Opportunity")
+    = render(Primer::Beta::Heading.new(tag: :h1)) { "New Opportunity" }
 
     = render "form", opportunity: @opportunity

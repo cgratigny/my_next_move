@@ -1,3 +1,3 @@
-= render Common::Layout::TitleComponent.new(title: "Opportunities (#{@opportunities.count})")
+= render(Primer::Beta::Heading.new(tag: :h1)) { "Opportunities (#{@opportunities.count})" }
 
 = render Opportunity::ListComponent.new(opportunities: @opportunities)

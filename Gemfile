@@ -65,6 +65,7 @@ gem "hamlit-rails"
 gem "html2haml"
 
 gem "view_component"
+gem "primer_view_components"
 
 gem "amazing_print"
 
