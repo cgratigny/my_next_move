@@ -11,7 +11,13 @@
     = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
 
 %turbo-frame#opportunities{ data: { target: :_top } }
-  #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
-    - opportunities.each do |opportunity|
-      .max-w-sm.card
-        = render Opportunity::ShowComponent.new(opportunity: opportunity, card: true)
+  - if opportunities.none?
+    - if params[:search].present?
+      .card
+        No results found for 
+        %strong= params[:search]
+  - else
+    #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
+      - opportunities.each do |opportunity|
+        .max-w-sm.card
+          = render Opportunity::ShowComponent.new(opportunity: opportunity, card: true)
