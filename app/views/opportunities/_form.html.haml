@@ -32,9 +32,6 @@
 
       = form.input :rating, as: :radio_buttons, collection: OpportunityRating.select_options
 
-    .card
-      = render(Primer::Beta::Heading.new(tag: :h4)) { "Details" }
-
     = form.input :move_id, as: :hidden, input_html: { value: Current.user.default_move.id }
 
     .card
