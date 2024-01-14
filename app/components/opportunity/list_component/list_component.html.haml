@@ -17,7 +17,6 @@
         No results found for 
         %strong= params[:search]
   - else
-    #opportunities.container.m-auto.grid.grid-cols-1.md:grid-cols-4.gap-4
+    #opportunities.container.m-auto.grid.grid-cols-1.gap-4.lg:grid-cols-4.md:grid-cols-2
       - opportunities.each do |opportunity|
-        .max-w-sm.card
-          = render Opportunity::ShowComponent.new(opportunity: opportunity, card: true)
+        = render Opportunity::ShowComponent.new(opportunity: opportunity, card: true)

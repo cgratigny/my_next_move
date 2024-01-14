@@ -1,38 +1,43 @@
-%div.text-xs{:id => "#{dom_id opportunity}"}
+.card.text-xs{:id => "#{dom_id opportunity}"}
   %turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
-    %div{ class: show? ? "card" : "" }
-      %span{ class: opportunity.state.tailwind_class}
-        = link_to [:opportunities, { search: opportunity.state.text } ] do
-          = opportunity.state.text
+    .opportunity-head.leading-6
 
-        - if opportunity.state.interested?
-          = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { state: :application_submitted }}, form: { class: "inline" } do
-            = heroicon(:play, size: 15, variant: :micro, class: "pb-0.5 inline border-l border-gray-700" )
+      %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
+        = link_to opportunity.name, opportunity
+        - if opportunity.uri.present?
+          %span
+            = link_to opportunity.uri, target: :_blank do
+              = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+        = link_to [:edit, opportunity] do
+          = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
 
-      = render Opportunity::ChooseStateComponent.new(opportunity: opportunity)
+      .flex
+        .status-container.grow
+          %span.status-body{ class: opportunity.state.tailwind_class}
+            = link_to [:opportunities, { search: opportunity.state.text } ] do
+              = opportunity.state.text
+          - if opportunity.state.interested?
+            = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { state: :application_submitted }}, form: { class: "inline" } do
+              = heroicon(:play, size: 15, variant: :micro, class: "pb-0.5 inline border-l border-gray-700" )
+          = render Opportunity::ChooseStateComponent.new(opportunity: opportunity)
 
-      - opportunity.tags.each do |tag|
+        .rating
+          - OpportunityRating.selectable.each do |rating|
+            = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { rating: }}, form: { class: :inline } do
+              - if rating.to_i <= opportunity.rating.to_i
+                %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-orange-700")
+              - else
+                %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
+
+
+      - opportunity.tags.each.with_index(1) do |tag, index|
+        - if index == 1
+          = heroicon(:tag, size: 12, class: "inline")
         = link_to [:opportunities, { search: tag.to_s } ] do
-          %span.p-1.bg-slate-200.dark:bg-slate-700.rounded= tag
+          %span.bg-slate-200.dark:bg-slate-700.rounded{ class: "p-0.5" }= tag
 
-      .float-right
-        - OpportunityRating.selectable.each do |rating|
-          = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { rating: }}, form: { class: :inline } do
-            - if rating.to_i <= opportunity.rating.to_i
-              %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-orange-700")
-            - else
-              %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
-
+    .opportunity-body
       .title.mb-2.mt-2
-        %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
-          = link_to opportunity.name, opportunity
-          - if opportunity.uri.present?
-            %span
-              = link_to opportunity.uri, target: :_blank do
-                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
-          = link_to [:edit, opportunity] do
-            = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
-
         %div
           = opportunity.company.name
           - if opportunity.company.uri.present?
@@ -40,32 +45,33 @@
               = link_to opportunity.company.uri, target: :_blank do
                 = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
 
+      - unless show?
+        %span.text-xs= pluralize(opportunity.tasks_count, "Task")
+        = " | "
+        %span.text-xs= pluralize(opportunity.notes_count, "Note")
+
       %br
       Added
       = opportunity.created_at.to_fs
 
-.m-2
+
 - if show?
-  .card
+  .card.m-2
     .float-right
       = render Common::Element::ButtonComponent.new(label: "Add Task", path: [:new, opportunity, :task], custom_args: { data: { turbo_frame: :new_task } } )
     %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Tasks
     %turbo-frame{ id: dom_id(Task.new) }
     = render "tasks/list", tasks: opportunity.tasks
-- else
-  %span.text-xs= pluralize(opportunity.tasks_count, "Task")
+    
+  %br
 
-%br
-
-- if show?
   .card
     .float-right
       = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, opportunity, :note], custom_args: { data: { turbo_frame: :new_note } } )
     %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Notes
     %turbo-frame{ id: dom_id(Note.new) }
     = render "notes/list", notes: opportunity.notes.reverse_chronological
-- else
-  %span.text-xs= pluralize(opportunity.notes_count, "Note")
+  
 
-.mb-10
+  .mb-10
 
