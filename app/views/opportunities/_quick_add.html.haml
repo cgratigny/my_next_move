@@ -1,7 +1,8 @@
 %turbo-frame{:id => "#{dom_id opportunity}" }
-  = simple_form_for opportunity, data: { controller: "form-toggler", turbo_frame: :_top } do |form|
-    = render Common::Form::ErrorsComponent.new(form: form)
+  .w-64
+    = simple_form_for opportunity, data: { controller: "form-toggler", turbo_frame: :_top } do |form|
+      = render Common::Form::ErrorsComponent.new(form: form)
 
-    = form.input :uri, label: false, placeholder: "Add by URL"
-    = form.input :move_id, as: :hidden
-    = form.input :quick_add, as: :hidden
+      = form.input :uri, label: false, placeholder: "Add by URL"
+      = form.input :move_id, as: :hidden
+      = form.input :quick_add, as: :hidden

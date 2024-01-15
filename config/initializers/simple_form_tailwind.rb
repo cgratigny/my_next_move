@@ -22,7 +22,7 @@ SimpleForm.setup do |config|
   config.include_default_input_wrapper_class = false
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = "px-6 py-4 border-0 rounded relative mb-4 bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-400"
+  config.error_notification_class = "px-6 py-4 border-0 rounded relative bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-400"
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -32,12 +32,12 @@ SimpleForm.setup do |config|
   # add validation classes to `input_field`
   config.input_field_error_class = "border-red-500"
   config.input_field_valid_class = "border-green-400"
-  config.label_class = "text-sm font-medium font-semibold text-gray-800 dark:text-gray-100 mb-1"
+  config.label_class = "text-sm font-medium font-semibold text-gray-800 dark:text-gray-100 mb-1 mt-4"
 
   # vertical forms
   #
   # vertical default_wrapper
-  config.wrappers :vertical_form, tag: "div", class: "mb-4" do |b|
+  config.wrappers :vertical_form, tag: "div", class: "" do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -52,7 +52,7 @@ SimpleForm.setup do |config|
   end
 
   # vertical input for boolean (aka checkboxes)
-  config.wrappers :vertical_boolean, tag: "div", class: "mb-4 flex items-start", error_class: "" do |b|
+  config.wrappers :vertical_boolean, tag: "div", class: "flex items-start", error_class: "" do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: "div", class: "flex items-center h-5" do |ba|

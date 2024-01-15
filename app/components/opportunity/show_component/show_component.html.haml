@@ -56,16 +56,14 @@
 
 
 - if show?
-  .card.m-2
+  .card.my-4
     .float-right
       = render Common::Element::ButtonComponent.new(label: "Add Task", path: [:new, opportunity, :task], custom_args: { data: { turbo_frame: :new_task } } )
     %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Tasks
     %turbo-frame{ id: dom_id(Task.new) }
     = render "tasks/list", tasks: opportunity.tasks
     
-  %br
-
-  .card
+  .card.my-4
     .float-right
       = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, opportunity, :note], custom_args: { data: { turbo_frame: :new_note } } )
     %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Notes

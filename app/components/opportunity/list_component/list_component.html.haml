@@ -1,13 +1,12 @@
-.flex.flex-row.card.bg-slate-400
+.flex.card.bg-slate-200.p-1.mb-4
 
-  %div.w-96.dispay-inline.ml-2{ class: "basis-1/2 sm:basis-full"}
+  %div.dispay-inline.ml-2.grow
     = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
       .inline-flex
-        = form.input :search, label: false, placeholder: "Filter...", required: false, input_html: { name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
-      .inline-flex.ml-3.text-xs
-        = link_to "Reset", [:opportunities]
+        = form.input :search, label: false, placeholder: "Filter...", required: false, input_html: { class: "text-s", name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
 
-  %div.w-96.dispay-inline.ml-2{ class: "basis-1/2 sm:basis-full"}
+  %div.w-64.dispay-inline
     = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
 
 %turbo-frame#opportunities{ data: { target: :_top } }
