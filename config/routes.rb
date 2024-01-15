@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  resource :dashboard
+  resource :dashboard, only: :show
 
   resources :documents
 

@@ -18,5 +18,7 @@
 #
 FactoryBot.define do
   factory :user do
+    email { Forgery('email').address }
+    password { SecureRandom.hex(8) }
   end
 end

@@ -20,5 +20,7 @@
 #
 FactoryBot.define do
   factory :move do
+    name { Forgery('lorem_ipsum').title }
+    user { create(:user) }
   end
 end
