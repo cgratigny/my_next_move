@@ -3,12 +3,12 @@
     .opportunity-head.leading-6
 
       %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
-        = link_to opportunity.name, opportunity
+        = link_to opportunity.name, opportunity, data: { turbo_frame: :_top }
         - if opportunity.uri.present?
           %span
             = link_to opportunity.uri, target: :_blank do
               = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
-        = link_to [:edit, opportunity] do
+        = link_to [:edit, opportunity], data: { turbo_frame: :_top } do
           = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
 
       .flex
