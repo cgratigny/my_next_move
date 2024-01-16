@@ -1,0 +1,13 @@
+.flex.bg-slate-200.mb-4.dark:bg-slate-700.h-full.p-4
+  .pt-2
+    = render Common::Layout::NavigationComponent.new
+
+  %div.dispay-inline.ml-2.grow
+    = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
+      .inline-flex
+        = form.input :search, label: false, placeholder: "Search...", required: false, input_html: { class: "text-s", name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
+
+  %div.w-64.dispay-inline
+    = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
+

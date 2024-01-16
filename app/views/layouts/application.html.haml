@@ -13,8 +13,8 @@
 
     = javascript_importmap_tags
   %body.dark:bg-gray-800.dark:text-gray-200
-    .container.mx-6.mt-6
-      = render Common::Layout::NavigationComponent.new
+    = render "layouts/header"
+    .container.mx-6.mt-6  
       = render Common::Layout::BreadcrumbsComponent.new
       = render Common::Layout::FlashMessagesComponent.new
       = yield

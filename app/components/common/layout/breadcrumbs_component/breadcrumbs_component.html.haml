@@ -1,9 +1,7 @@
-%span.text-xs.mb-2.pb-1
+.text-xs.mb-2.pb-1.mb-4
   - breadcrumb_trail.with_index do |crumb, index|
     %span{class: crumb.current? ? "active" : "" }
       - if index > 0
         = "/"
       %span{ class: crumb.current? ? "font-semibold" : "" }
         = link_to_unless crumb.current?, crumb.name, crumb.url, (crumb.current? ? {"aria-current": "page"} : {})
-
-.border.border-slate-400.mt-1.mb-4

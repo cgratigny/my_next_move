@@ -29,7 +29,7 @@
 class Opportunity < ApplicationRecord
   attr_accessor :tags_input, :quick_add
 
-  attr_accessor :company_name
+  attr_accessor :company_name, :search
 
   include PgSearch::Model
   has_paper_trail
