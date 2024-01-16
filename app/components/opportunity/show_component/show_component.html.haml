@@ -4,7 +4,7 @@
       .flex
         .status-container.grow
           %span.status-body{ class: opportunity.state.tailwind_class}
-            = link_to [:opportunities, { search: opportunity.state.to_s.titleize } ] do
+            = link_to [:opportunities, { state: opportunity.state.to_s.titleize } ] do
               = opportunity.state.text
           - if opportunity.state.interested?
             = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { state: :application_submitted }}, form: { class: "inline" } do

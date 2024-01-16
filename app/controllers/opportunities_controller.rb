@@ -3,6 +3,7 @@ class OpportunitiesController < ApplicationController
   before_action :build_opportunities, only: :index
 
   has_scope :search
+  has_scope :state
 
   breadcrumb "Opportunities", [:opportunities], match: :exact
 

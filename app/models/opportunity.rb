@@ -54,6 +54,7 @@ class Opportunity < ApplicationRecord
   scope :search, ->(given_needle) {
                    where(id: global_search(given_needle) + where(company: Company.global_search(given_needle)))
                  }
+  scope :state, -> (given_needle) { by_state(given_needle.to_s.downcase) }
 
   scope :by_state, ->(given_state) { where(state: given_state.to_s) }
   scope :active, -> { where(state: OpportunityState.active.map(&:to_s)) }

@@ -8,7 +8,7 @@
           %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col } Date
           - OpportunityState.each do |opportunity_state|
             %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col, class: opportunity_state.tailwind_classes }
-              = link_to [:opportunities, search: opportunity_state.text] do
+              = link_to [:opportunities, state: opportunity_state.text] do
                 = opportunity_state.text
           %th.px-6.py-3.text-start.text-xs.font-medium.text-gray-500.uppercase{ scope: :col } Total
       %tbody.divide-y.divide-gray-200.dark:divide-gray-700
