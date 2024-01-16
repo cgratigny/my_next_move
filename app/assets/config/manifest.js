@@ -4,3 +4,5 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 //= link primer_view_components.css
+//= link graphiql/rails/application.css
+//= link graphiql/rails/application.js

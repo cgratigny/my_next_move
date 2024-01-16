@@ -114,6 +114,8 @@ group :development do
 
   # finds syntax errors
   gem "brakeman", "~> 5.4"
+
+  gem "graphiql-rails"
 end
 
 group :test do
@@ -142,3 +144,5 @@ gem "nokogiri"
 gem "devise", "~> 4.9"
 
 gem "honeybadger", "~> 5.4"
+
+gem "graphql", "~> 2.2"
