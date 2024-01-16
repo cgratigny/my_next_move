@@ -1,20 +1,10 @@
 %turbo-frame{:id => "#{dom_id opportunity}", target: :_top }
-  .card.text-xs{:id => "#{dom_id opportunity}"}
+  .card.text-xs.h-full{:id => "#{dom_id opportunity}"}
     .opportunity-head.leading-6
-
-      %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
-        = link_to opportunity.name, opportunity, data: { turbo_frame: :_top }
-        - if opportunity.uri.present?
-          %span
-            = link_to opportunity.uri, target: :_blank do
-              = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
-        = link_to [:edit, opportunity], data: { turbo_frame: :_top } do
-          = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
-
       .flex
         .status-container.grow
           %span.status-body{ class: opportunity.state.tailwind_class}
-            = link_to [:opportunities, { search: opportunity.state.text } ] do
+            = link_to [:opportunities, { search: opportunity.state.to_s.titleize } ] do
               = opportunity.state.text
           - if opportunity.state.interested?
             = button_to opportunity, method: :patch, data: { turbo_frame: dom_id(opportunity) }, params: { opportunity: { state: :application_submitted }}, form: { class: "inline" } do
@@ -28,6 +18,15 @@
                 %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-orange-700")
               - else
                 %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
+
+      %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
+        = link_to opportunity.name, opportunity, data: { turbo_frame: :_top }
+        - if opportunity.uri.present?
+          %span
+            = link_to opportunity.uri, target: :_blank do
+              = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+        = link_to [:edit, opportunity], data: { turbo_frame: :_top } do
+          = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
 
 
       - opportunity.tags.each.with_index(1) do |tag, index|
@@ -54,22 +53,27 @@
       Added
       = opportunity.created_at.to_fs
 
-
 - if show?
-  .card.my-4
-    .float-right
-      = render Common::Element::ButtonComponent.new(label: "Add Task", path: [:new, opportunity, :task], custom_args: { data: { turbo_frame: :new_task } } )
-    %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Tasks
-    %turbo-frame{ id: dom_id(Task.new) }
-    = render "tasks/list", tasks: opportunity.tasks
-    
-  .card.my-4
-    .float-right
-      = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, opportunity, :note], custom_args: { data: { turbo_frame: :new_note } } )
-    %h3.text-lg.font-semi-bold.border-b.border-slate-600.mb-4.pb-2 Notes
-    %turbo-frame{ id: dom_id(Note.new) }
-    = render "notes/list", notes: opportunity.notes.reverse_chronological
-  
+  .grid.grid-cols-2.gap-4.md:grid-cols-2.mt-4
+    .card.h-full
+      .flex.border-b.border-slate-200.pb-1.mb-4
+        .title.grow
+          = render(Primer::Beta::Heading.new(tag: :h3)) { "Notes" }
+        .button
+          = link_to [:new, opportunity, :note], data: { turbo_frame: :new_note } do
+            = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Task"}
+            
+      %turbo-frame{ id: dom_id(Note.new) }
+      = render "notes/list", notes: opportunity.notes.reverse_chronological
 
-  .mb-10
+    .card.h-full
+      .flex.border-b.border-slate-200.pb-1.mb-4
+        .title.grow
+          = render(Primer::Beta::Heading.new(tag: :h3)) { "Tasks" }
+        .button
+          = link_to [:new, opportunity, :task], data: { turbo_frame: :new_task } do
+            = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Task"}
 
+      %turbo-frame{ id: dom_id(Task.new) }
+      = render "tasks/list", tasks: opportunity.tasks
+      

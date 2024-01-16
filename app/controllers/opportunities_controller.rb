@@ -4,10 +4,13 @@ class OpportunitiesController < ApplicationController
 
   has_scope :search
 
-  breadcrumb "Opportunities", [:opportunities], match: :exclusive
+  breadcrumb "Opportunities", [:opportunities], match: :exact
 
   # GET /Opportunitys or /Opportunitys.json
   def index
+    if params[:search]
+      breadcrumb "Search: #{params[:search]}", [:opportunities, { search: params[:search] }]
+    end
   end
 
   # GET /Opportunitys/1 or /Opportunitys/1.json
