@@ -61,7 +61,7 @@
           = render(Primer::Beta::Heading.new(tag: :h3)) { "Notes" }
         .button
           = link_to [:new, opportunity, :note], data: { turbo_frame: :new_note } do
-            = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Task"}
+            = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Note"}
             
       %turbo-frame{ id: dom_id(Note.new) }
       = render "notes/list", notes: opportunity.notes.reverse_chronological
