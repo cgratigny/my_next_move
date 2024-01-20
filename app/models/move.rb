@@ -42,7 +42,7 @@ class Move < ApplicationRecord
   end
 
   def calculate_opportunity_ranking
-    self.opportunities.metrics_enabled.each.with_index(1) do |opportunity, index| 
+    self.opportunities.order(total_score: :desc).metrics_enabled.each.with_index(1) do |opportunity, index| 
       opportunity.update(ranking: index)
     end
   end
