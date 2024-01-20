@@ -10,4 +10,4 @@
   = form.input :name
   = form.input :uri
   %div
-    = form.submit
+    = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}
