@@ -5,7 +5,7 @@
 
     .font-semibold
       = link_to_if action_name != "show", move.name, move
-      = link_to [:edit, move] do
+      = link_to [:edit, move], data: { turbo_frame: dom_id(move) } do
         = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
 
     - if action_name == "show"
@@ -15,7 +15,28 @@
         = move.description.to_s
 
     %hr.m-2
-    %h3.text-s.font-semi-bold Notes (#{move.notes_count})
-    = render "notes/list", notes: move.notes
+    .flex
+      .grow
+        = render(Primer::Beta::Heading.new(tag: :h3)) { "Metrics (#{move.metrics_count})" }
+      .new.pr-1
+        = link_to [:new, move, :metric], data: { turbo_frame: dom_id(Metric.new) } do
+          = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Metric"}
+      .report
+        = link_to [move, :opportunity_metrics], data: { turbo_frame: :_top } do
+          = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Report"}
+
+    %turbo-frame{ id: dom_id(Metric.new) }
+    = render "metrics/list", metrics: move.metrics
     
-    = render Common::Element::ButtonComponent.new(label: "Add Note", path: [:new, move, :note])
+
+    %hr.m-2
+    .flex
+      .grow
+        = render(Primer::Beta::Heading.new(tag: :h3)) { "Notes (#{move.notes_count})" }
+      .new
+        = link_to [:new, move, :note], data: { turbo_frame: :new_note } do
+          = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Add Note"}
+
+    %turbo-frame{ id: dom_id(Note.new) }
+    = render "notes/list", notes: move.notes.reverse_chronological
+    

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_041117) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_183811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_041117) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "metrics", force: :cascade do |t|
+    t.string "name"
+    t.bigint "move_id"
+    t.integer "position"
+    t.integer "weight", default: 1
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["move_id"], name: "index_metrics_on_move_id"
+  end
+
   create_table "moves", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -93,6 +104,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_041117) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "notes_count"
+    t.integer "metrics_count"
+    t.integer "metrics_total_weight"
     t.index ["user_id"], name: "index_moves_on_user_id"
   end
 
@@ -125,8 +138,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_041117) do
     t.integer "tasks_count"
     t.string "tags"
     t.string "tags_string"
+    t.boolean "metrics_enabled", default: false
+    t.integer "total_score", default: 0
+    t.integer "ranking", default: 0
     t.index ["company_id"], name: "index_opportunities_on_company_id"
     t.index ["move_id"], name: "index_opportunities_on_move_id"
+  end
+
+  create_table "opportunity_metrics", force: :cascade do |t|
+    t.integer "score"
+    t.bigint "opportunity_id"
+    t.bigint "metric_id"
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["metric_id"], name: "index_opportunity_metrics_on_metric_id"
+    t.index ["opportunity_id", "metric_id"], name: "index_opportunity_metrics_on_opportunity_id_and_metric_id", unique: true
+    t.index ["opportunity_id"], name: "index_opportunity_metrics_on_opportunity_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|

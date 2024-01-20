@@ -2,17 +2,19 @@
 #
 # Table name: moves
 #
-#  id          :bigint           not null, primary key
-#  description :text
-#  goal_on     :date
-#  name        :string
-#  notes_count :integer
-#  starts_on   :date
-#  state       :string
-#  stops_on    :date
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :bigint
+#  id                   :bigint           not null, primary key
+#  description          :text
+#  goal_on              :date
+#  metrics_count        :integer
+#  metrics_total_weight :integer
+#  name                 :string
+#  notes_count          :integer
+#  starts_on            :date
+#  state                :string
+#  stops_on             :date
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  user_id              :bigint
 #
 # Indexes
 #
@@ -24,6 +26,7 @@ class Move < ApplicationRecord
 
   has_many :opportunities
   has_many :companies, through: :opportunities
+  has_many :metrics
 
   classy_enum_attr :state, enum: "MoveState", default: :open
 
@@ -36,5 +39,11 @@ class Move < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def calculate_opportunity_ranking
+    self.opportunities.metrics_enabled.each.with_index(1) do |opportunity, index| 
+      opportunity.update(ranking: index)
+    end
   end
 end

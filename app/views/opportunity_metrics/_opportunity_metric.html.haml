@@ -1,0 +1,5 @@
+%div{:id => "#{dom_id opportunity_metric}"}
+  - if action_name != "show"
+    = link_to "Show this opportunity metric", opportunity_metric, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    = link_to "Edit this opportunity metric", edit_opportunity_metric_path(opportunity_metric), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+    %hr.mt-6/

@@ -1,0 +1,4 @@
+.mx-auto.w-full{:class => "md:w-2/3"}
+  %h1.font-bold.text-4xl New metric
+  %turbo-frame{:id => dom_id(@metric), target: :_top }
+    = render "form", metric: @metric

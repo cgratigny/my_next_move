@@ -2,24 +2,27 @@
 #
 # Table name: opportunities
 #
-#  id          :bigint           not null, primary key
-#  applied_on  :date
-#  data        :jsonb
-#  name        :string
-#  notes_count :integer
-#  pay_maximum :integer
-#  pay_minimum :integer
-#  pay_period  :string
-#  rating      :string
-#  state       :string
-#  tags        :string
-#  tags_string :string
-#  tasks_count :integer
-#  uri         :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  company_id  :bigint
-#  move_id     :bigint
+#  id              :bigint           not null, primary key
+#  applied_on      :date
+#  data            :jsonb
+#  metrics_enabled :boolean          default(FALSE)
+#  name            :string
+#  notes_count     :integer
+#  pay_maximum     :integer
+#  pay_minimum     :integer
+#  pay_period      :string
+#  ranking         :integer          default(0)
+#  rating          :string
+#  state           :string
+#  tags            :string
+#  tags_string     :string
+#  tasks_count     :integer
+#  total_score     :integer          default(0)
+#  uri             :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  company_id      :bigint
+#  move_id         :bigint
 #
 # Indexes
 #
@@ -40,8 +43,10 @@ class Opportunity < ApplicationRecord
   belongs_to :move
   has_one :user, through: :move
   has_many :tasks, as: :taskable
+  has_many :opportunity_metrics
 
   accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :opportunity_metrics
 
   classy_enum_attr :state, enum: "OpportunityState", default: :interested
   classy_enum_attr :rating, enum: "OpportunityRating", default: :zero
@@ -58,6 +63,7 @@ class Opportunity < ApplicationRecord
 
   scope :by_state, ->(given_state) { where(state: given_state.to_s) }
   scope :active, -> { where(state: OpportunityState.active.map(&:to_s)) }
+  scope :metrics_enabled, -> { where(metrics_enabled: true) }
 
   pg_search_scope :global_search,
     against: [:name, :state, :tags_string],
@@ -81,6 +87,14 @@ class Opportunity < ApplicationRecord
     )
     # rescue
     # this means we weren't able to get the name, not a big deal
+  end
+
+  def build_opportunity_metrics
+    return opportunity_metrics if opportunity_metrics.any?
+    Metric.all.each do |metric|
+      self.opportunity_metrics << OpportunityMetric.new(opportunity: self, metric: metric)
+    end
+    self.opportunity_metrics
   end
 
   def process_company_name
@@ -113,5 +127,15 @@ class Opportunity < ApplicationRecord
 
   def set_tags_string
     self.tags_string = tag_list
+  end
+
+  def calculate_score
+    
+    self.total_score = opportunity_metrics.sum{ |opportunity_metric| opportunity_metric.score.to_i * opportunity_metric.metric.weight.to_i }
+  end
+
+  def calculate_score!
+    self.calculate_score
+    self.save!
   end
 end

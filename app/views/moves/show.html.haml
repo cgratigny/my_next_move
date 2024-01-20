@@ -1,7 +1,3 @@
-.mx-auto.w-full.flex{:class => "md:w-2/3"}
+.card.mx-auto.w-full
   .mx-auto
     = render @move
-    = link_to "Edit this move", edit_move_path(@move), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    .inline-block.ml-2
-      = render Common::Element::DestroyLinkComponent.new(model: @move, text: "Destroy")
-    = link_to "Back to moves", moves_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
