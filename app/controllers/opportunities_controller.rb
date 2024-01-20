@@ -92,6 +92,6 @@ class OpportunitiesController < ApplicationController
     end
 
     tmp_params = ActionController::Parameters.new(opportunity: opportunity_params)
-    tmp_params[:opportunity].present? ? tmp_params.require(:opportunity).permit(:name, :tags_input, :quick_add, :move_id, :body, :rating, :uri, :state, :posted_on, :applied_on, :company_id, :tag_list, company_attributes: [:id, :name, :uri]) : {}
+    tmp_params[:opportunity].present? ? tmp_params.require(:opportunity).permit(:name, :tags_input, :quick_add, :move_id, :body, :rating, :uri, :state, :posted_on, :applied_on, :company_id, :tag_list, :metrics_enabled, company_attributes: [:id, :name, :uri], opportunity_metrics_attributes: [:id, :score]) : {}
   end
 end
