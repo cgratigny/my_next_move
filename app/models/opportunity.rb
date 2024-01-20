@@ -138,8 +138,6 @@ class Opportunity < ApplicationRecord
     self.save!
   end
 
-  private
-
   def calculate_opportunity_ranking
     return unless self.metrics_enabled?
 
