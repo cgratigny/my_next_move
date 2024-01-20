@@ -5,7 +5,7 @@ class CreateMetrics < ActiveRecord::Migration[7.1]
       t.references :move
 
       t.integer :position
-      t.integer :weight, default: 10
+      t.integer :weight, default: 1
 
       t.jsonb :data, default: {}
 

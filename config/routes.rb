@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :documents
 
   resources :moves do
+    resources :metrics
     resources :notes
+    resources :opportunity_metrics
   end
 
   resources :notes

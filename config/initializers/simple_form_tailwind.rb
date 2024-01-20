@@ -69,7 +69,7 @@ SimpleForm.setup do |config|
   config.wrappers :vertical_collection, item_wrapper_class: "flex items-center", item_label_class: "my-1 ml-3 block text-sm font-medium text-gray-400", tag: "div", class: "my-4" do |b|
     b.use :html5
     b.optional :readonly
-    b.wrapper :legend_tag, tag: "legend", class: "text-sm font-medium text-gray-600", error_class: "text-red-700" do |ba|
+    b.wrapper :legend_tag, tag: "legend", class: "text-sm font-medium text-gray-600 align-middle", error_class: "text-red-700" do |ba|
       ba.use :label_text
     end
     b.use :input, class: "focus:ring-2 focus:ring-indigo-500 ring-offset-2 h-4 w-4 text-indigo-600 border-gray-300 rounded", error_class: "text-red-700", valid_class: "text-green-400"

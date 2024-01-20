@@ -1,0 +1,4 @@
+.mx-auto.w-full{:class => "md:w-2/3"}
+  %h1.font-bold.text-4xl New opportunity metric
+  = render "form", opportunity_metric: @opportunity_metric
+  = link_to "Back to opportunity metrics", opportunity_metrics_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

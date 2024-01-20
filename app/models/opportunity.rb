@@ -11,11 +11,13 @@
 #  pay_maximum     :integer
 #  pay_minimum     :integer
 #  pay_period      :string
+#  ranking         :integer          default(0)
 #  rating          :string
 #  state           :string
 #  tags            :string
 #  tags_string     :string
 #  tasks_count     :integer
+#  total_score     :integer          default(0)
 #  uri             :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -125,5 +127,15 @@ class Opportunity < ApplicationRecord
 
   def set_tags_string
     self.tags_string = tag_list
+  end
+
+  def calculate_score
+    
+    self.total_score = opportunity_metrics.sum{ |opportunity_metric| opportunity_metric.score.to_i * opportunity_metric.metric.weight.to_i }
+  end
+
+  def calculate_score!
+    self.calculate_score
+    self.save!
   end
 end

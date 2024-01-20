@@ -1,0 +1,6 @@
+%turbo-frame{ id: dom_id(metric) }
+  %div{:id => "#{dom_id metric}"}
+    = "##{metric.position} :"
+    = metric.name
+    = link_to [:edit, metric.move, metric], data: { turbo_frame: dom_id(metric) } do
+      = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"

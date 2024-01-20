@@ -9,6 +9,6 @@ module Notable
   end
 
   def embedded_params_to_permit
-    []
+    {}
   end
 end

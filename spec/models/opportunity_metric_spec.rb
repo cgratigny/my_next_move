@@ -16,23 +16,8 @@
 #  index_opportunity_metrics_on_opportunity_id                (opportunity_id)
 #  index_opportunity_metrics_on_opportunity_id_and_metric_id  (opportunity_id,metric_id) UNIQUE
 #
-class OpportunityMetric < ApplicationRecord
-  belongs_to :metric
-  belongs_to :opportunity
+require 'rails_helper'
 
-  after_commit :update_opportunity_total_score
-
-  validates :metric_id, uniqueness: { scope: :opportunity_id,
-    message: "and opportunity must be unique" }
-
-
-  def update_opportunity_total_score
-    return unless self.previous_changes["score"].present?
-
-    opportunity.calculate_score!
-  end
-
-  def calculated_score
-    (score.to_i * metric.weight.to_i)
-  end
+RSpec.describe OpportunityMetric, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

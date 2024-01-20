@@ -6,7 +6,7 @@
 #  data       :jsonb
 #  name       :string
 #  position   :integer
-#  weight     :integer          default(10)
+#  weight     :integer          default(1)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  move_id    :bigint
@@ -17,10 +17,11 @@
 #
 class Metric < ApplicationRecord
   belongs_to :move, counter_cache: true
-  has_many :opportunity_metrics
+  has_many :opportunity_metrics, dependent: :destroy
 
-  after_commit on: :create
-  before_validation :calculate_position, on: :create
+  after_commit :create_opportunity_metrics, on: :create
+  after_commit :update_opportunity_metrics
+  before_validation :calculate_initial_position, on: :create
 
   validates :name, presence: true
   validates :position, numericality: true
@@ -33,7 +34,13 @@ class Metric < ApplicationRecord
     end
   end
 
-  def calculate_position
+  def update_opportunity_metrics
+    self.move.opportunities.metrics_enabled.each do |opportunity|
+      opportunity.calculate_score!
+    end
+  end
+
+  def calculate_initial_position
     self.position = self.move.metrics.reorder(position: :desc).first.try(:position).to_i + 1
   end
 

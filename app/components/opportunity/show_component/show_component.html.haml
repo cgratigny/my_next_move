@@ -20,13 +20,22 @@
                 %span= heroicon(:fire, variant: :micro, size: 12, class: "m-[-1px] p-[-1px] inline text-slate-200 dark:text-slate-700")
 
       %div.text-l.text-slate-700.text-xs.dark:text-slate-200.font-semibold
-        = link_to opportunity.name, opportunity, data: { turbo_frame: :_top }
+        - if opportunity.metrics_enabled?
+          = link_to [opportunity.move, :opportunity_metrics] do
+            = "##{opportunity.ranking}."
+
+        = link_to opportunity, data: { turbo_frame: :_top } do
+          = opportunity.name
         - if opportunity.uri.present?
           %span
             = link_to opportunity.uri, target: :_blank do
-              = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+              = heroicon "arrow-top-right-on-square", size: 18, class: "pb-0.5 inline"
         = link_to [:edit, opportunity], data: { turbo_frame: :_top } do
-          = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+          = heroicon "cog-6-tooth", size: 18, class: "pb-0.5 inline"
+
+        - if opportunity.metrics_enabled?
+          = link_to [opportunity.move, :opportunity_metrics] do
+            = heroicon("chart-bar-square", size: 18, class: "inline")
 
 
       - opportunity.tags.each.with_index(1) do |tag, index|

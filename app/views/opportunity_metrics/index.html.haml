@@ -1,0 +1,4 @@
+.w-full
+  = render(Primer::Beta::Heading.new(tag: :h1)) { "Opportunity Metrics" }
+  #opportunity_metrics.min-w-full
+    = render "list", opportunities: @opportunities
