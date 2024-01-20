@@ -30,6 +30,7 @@ class OpportunityMetric < ApplicationRecord
     return unless self.previous_changes["score"].present?
 
     opportunity.calculate_score!
+    opportunity.calculate_opportunity_ranking
   end
 
   def calculated_score
