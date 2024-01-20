@@ -1,11 +1,11 @@
 class OpportunitiesController < ApplicationController
   before_action :set_opportunity, only: %i[show edit update destroy]
   before_action :build_opportunities, only: :index
+  before_action :save_params, only: :index
+  before_action :build_index_breadcrumb
 
   has_scope :search
   has_scope :state
-
-  breadcrumb "Opportunities", [:opportunities], match: :exact
 
   # GET /Opportunitys or /Opportunitys.json
   def index
@@ -70,6 +70,26 @@ class OpportunitiesController < ApplicationController
   end
 
   private
+
+  def build_index_breadcrumb
+    breadcrumb "Opportunities", [:opportunities, saved_opportunity_params], match: :exact
+  end
+
+  def saved_opportunity_params
+    Current.user.data["opportunity_params"].slice(*saveable_params)
+  rescue
+    {}
+  end
+
+  def saveable_params
+    ["search", "state"]
+  end
+
+  def save_params
+    if (params.keys && saveable_params).any?
+      Current.user.update(data: { opportunity_params: params } )
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_opportunity

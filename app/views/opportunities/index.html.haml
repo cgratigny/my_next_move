@@ -1,9 +1,10 @@
 = render(Primer::Beta::Heading.new(tag: :h1)) { "Opportunities (#{@opportunities.count})" }
 
 .text-xs.mb-4
+  = link_to [:opportunities], class: (params[:state].blank? ? "font-semibold" : "")  do
+    All
   - OpportunityState.each_with_index do |opportunity_state, index|
-    - if index > 0
-      = " | "
+    = " | "
     = link_to [:opportunities, state: opportunity_state.to_s], class: (params[:state] == opportunity_state.to_s ? "font-semibold" : "")  do
       = opportunity_state.text
 
