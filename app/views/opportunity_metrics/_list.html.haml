@@ -4,13 +4,13 @@
       %tr
         %th{ scope: "col", class: "px-6 py-3" } 
           Rank
+        %th{ scope: "col", class: "px-6 py-3" } 
+          Total Score
         %th{ scope: "col", class: "px-6 py-3" }
           Opportunity
         - @move.metrics.each do |metric|
           %th{ scope: "col", class: "px-6 py-3" }
             = metric.name
-        %th{ scope: "col", class: "px-6 py-3" } 
-          Total Score
     %tbody
       - opportunities.each do |opportunity|
         = render "show", opportunity: opportunity

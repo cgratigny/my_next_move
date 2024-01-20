@@ -1,6 +1,8 @@
 %tr{ class: "g-white border-b dark:bg-gray-800 dark:border-gray-700" }
   %th{ scope: "row", class: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"}
     = opportunity.ranking
+  %td{ class: "text-center" }
+    = opportunity.total_score
   %th{ scope: "row", class: "px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"}
     = link_to opportunity, opportunity
     %br
@@ -8,5 +10,3 @@
   - opportunity.opportunity_metrics.each do |opportunity_metric|
     %td{ class: "text-center" }
       = opportunity_metric.calculated_score
-  %td{ class: "text-center" }
-    = opportunity.total_score
