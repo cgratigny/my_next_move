@@ -130,7 +130,6 @@ class Opportunity < ApplicationRecord
   end
 
   def calculate_score
-    
     self.total_score = opportunity_metrics.sum{ |opportunity_metric| opportunity_metric.score.to_i * opportunity_metric.metric.weight.to_i }
   end
 
