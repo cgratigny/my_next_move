@@ -9,7 +9,7 @@ class Common::Layout::NavigationComponent < ApplicationComponent
     [
       ["Dashboard", [:dashboard]],
       ["Opportunities", [:opportunities]],
-      ["New", [:new, :opportunity], {class: "ml-4"}],
+      ["New", [:new, :opportunity]],
       ["Moves", [:moves]],
       ["Stats", [:daily_opportunity_stats]]
       # [ "Companies", [:companies] ],
