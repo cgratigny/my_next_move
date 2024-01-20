@@ -77,6 +77,8 @@ class Opportunity < ApplicationRecord
   before_validation :set_name_from_uri_title
   before_validation :process_company_name
 
+  after_commit :calculate_opportunity_ranking
+
   def set_name_from_uri_title
     return if name.present?
     return if uri.blank?
@@ -136,5 +138,13 @@ class Opportunity < ApplicationRecord
   def calculate_score!
     self.calculate_score
     self.save!
+  end
+
+  private
+
+  def calculate_opportunity_ranking
+    return unless self.metrics_enabled?
+
+    self.move.calculate_opportunity_ranking
   end
 end
