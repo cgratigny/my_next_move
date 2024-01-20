@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   changed(event) {
-    // console.log("Select changed:", event.target.value);
+    console.log("Select changed:", event.target.value);
     this.toggleForSelect(event.target);
   }
 
@@ -29,3 +29,4 @@ export default class extends Controller {
     element.hidden = !shouldShow;
   }
 }
+
