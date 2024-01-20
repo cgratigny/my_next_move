@@ -20,8 +20,8 @@
 #  index_tasks_on_taskable  (taskable_type,taskable_id)
 #
 class Task < ApplicationRecord
+  include Notable
   belongs_to :taskable, polymorphic: true, counter_cache: true
-  has_many :notes, as: :notable
 
   has_rich_text :body
 

@@ -19,12 +19,11 @@
 #  index_moves_on_user_id  (user_id)
 #
 class Move < ApplicationRecord
+  include Notable
   belongs_to :user
 
   has_many :opportunities
   has_many :companies, through: :opportunities
-
-  has_many :notes, as: :notable
 
   classy_enum_attr :state, enum: "MoveState", default: :open
 

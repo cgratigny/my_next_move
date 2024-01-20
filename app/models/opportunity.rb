@@ -27,6 +27,7 @@
 #  index_opportunities_on_move_id     (move_id)
 #
 class Opportunity < ApplicationRecord
+  include Notable
   attr_accessor :tags_input, :quick_add
 
   attr_accessor :company_name, :search
@@ -38,7 +39,6 @@ class Opportunity < ApplicationRecord
   belongs_to :company
   belongs_to :move
   has_one :user, through: :move
-  has_many :notes, as: :notable
   has_many :tasks, as: :taskable
 
   accepts_nested_attributes_for :company
@@ -101,6 +101,10 @@ class Opportunity < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def embedded_params_to_permit
+    [:id, :state]
   end
 
   def short_name

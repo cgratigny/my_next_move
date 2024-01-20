@@ -11,5 +11,12 @@
             %li= error.full_message
     = form.input :body, as: :rich_text_area
 
-  .card
-    = render Common::Form::SubmitComponent.new(form: form)
+    = form.simple_fields_for :notable, form.object.notable do |notable_form|
+      = render "#{notable_form.object.class.name.underscore.pluralize}/embedded_notable_fields", form: notable_form
+
+    .flex
+      .grow.text-right.pr-1
+        = link_to [:blank_turbo_frame, { id: dom_id(note) }] do
+          = render(Primer::Beta::Button.new(scheme: :secondary, type: :button)) { "Cancel" }
+      .submit
+        = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}

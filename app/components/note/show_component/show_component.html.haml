@@ -3,11 +3,11 @@
     .text-s.max-h-40.overflow-scroll
       = note.body.to_s
 
-
-    -# = render Common::Element::DestroyLinkComponent.new(model: @note, text: "Destroy")    
     .font-semibold
       = link_to note.notable.to_s, [note.notable], data: { turbo_frame: :_top } 
     %div.mt-4
+      %p.mb-1
+        = render PaperTrailVersion::ShowComponent.new(version: note.version)
       = note.created_at.to_fs
       = link_to [:edit, note.notable, note] do
         = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"

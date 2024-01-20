@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :daily_opportunity_stats
 
+  resources :blank_turbo_frames
   resources :companies
 
   resource :dashboard, only: :show

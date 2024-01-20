@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :set_notable
   before_action :build_note, only: %i[new create]
   before_action :set_note, only: %i[show edit update destroy]
@@ -30,7 +31,12 @@ class NotesController < ApplicationController
       if @note.save
         format.html { redirect_to [@note.notable], notice: "Note was successfully created." }
         format.json { render :show, status: :created, location: [@note.notable, @note] }
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update(:new_note, partial: @note, locals: { note: @note} ),
+            turbo_stream.update(dom_id(@notable), partial: @notable, locals: { @notable.class.name => @notable })
+          ]
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -100,6 +106,6 @@ class NotesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def note_params
-    params[:note].present? ? params.require(:note).permit(:body) : {}
+    params[:note].present? ? params.require(:note).permit(:body, notable_attributes: @notable.embedded_params_to_permit) : {}
   end
 end

@@ -1,0 +1,5 @@
+- changes.each do |change|
+  %em Moved from
+  = change.old_value.to_s.titleize
+  %em to
+  = change.new_value.to_s.titleize

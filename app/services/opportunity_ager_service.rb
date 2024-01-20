@@ -12,9 +12,14 @@ class OpportunityAgerService < ApplicationService
   def perform_single
     return unless ageable_date_value.present?
 
-    opportunity.update!(
-      state: :stale,
-      notes: opportunity.notes + [Note.new(notable: opportunity, body: build_note_body, source: :system)]
+    Note.create!(
+      notable: opportunity, 
+      body: build_note_body, 
+      source: :system,
+      notable_attributes: {
+        id: opportunity.id,
+        state: :stale
+      }
     )
   end
 
