@@ -5,8 +5,6 @@
     = link_to [:new, :move] do
       = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New" }
 
-
-
 %turbo-frame#moves{ data: { target: :_top } }
   #moves.container.m-auto.grid.grid-cols-1
     - @moves.each do |move|
