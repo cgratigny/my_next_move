@@ -1,6 +1,4 @@
 %turbo-frame{ id: dom_id(@move) }
   .mx-auto.w-full{:class => "md:w-2/3"}
-    %h1.font-bold.text-4xl Editing move
+    %h1.font-bold.text-4xl Editing #{@move.name}
     = render "form", move: @move
-    = link_to "Show this move", @move, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    = link_to "Back to moves", moves_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"

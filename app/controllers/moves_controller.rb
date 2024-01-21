@@ -1,7 +1,12 @@
 class MovesController < ApplicationController
   before_action :set_move, only: %i[show edit update destroy]
   before_action :build_move, only: [:new, :create]
+  before_action :build_breadcrumbs
 
+  # The line `breadcrumb "Moves", [:moves]` is defining a breadcrumb for the MovesController.
+  # Breadcrumbs are a way to provide navigation links that show the user's current location within the
+  # application's hierarchy.
+  
   # GET /moves or /moves.json
   def index
     @moves = Current.user.moves
@@ -56,6 +61,11 @@ class MovesController < ApplicationController
   end
 
   private
+
+  def build_breadcrumbs
+    breadcrumb "Moves", [:moves], match: :exact
+    breadcrumb @move.name, [@move] if @move.present?
+  end
 
   def build_move
     @move = Move.new(move_params.merge({user: Current.user}))

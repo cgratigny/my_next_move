@@ -1,13 +1,10 @@
 class OpportunityMetricsController < ApplicationController
   before_action :set_opportunity_metric, only: %i[ show edit update destroy ]
   before_action :find_move, only: [:index]
-
-  breadcrumb "Moves", [:moves], match: :exact
+  before_action :build_breadcrumbs
 
   # GET /opportunity_metrics or /opportunity_metrics.json
   def index
-    breadcrumb @move.name, [@move], match: :exact
-    breadcrumb "Opportunity Metrics", [@move, :opportunity_metrics], match: :exact
     @opportunities = @move.opportunities.metrics_enabled.order(ranking: :asc)
   end
 
@@ -63,6 +60,12 @@ class OpportunityMetricsController < ApplicationController
   end
 
   private
+    def build_breadcrumbs 
+      breadcrumb "Moves", [:moves], match: :exact
+      breadcrumb @move.name, [@move], match: :exact
+      breadcrumb "Opportunity Metrics", [@move, :opportunity_metrics], match: :exact
+    end
+
     def find_move
       @move = Move.find(params[:move_id])
     end
