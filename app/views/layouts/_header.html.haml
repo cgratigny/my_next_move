@@ -9,10 +9,10 @@
   .grow.mt-1.text-right.sm:text-left
     = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
 
-  .mt-1.mr-2.lg:visible.hidden
+  .mt-1.mr-2.invisible.lg:visible
     = link_to [:new, :opportunity] do
       = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New" }
 
-  .lg:visible.hidden
+  .invisible.lg:visible
     = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
 
