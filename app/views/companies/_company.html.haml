@@ -1,5 +1,5 @@
 %turbo-frame{ id: dom_id(company) }
-  .card{id: dom_id(company)}
+  %div{id: dom_id(company)}
     = link_to company do
       = company.name
       - if company.uri.present?
