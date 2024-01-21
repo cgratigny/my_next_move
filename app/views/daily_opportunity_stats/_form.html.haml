@@ -1,11 +1,5 @@
 = form_with(model: daily_opportunity_stat, class: "contents") do |form|
-  - if daily_opportunity_stat.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      %h2
-        = pluralize(daily_opportunity_stat.errors.count, "error")
-        prohibited this daily_opportunity_stat from being saved:
-      %ul
-        - daily_opportunity_stat.errors.each do |error|
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
+
   .inline
     = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"

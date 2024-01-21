@@ -1,12 +1,5 @@
 = simple_form_for [@metric.move, @metric], data: { turbo_frame: dom_id(@metric) } do |form|
-  - if metric.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      %h2
-        = pluralize(metric.errors.count, "error")
-        prohibited this metric from being saved:
-      %ul
-        - metric.errors.each do |error|
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
   
   .flex
     .w-64

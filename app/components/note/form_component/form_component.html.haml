@@ -1,14 +1,8 @@
 = simple_form_for [note.notable, note], data: { turbo_frame: dom_id(note) } do |form|
   .card
 
-    - if note.errors.any?
-      #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-        %h2
-          = pluralize(note.errors.count, "error")
-          prohibited this note from being saved:
-        %ul
-          - note.errors.each do |error|
-            %li= error.full_message
+    = render Common::Form::ErrorsComponent.new(form: form)
+
     = form.input :body, as: :rich_text_area
 
     = form.simple_fields_for :notable, form.object.notable do |notable_form|

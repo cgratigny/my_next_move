@@ -1,12 +1,5 @@
 = simple_form_for document do |form|
-  - if document.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      %h2
-        = pluralize(document.errors.count, "error")
-        prohibited this document from being saved:
-      %ul
-        - document.errors.each do |error|
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
 
   = form.input :name
   = form.input :description, as: :rich_text_area

@@ -1,17 +1,9 @@
 = simple_form_for move do |form|
-  - if move.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      %h2
-        = pluralize(move.errors.count, "error")
-        prohibited this move from being saved:
-      %ul
-        - move.errors.each do |error|
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
 
   %p 
     Everything you are setting up is based on a "Move" you are making in your life. Start the setup by 
     creating a move. Optionally, you can choose a goal date for this move.
-
 
   = form.input :name
   = form.input :description, as: :rich_text_area

@@ -1,13 +1,5 @@
 = simple_form_for [@taskable, task], class: "contents" do |form|
-  - if task.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      %h2
-        = pluralize(task.errors.count, "error")
-        prohibited this task from being saved:
-      %ul
-        - task.errors.each do |error|
-
-          %li= error.full_message
+  = render Common::Form::ErrorsComponent.new(form: form)
   
   = form.input :name
 
