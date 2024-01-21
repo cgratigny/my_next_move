@@ -1,4 +1,16 @@
-%div{id: dom_id(company)}
-  = company.name
-  %span.text-xs
-    (#{company.opportunity_count} opportunities)
+%turbo-frame{ id: dom_id(company) }
+  .card{id: dom_id(company)}
+    = link_to company do
+      = company.name
+      - if company.uri.present?
+        %span
+          = link_to company.uri, target: :_blank do
+            = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+
+    = link_to [:edit, company] do
+      = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
+    - if company.opportunities.none?
+      = render Common::Element::DestroyLinkComponent.new(model: company, text: heroicon("trash", size: 16, class: "pb-0.5 inline"), args: { class: "inline" } )
+    %span.text-xs
+      = link_to [:opportunities, search: company.name], data: { turbo_frame: :_top } do
+        (#{company.opportunity_count.to_i} opportunities)

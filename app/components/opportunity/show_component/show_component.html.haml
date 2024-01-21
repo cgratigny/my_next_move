@@ -47,11 +47,7 @@
     .opportunity-body
       .title.mb-2.mt-2
         %div
-          = opportunity.company.name
-          - if opportunity.company.uri.present?
-            %span
-              = link_to opportunity.company.uri, target: :_blank do
-                = heroicon "arrow-top-right-on-square", size: 16, class: "pb-0.5 inline"
+          = render opportunity.company
 
       - unless show?
         %span.text-xs= pluralize(opportunity.tasks_count, "Task")

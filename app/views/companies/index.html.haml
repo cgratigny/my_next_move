@@ -1,7 +1,11 @@
 %p{:style => "color: green"}= notice
-%h1 Companies
-#companies
-  - @companies.each do |company|
-    = link_to company do
-      = render company
-= link_to "New company", new_company_path
+.flex.mb-2
+  %h1.grow Companies
+  .new
+    = link_to [:new, :company], data: { turbo_frame: dom_id(Company.new) } do
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New"}
+
+%turbo-frame{ id: dom_id(Company.new) }
+
+%turbo-frame#companies
+  = render "list"

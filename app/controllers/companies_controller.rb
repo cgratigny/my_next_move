@@ -1,11 +1,12 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
+  before_action :build_company, only: %i[new create]
+  before_action :build_companies, only: :index
 
   breadcrumb "Companies", [:companies], match: :exact
 
   # GET /companies or /companies.json
   def index
-    @companies = Current.user.companies.distinct.alphabetical
   end
 
   # GET /companies/1 or /companies/1.json
@@ -14,7 +15,6 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
   end
 
   # GET /companies/1/edit
@@ -23,12 +23,12 @@ class CompaniesController < ApplicationController
 
   # POST /companies or /companies.json
   def create
-    @company = Company.new(company_params)
-
     respond_to do |format|
       if @company.save
+        build_companies
         format.html { redirect_to company_url(@company), notice: "Company was successfully created." }
         format.json { render :show, status: :created, location: @company }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @company.errors, status: :unprocessable_entity }
@@ -56,10 +56,19 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to companies_url, notice: "Company was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 
   private
+
+  def build_companies
+    @companies = Current.user.companies.distinct.alphabetical
+  end
+
+  def build_company
+    @company = Company.new(company_params.merge(user: Current.user))
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_company

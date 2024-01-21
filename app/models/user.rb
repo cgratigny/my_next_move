@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   has_many :moves
   has_many :opportunities, through: :moves
-  has_many :companies, through: :opportunities
+  has_many :companies
   has_many :documents
 
   def notes

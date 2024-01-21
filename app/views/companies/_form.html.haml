@@ -1,6 +1,11 @@
-= simple_form_for company do |form|
-  = render Common::Form::ErrorsComponent.new(form: form)
-  = form.input :name
-  = form.input :uri
-  %div
-    = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}
+%turbo-frame{ id: dom_id(company) }
+  = simple_form_for company do |form|
+    = render Common::Form::ErrorsComponent.new(form: form)
+    = form.input :name
+    = form.input :uri
+    .flex.mt-4
+      .show.grow
+        = link_to [company] do
+          = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Cancel"}
+      .save
+        = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}

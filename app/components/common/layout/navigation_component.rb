@@ -10,7 +10,8 @@ class Common::Layout::NavigationComponent < ApplicationComponent
       ["Dashboard", [:dashboard]],
       ["Opportunities", [:opportunities]],
       ["Moves", [:moves]],
-      ["Stats", [:daily_opportunity_stats]]
+      ["Stats", [:daily_opportunity_stats]],
+      ["Companies", [:companies]]
     ]
   end
 end
