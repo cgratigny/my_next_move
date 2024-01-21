@@ -17,10 +17,8 @@
   = form.input :body, as: :rich_text_area, label: "Detail"
   = form.input :due_date, as: :datepicker, label: "Due On"
 
-  .flex
+  .flex.pt-4
     .grow.text-right.pr-1
-      = render Common::Element::DestroyLinkComponent.new(model: @task, text: "Destroy")
-
       = link_to [:blank_turbo_frame, { id: dom_id(task) }] do
         = render(Primer::Beta::Button.new(scheme: :secondary, type: :button)) { "Cancel" }
     .submit

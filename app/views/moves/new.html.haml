@@ -1,5 +1,5 @@
 %turbo-frame{ id: dom_id(@move) }
-  .m-auto{ class: "lg:w-1/2 md:w-3/4" }
+  .container
     = render(Primer::Beta::Heading.new(tag: :h1)) { "New Move" }
     .card
       %turbo-frame{:id => "new_move", target: :_top}

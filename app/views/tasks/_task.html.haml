@@ -9,7 +9,7 @@
     = link_to [:edit, task.taskable, task] do
       = heroicon "cog-6-tooth", size: 16, class: "pb-0.5 inline"
     
-    = render Common::Element::DestroyLinkComponent.new(model: @task)
+    = render Common::Element::DestroyLinkComponent.new(model: task)
 
     %br
     .text-xs.font-thin

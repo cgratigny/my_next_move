@@ -1,6 +1,10 @@
-.float-right
-  = render Common::Element::ButtonComponent.new(label: "New", path: [:new, :move], icon: :plus)
-= render(Primer::Beta::Heading.new(tag: :h1)) { "Moves (#{@moves.count})" }
+.flex
+  .grow
+    = render(Primer::Beta::Heading.new(tag: :h1)) { "Moves (#{@moves.count})" }
+  .new
+    = link_to [:new, :move] do
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New" }
+
 
 
 %turbo-frame#moves{ data: { target: :_top } }

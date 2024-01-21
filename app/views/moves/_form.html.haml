@@ -16,5 +16,6 @@
   = form.input :name
   = form.input :description, as: :rich_text_area
   = form.input :goal_on, as: :datepicker, label: "Goal Date"  
-  .inline
-    = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"
+  
+  .text-right.mt-4
+    = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save" }
