@@ -90,6 +90,7 @@ class Opportunity < ApplicationRecord
   end
 
   def build_opportunity_metrics
+    return [] unless self.metrics_enabled?
     return opportunity_metrics if opportunity_metrics.any?
     Metric.all.each do |metric|
       self.opportunity_metrics << OpportunityMetric.new(opportunity: self, metric: metric)
