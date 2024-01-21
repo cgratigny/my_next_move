@@ -3,7 +3,7 @@
     %button{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button", data: { action: "navigation#toggleDropdown" } }
       = heroicon "bars-3", size:25, class: "inline"
 
-  .hidden.shadow.fixed.h-full.z-50.left-0.top-0.w-64.dark:bg-slate-900{ "aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", data: { navigation_target: "dropdown" } }
+  .hidden.shadow.fixed.h-full.z-50.left-0.top-0.w-64.bg-slate-500.dark:bg-slate-900{ "aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", data: { navigation_target: "dropdown" } }
     .flex
       .grow
       .close
