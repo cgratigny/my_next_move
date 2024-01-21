@@ -104,7 +104,7 @@ class Opportunity < ApplicationRecord
     self.company = if found_company.present?
       found_company
     else
-      Company.new(name: company_name)
+      Company.new(name: company_name, user: user)
     end
   end
 

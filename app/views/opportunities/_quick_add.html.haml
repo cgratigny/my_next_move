@@ -4,5 +4,5 @@
       = render Common::Form::ErrorsComponent.new(form: form)
 
       = form.input :uri, label: false, placeholder: "Add by URL", wrapper_html: { class: "w-64" }
-      = form.input :move_id, as: :hidden
-      = form.input :quick_add, as: :hidden
+      = form.input :move_id, as: :hidden, input_html: { value: Current.user.default_move.id }
+      = form.input :quick_add, as: :hidden, input_html: { value: true }
