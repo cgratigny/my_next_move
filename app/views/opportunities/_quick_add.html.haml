@@ -1,8 +1,8 @@
 %turbo-frame{:id => "#{dom_id opportunity}" }
-  .w-64
-    = simple_form_for opportunity, data: { controller: "form-checkbox-toggler", turbo_frame: :_top } do |form|
+  .quick-add
+    = simple_form_for opportunity, data: { controller: "form-checkbox-toggler", turbo_frame: :_top }, class: "inline" do |form|
       = render Common::Form::ErrorsComponent.new(form: form)
 
-      = form.input :uri, label: false, placeholder: "Add by URL"
+      = form.input :uri, label: false, placeholder: "Add by URL", wrapper_html: { class: "w-64" }
       = form.input :move_id, as: :hidden
       = form.input :quick_add, as: :hidden

@@ -2,12 +2,17 @@
   .pt-2
     = render Common::Layout::NavigationComponent.new
 
-  %div.dispay-inline.ml-2.grow
-    = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance } do |form|
+  %div.dispay-inline.ml-2
+    = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance }, class: "m-0 p-0" do |form|
       .inline-flex
         = form.input :search, label: false, placeholder: "Search...", required: false, input_html: { class: "text-s", name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
-      = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
+  .grow.mt-1.text-right.sm:text-left
+    = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
 
-  %div.w-64.dispay-inline
+  .mt-1.mr-2.lg:visible.hidden
+    = link_to [:new, :opportunity] do
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New" }
+
+  .lg:visible.hidden
     = render "opportunities/quick_add", opportunity: Opportunity.new(move_id: Current.user.default_move.id, quick_add: true)
 

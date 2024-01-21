@@ -45,7 +45,9 @@
 
     = form.input :move_id, as: :hidden, input_html: { value: Current.user.default_move.id }
 
-    .card
-      = render Common::Form::SubmitComponent.new(form: form)
+    .card.text-right
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}
 
-= render Common::Element::DestroyLinkComponent.new(model: @opportunity, text: "Destroy", args: { data: { turbo_frame: :_top } } )
+
+    .card
+      = render Common::Element::DestroyLinkComponent.new(model: @opportunity, text: "Destroy", args: { data: { turbo_frame: :_top } } )
