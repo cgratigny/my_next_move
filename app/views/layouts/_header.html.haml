@@ -2,11 +2,12 @@
   .pt-2
     = render Common::Layout::NavigationComponent.new
 
-  %div.dispay-inline.ml-2
+  %div.ml-2.w-64.mr-2
     = simple_form_for :opportunity, url: [:opportunities], method: :get, data: { controller: :search, turbo_frame: :opportunities, turbo_action: :advance }, class: "m-0 p-0" do |form|
       .inline-flex
-        = form.input :search, label: false, placeholder: "Search...", required: false, input_html: { class: "text-s", name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
-  .grow.mt-1.text-right.sm:text-left
+        = form.input :search, label: false, placeholder: "Search...", required: false, wrapper_html: { class: "w-64" }, input_html: { class: "text-s", name: :search, data: { search_target: :searchInput, action: "input->search#search"} }
+  
+  .grow.mt-1.text-right.sm:text-left.invisible.md:visible
     = render(Primer::Beta::Button.new(scheme: :primary, type: :reset, **{data: { action: "click->search#search" } })) { "Reset" }
 
   .mt-1.mr-2.invisible.lg:visible
