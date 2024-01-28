@@ -19,6 +19,7 @@ gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
+gem "requestjs-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
@@ -142,3 +143,7 @@ gem "nokogiri"
 gem "devise", "~> 4.9"
 
 gem "honeybadger", "~> 5.4"
+
+gem "sidekiq", "~> 7.2"
+
+gem "acts_as_list", "~> 1.1"

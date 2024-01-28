@@ -1,0 +1,10 @@
+= simple_form_for @tabular_datum, data: { controller: 'autosave' } do |form|
+  = render Common::Form::ErrorsComponent.new(form: form)
+
+  = form.input :title, input_html: { data: { action: 'change->autosave#save' } }
+
+  .text-right.mt-4.dark:font-slate-200
+    = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}
+
+- if @tabular_datum.persisted?
+  = render Common::Element::DestroyLinkComponent.new(model: @tabular_datum, text: heroicon("trash", size: 16, class: "pb-0.5 inline"), args: { class: "inline" } )

@@ -1,0 +1,13 @@
+= turbo_stream_from "quotes"
+
+%main.container
+  %turbo-frame#header
+    .header
+      %h1 Quotes
+    = link_to "New quote", [:new, :quote], data: { turbo_frame: dom_id(Quote.new) }
+
+  = turbo_frame_tag dom_id(Quote.new)
+
+  %turbo-frame#quotes{ data: { controller: "auto-sortable", auto_sortable_target: :frame } }
+    .sortable{ data: { controller: :sortable, sortable_response_kind_value: :json, sortable_resource_name_value: :quote, sortable_param_name_value: :position} }
+      = render @quotes

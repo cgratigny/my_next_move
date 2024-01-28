@@ -1,0 +1,15 @@
+%turbo-frame{ id: dom_id(tabular_datum), data: { sortable_update_url: tabular_datum_path(tabular_datum, format: :json) }}
+  .grid.grid-cols-3
+    .border.dark:border-slate-700.border-slate-200.p-2.col-1
+      = "#"
+      %span{ data: { controller: 'pub-sub-input', action: 'pub-sub-input:send@window->pub-sub-input#subscribe', pub_sub_input_key_value: dom_id(tabular_datum) } }= tabular_datum.position
+      = heroicon("chevron-up-down", class: "inline handle")
+
+      = simple_form_for tabular_datum, method: :patch, data: { controller: 'autosave' } do |f|
+        = f.input :position, as: :hidden, label: false, input_html: { data: { controller: "pub-sub-input", action: "pub-sub-input#publish", pub_sub_input_key_value: dom_id(tabular_datum), sortable: :target , action: 'change->autosave#save click->autossave#save' } }, wrapper_html: { class: "w-16" }
+
+
+    .border.dark:border-slate-700.border-slate-200.p-2.col-2= tabular_datum.title
+    .border.dark:border-slate-700.border-slate-200.p-2.col-3
+      = link_to [:edit, tabular_datum], data: { turbo_frame: :modal } do
+        = render(Primer::Beta::Button.new(scheme: :primary)) { "Edit"}

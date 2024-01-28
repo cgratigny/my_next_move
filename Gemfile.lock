@@ -79,6 +79,8 @@ GEM
       tzinfo (~> 2.0)
     acts-as-taggable-on (10.0.0)
       activerecord (>= 6.1, < 7.2)
+    acts_as_list (1.1.0)
+      activerecord (>= 4.2)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     amazing_print (1.5.0)
@@ -322,6 +324,8 @@ GEM
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
+    requestjs-rails (0.0.11)
+      railties (>= 6.1.0)
     require_all (3.0.0)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -384,6 +388,11 @@ GEM
     shoulda (2.11.3)
     shoulda-matchers (6.0.0)
       activesupport (>= 5.2.0)
+    sidekiq (7.2.1)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.19.0)
     simple_form (5.3.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -466,6 +475,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   acts-as-taggable-on
+  acts_as_list (~> 1.1)
   amazing_print
   annotate
   better_errors
@@ -501,12 +511,14 @@ DEPENDENCIES
   rails_best_practices
   rails_heroicon
   redis (>= 4.0.1)
+  requestjs-rails
   rspec-activemodel-mocks
   rspec-rails
   rspec_junit_formatter
   selenium-webdriver
   shoulda
   shoulda-matchers
+  sidekiq (~> 7.2)
   simple_form
   simple_form-tailwind
   simplecov

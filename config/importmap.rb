@@ -29,3 +29,8 @@ pin "@github/tab-container-element", to: "https://ga.jspm.io/npm:@github/tab-con
 pin "@oddbird/popover-polyfill", to: "https://ga.jspm.io/npm:@oddbird/popover-polyfill@0.3.7/dist/popover.js"
 pin "@primer/behaviors", to: "https://ga.jspm.io/npm:@primer/behaviors@1.5.1/dist/esm/index.js"
 pin "@primer/behaviors/utils", to: "https://ga.jspm.io/npm:@primer/behaviors@1.5.1/dist/esm/utils/index.js"
+
+pin "stimulus-sortable", to: "https://ga.jspm.io/npm:stimulus-sortable@4.1.1/dist/stimulus-sortable.mjs"
+pin "@rails/request.js", to: "https://ga.jspm.io/npm:@rails/request.js@0.0.8/src/index.js"
+pin "sortablejs", to: "https://ga.jspm.io/npm:sortablejs@1.15.2/modular/sortable.esm.js"
+pin "stimulus-rails-autosave", to: "https://ga.jspm.io/npm:stimulus-rails-autosave@5.1.0/dist/stimulus-rails-autosave.mjs"

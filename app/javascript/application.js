@@ -7,3 +7,4 @@ import "trix"
 import "@rails/actiontext"
 
 import '@primer/view-components'
+import "@rails/request.js"

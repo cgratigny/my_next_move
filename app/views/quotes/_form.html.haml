@@ -1,0 +1,14 @@
+= simple_form_for quote do |form|
+  = render Common::Form::ErrorsComponent.new(form: form)
+  
+  .flex
+    .grow.mr-2
+      = form.input :name, label: false, input_html: { autofocus: true }
+      = form.input :position
+
+    .save.mr-2
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :submit)) { "Save"}
+
+    .cancel
+      = link_to quote do
+        = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "Cancel"}

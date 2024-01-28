@@ -1,0 +1,14 @@
+%div{ data: { controller: :modal, auto_open_modal: 'true' } }
+  / Modal Dialog
+  %dialog.modal-hidden{"aria-labelledby" => "modal-title", "aria-modal" => "true", "data-modal-target" => "modal", role: "dialog"}
+    / Desktop Overlay
+    .desktop-overlay.fixed.inset-0.bg-black.opacity-95.z-10
+    .fixed.inset-0.z-10.w-screen.overflow-y-auto.modal-body
+      .flex.min-h-full.items-end.justify-center.p-4.text-center.sm:items-center.sm:p-0
+        .relative.transform.overflow-hidden.rounded-xl.bg-white.dark:bg-slate-800.dark:font-slate-300.text-left.shadow-xl.transition-all{class: "w-[720px]"}
+          .text-right.bg-slate-500.py-2
+            %a.mr-1{ data: { action: "click->modal#hide" } }= heroicon("x-mark", class: "inline" )
+          / Modal Content
+          .px-4.pb-4.pt-5.sm:p-6.sm:pb-4
+            .mt-3
+              = content

@@ -1,0 +1,8 @@
+%main.container
+  = link_to "Back to quotes", [:quotes], class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+  .header
+    %h1 New Quote
+  
+  = turbo_frame_tag @quote do
+    %div.card.mt-4.quote
+      = render "form", quote: @quote

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :quotes
+  resources :tabular_data
   resources :daily_opportunity_stats, only: :index
 
   resources :blank_turbo_frames, only: :show

@@ -1,0 +1,7 @@
+%main.container
+  = link_to sanitize("&larr; Back to quote"), quote_path(@quote)
+  .header
+    %h1 Edit quote
+  = turbo_frame_tag @quote do
+    %div.card.mt-4.quote
+      = render "form", quote: @quote

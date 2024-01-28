@@ -1,0 +1,8 @@
+%turbo-stream{ action: :prepend, target: :quotes }
+  %template
+    = turbo_frame_tag(quote, data: { sortable_update_url: quote_path(quote, format: :json) } ) do
+      %div.card.mt-4.quote{ data: { auto_sortable_target: :position, sortable_position: quote.position }}
+        = link_to quote.name, [quote], data: { turbo_frame: :_top }
+
+        = button_to "Delete", quote_path(quote), method: :delete, class: "inline"
+        = render(Primer::Beta::Link.new(href: url_for([:edit, quote]))) { "Edit"}

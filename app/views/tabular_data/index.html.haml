@@ -1,0 +1,19 @@
+.w-full
+  .flex.justify-between.items-center
+    %h1.font-bold.text-4xl Data
+    = link_to [:new, :tabular_datum], data: { turbo_frame: :modal } do
+      = render(Primer::Beta::Button.new(scheme: :primary, type: :button)) { "New"}
+
+  %turbo-frame#tabular_data.min-w-full
+  
+    .grid.grid-cols-3.w-fill
+      .border.dark:border-slate-700.border-slate-200.p-2.col-1 Sort
+      .border.dark:border-slate-700.border-slate-200.p-2.col-2 Title
+      .border.dark:border-slate-700.border-slate-200.p-2.col-3 Links
+     
+    #sortable-data{ data: { controller: :sortable, sortable_handle_value: ".handle", sortable_animation_value: "150", sortable_response_kind_value: :json, sortable_resource_name_value: :tabular_datum, sortable_param_name_value:  :position} }
+
+      - @tabular_data.each do |tabular_datum|
+        = render tabular_datum
+
+  %turbo-frame#modal    
