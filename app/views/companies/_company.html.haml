@@ -1,7 +1,7 @@
 %turbo-frame{ id: dom_id(company) }
   %div{id: dom_id(company)}
     = link_to company do
-      = company.name
+      = highlight company.name, params[:search]
       - if company.uri.present?
         %span
           = link_to company.uri, target: :_blank do
