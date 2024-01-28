@@ -25,7 +25,7 @@
             = "##{opportunity.ranking}."
 
         = link_to opportunity, data: { turbo_frame: :_top } do
-          = opportunity.name
+          = highlight opportunity.name, params[:search]
         - if opportunity.uri.present?
           %span
             = link_to opportunity.uri, target: :_blank do
